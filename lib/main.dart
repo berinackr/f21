@@ -3,15 +3,15 @@ import 'package:f21_demo/screens/ForgotPasswordScreen.dart';
 import 'package:f21_demo/screens/LoginScreen.dart';
 import 'package:f21_demo/screens/PasswordResetInfoScreen.dart';
 import 'package:f21_demo/screens/RegisterScreen.dart';
-import 'package:f21_demo/screens/SplashScreen.dart';
+import 'package:f21_demo/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 
 
 void main() {
-  runApp(); //const BiberonApp()
+  runApp(const BiberonApp()); //const BiberonApp()
 }
-/*
+
 class BiberonApp extends StatefulWidget {
   const BiberonApp({Key? key}) : super(key: key);
 
@@ -28,7 +28,7 @@ class _BiberonAppState extends State<BiberonApp> {
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       initialRoute: "/",
       routes: {
-        "/":(context)=>const SplashScreen(),
+        "/":(context)=>const Splash(),
         "/loginScreen":(context)=>const LoginScreen(),
         "/registerScreen":(context)=>const RegisterScreen(),
         "/forgotPasswordScreen":(context)=>const ForgotPasswordScreen(),
@@ -37,5 +37,5 @@ class _BiberonAppState extends State<BiberonApp> {
     );
   }
 }
-*/
+
 

@@ -1,22 +1,9 @@
-import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/core/common/splash_screen.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
-import 'package:f21_demo/features/auth/screens/example_profile_data.dart';
 import 'package:f21_demo/features/auth/screens/example_signup.dart';
 import 'package:f21_demo/features/home/screens/home_screen.dart';
-import 'package:f21_demo/models/user_model.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:go_router/go_router.dart';
-
-final loggedOutRoute = RouteMap(routes: {'/': (_) => const MaterialPage(child: ExampleSignUp())});
-
-final loggedInRoute = RouteMap(routes: {'/': (_) => const MaterialPage(child: HomeScreen())});
-
-final infosNotAddedRoute = RouteMap(routes: {'/': (_) => const MaterialPage(child: ExampleProfileData())});
-
-final loadingRoute = RouteMap(routes: {'/': (_) => const MaterialPage(child: LoadingScreen())});
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateChangesProvider);

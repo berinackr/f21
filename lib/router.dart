@@ -1,7 +1,10 @@
-import 'package:f21_demo/core/common/splash_screen.dart';
+import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
-import 'package:f21_demo/features/auth/screens/example_signup.dart';
+import 'package:f21_demo/features/auth/screens/password_reset_info_screen.dart';
 import 'package:f21_demo/features/home/screens/home_screen.dart';
+import 'package:f21_demo/features/auth/screens/forgot_password_screen.dart';
+import 'package:f21_demo/features/auth/screens/login_screen.dart';
+import 'package:f21_demo/features/auth/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,21 +20,27 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
     routes: [
-      GoRoute(path: "/", builder: (context, state) => const SplashScreen()),
+      GoRoute(path: "/", builder: (context, state) => const LoadingScreen()),
       GoRoute(path: "/home", builder: (context, state) => const HomeScreen()),
-      GoRoute(path: "/signup", builder: (context, state) => const ExampleSignUp()),
+      GoRoute(path: "/auth", builder: (context, state) => const LoginScreen()),
+      GoRoute(path: "/auth/register", builder: (context, state) => const RegisterScreen()),
+      GoRoute(
+        path: "/auth/forget",
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(path: "/auth/forget/reset", builder: (context, state) => const PasswordResetInfoScreen())
     ],
     redirect: (context, state) {
-      if (authState.isLoading || authState.hasError) return null;
+      if (authState.isLoading || authState.hasError || authState.isRefreshing || authState.isReloading) return null;
       final isAuth = authState.valueOrNull != null;
       final isSplash = state.location == "/";
       if (isSplash) {
         if (isAuth && userModel == null) {
           getData(authState.value!.uid);
         }
-        return isAuth ? "/home" : "/signup";
+        return isAuth ? "/home" : "/auth";
       }
-      final isLoggingIn = state.location == "/signup";
+      final isLoggingIn = state.matchedLocation.startsWith("/auth");
       if (isLoggingIn) return isAuth ? "/home" : null;
       return isAuth ? null : "/";
     },

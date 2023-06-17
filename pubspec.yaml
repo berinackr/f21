@@ -28,10 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  lottie: ^2.4.0
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,6 +42,8 @@ dependencies:
   form_validator: ^2.1.1
   fpdart: ^0.6.0
   go_router: ^8.0.5
+  lottie: ^2.4.0
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/google_icon.png
+    - assets/animations/splash_animation.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

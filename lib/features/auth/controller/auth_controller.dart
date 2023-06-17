@@ -7,6 +7,18 @@ import "package:f21_demo/core/utils.dart";
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
+final isFirstTimeProvider = StateNotifierProvider<IsFirstTime, bool>(
+  (ref) => IsFirstTime(ref: ref),
+);
+
+class IsFirstTime extends StateNotifier<bool> {
+  IsFirstTime({required Ref ref}) : super(true);
+
+  void trigger() {
+    state = false;
+  }
+}
+
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
   (ref) => AuthController(authRepository: ref.watch(authRepositoryProvider), ref: ref),
 );
@@ -51,8 +63,8 @@ class AuthController extends StateNotifier<bool> {
   }
 
   void logout() async {
-    _authRepository.logOut();
     _ref.read(userProvider.notifier).update((state) => null);
+    _authRepository.logOut();
   }
 
   User? getCurrentUser() {

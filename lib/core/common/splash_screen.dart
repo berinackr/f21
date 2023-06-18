@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/assets.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +38,7 @@ class Splash extends ConsumerWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(500),
                   child: Image.asset(
-                    'assets/images/logo.png',
+                    Assets.logoPath,
                     width: 250,
                   ),
                 ),
@@ -57,7 +58,7 @@ class Splash extends ConsumerWidget {
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
-                  child: Lottie.network('https://assets3.lottiefiles.com/packages/lf20_xD7kztjVaC.json'),
+                  child: SingleChildScrollView(child: Lottie.asset("assets/images/loading.json")),
                 ),
               ],
             ),

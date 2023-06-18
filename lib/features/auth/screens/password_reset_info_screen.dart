@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -44,7 +45,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                       //Logo
                       CircleAvatar(
                         radius: screenWidth / 4,
-                        backgroundImage: const AssetImage("assets/images/logo.png"),
+                        backgroundImage: const AssetImage(Assets.logoPath),
                       ),
                       const Spacer(
                         flex: 1,

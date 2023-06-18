@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/assets.dart';
 import 'package:f21_demo/core/common/loader.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         //Logo
                         CircleAvatar(
                           radius: screenWidth / 4,
-                          backgroundImage: const AssetImage("assets/images/logo.png"),
+                          backgroundImage: const AssetImage(Assets.logoPath),
                         ),
                         const SizedBox(
                           height: 30,
@@ -215,7 +216,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   children: [
                                     CircleAvatar(
                                       backgroundColor: Colors.transparent,
-                                      child: Image.asset("assets/images/google_icon.png"),
+                                      child: Image.asset(Assets.googleIconPath),
                                     ),
                                     const Text(
                                       "Google ile Giriş Yap",

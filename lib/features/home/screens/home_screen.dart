@@ -23,7 +23,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(userProvider);
     return user == null
         ? const LoadingScreen()
-        : user.birthDate == null
+        : user.username == null
             ? const ExampleProfileData()
             : Scaffold(
                 //backgroundColor: const Color(0xFF42A5F5),
@@ -240,14 +240,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //--------------------------------------
 
                 bottomNavigationBar: ConvexAppBar(
-                  backgroundColor: const Color(0xFF9533FF),
-                  items: const [
-                    TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
-                    TabItem(icon: Icons.home, title: 'Anasayfa'),
-                    TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
-                  ],
-                  onTap: (int i) => print('click index=$i'),
-                ),
+                    backgroundColor: const Color(0xFF9533FF),
+                    items: const [
+                      TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
+                      TabItem(icon: Icons.home, title: 'Anasayfa'),
+                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                    ],
+                    onTap: (int i) => {}),
               );
   }
 }

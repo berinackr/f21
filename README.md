@@ -132,15 +132,19 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog 1](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog1.png)
-![Backlog 1 Miro]([https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog1.png](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207)) 
+![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
+[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
 
 ![Backlog 2]() 
 
 ![Backlog 3]()
 
 - **Ürün Durumu**: Ekran görüntüleri:
- ???
+ ![1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127400.png)
+ ![2](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127401.png)
+ ![3](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127405.png)
+ ![4](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127414.png)
+ ![5](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127449.png)
 
 - **Sprint Review**: 
     * Alınan kararlar:  Yaptğımız işleri özetledik, Product Owner'ımız tamamlanmayan ya da üzerinden yeniden geçilmesi gereken konulardan bahsetti. Özellikle UI temasının daha modern ve farklı animasyonlara sahip olacak şekilde revize edilmesinde karar aldık. Ne kadar yol katettiğimizi ve ne kadar yolumuz kaldığını gözden geçirdik.

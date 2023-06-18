@@ -36,6 +36,15 @@ class _MyAppState extends ConsumerState<MyApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.blue,
+              colorScheme: const ColorScheme.light(
+                primary: Color.fromARGB(255, 31, 4, 99),
+                secondary: Color.fromARGB(255, 155, 174, 209),
+              ),
+              datePickerTheme: const DatePickerThemeData(
+                backgroundColor: Color.fromARGB(255, 236, 236, 236),
+                headerBackgroundColor: Color.fromARGB(255, 31, 4, 99),
+                headerForegroundColor: Color.fromARGB(255, 236, 236, 236),
+              ),
             ),
             routerConfig: router);
   }

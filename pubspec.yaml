@@ -44,6 +44,9 @@ dependencies:
   go_router: ^8.0.5
   lottie: ^2.4.0
   convex_bottom_bar: ^3.2.0
+  flutter_form_builder: ^9.0.0
+  dotted_border: ^2.0.0+3
+  file_picker: ^5.3.2
 
 dev_dependencies:
   flutter_test:
@@ -70,7 +73,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/google_icon.png
-    - assets/animations/splash_animation.json
+    - assets/images/loading.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

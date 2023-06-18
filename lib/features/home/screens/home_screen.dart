@@ -1,6 +1,6 @@
 import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
-import 'package:f21_demo/features/auth/screens/example_profile_data.dart';
+import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(userProvider);
     return user == null
         ? const LoadingScreen()
-        : user.birthDate == null
+        : user.username == null
             ? const ExampleProfileData()
             : Scaffold(
                 //backgroundColor: const Color(0xFF42A5F5),
@@ -246,7 +246,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     TabItem(icon: Icons.home, title: 'Anasayfa'),
                     TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                   ],
-                  onTap: (int i) => print('click index=$i'),
+                  onTap: (int i) => {},
                 ),
               );
   }

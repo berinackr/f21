@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/assets.dart';
 import 'package:f21_demo/core/common/loader.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       //Logo
                       CircleAvatar(
                         radius: screenWidth / 4,
-                        backgroundImage: const AssetImage("assets/images/logo.png"),
+                        backgroundImage: const AssetImage(Assets.logoPath),
                       ),
                       const SizedBox(
                         height: 20,

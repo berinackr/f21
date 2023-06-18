@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       //Logo
                       CircleAvatar(
                         radius: screenWidth / 4,
-                        backgroundImage: const AssetImage("assets/images/logo.png"),
+                        backgroundImage: const AssetImage(Assets.logoPath),
                       ),
                       const SizedBox(
                         height: 20,

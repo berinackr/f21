@@ -1,4 +1,4 @@
-# F21!
+# F21
 
 F21
 
@@ -54,9 +54,7 @@ Biberon App
 
 - **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. (Benzer bir mentalite kurmalıyız. Product owner ile birlikte user stories yazılmalı)
 
-Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir. (Biz de aynı yapıyı miro'da kullanabiliriz?? Ekiple konuşulmalı)
-
-Muhtemelen yukarıda parantez içerisinde yazdığım konular 7 Hazirandaki günlük toplantımızda belirlenemeyecek bunları bir sonraki toplantıda kararlaştırıp readme'yi bitirebiliriz. Her halükarda readme doldurulurken bunlara dikkat edeceğimiz için buraya yazıyorum.
+Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
 
 ## **Daily Scrums**: 
   - 5 Haziran : 
@@ -133,12 +131,13 @@ Muhtemelen yukarıda parantez içerisinde yazdığım konular 7 Hazirandaki gün
 
 
 
-- **Sprint board update**: Sprint board screenshotları: ?? (Biz de miro kullanarak böyle bir yapı kurabiliriz örnek olması açısından görselleri silmedim)
+- **Sprint board update**: Sprint board screenshotları: 
 ![Backlog 1](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog1.png)
+![Backlog 1 Miro]([https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog1.png](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207)) 
 
-![Backlog 2](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog2.png) 
+![Backlog 2]() 
 
-![Backlog 3](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1Documents/backlog3.png)
+![Backlog 3]()
 
 - **Ürün Durumu**: Ekran görüntüleri:
  ???

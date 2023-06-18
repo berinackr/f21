@@ -1,6 +1,6 @@
 import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
-import 'package:f21_demo/features/auth/screens/example_profile_data.dart';
+import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -240,13 +240,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //--------------------------------------
 
                 bottomNavigationBar: ConvexAppBar(
-                    backgroundColor: const Color(0xFF9533FF),
-                    items: const [
-                      TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
-                      TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
-                    ],
-                    onTap: (int i) => {}),
+                  backgroundColor: const Color(0xFF9533FF),
+                  items: const [
+                    TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
+                    TabItem(icon: Icons.home, title: 'Anasayfa'),
+                    TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                  ],
+                  onTap: (int i) => {},
+                ),
               );
   }
 }

@@ -46,7 +46,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           statusBarColor: Color.fromARGB(255, 155, 174, 209),
         ),
       ),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {

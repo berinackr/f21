@@ -1,4 +1,3 @@
-import 'package:f21_demo/core/assets.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

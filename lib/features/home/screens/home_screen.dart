@@ -5,6 +5,7 @@ import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -147,9 +148,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                         title: const Text('Profilim'),
                         onTap: () {
-                          // Update the state of the app
-                          // ...
-                          // Then close the drawer
+                          //Profil ekranına gider
+                          context.push('/home/profile');
                           Navigator.pop(context);
                         },
                       ),
@@ -171,9 +171,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                         title: const Text('Ayarlar'),
                         onTap: () {
-                          // Update the state of the app
-                          // ...
-                          // Then close the drawer
+                          //Ayarlar ekranına gider
+                          context.push('/home/settings');
                           Navigator.pop(context);
                         },
                       ),

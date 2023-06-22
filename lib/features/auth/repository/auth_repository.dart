@@ -6,21 +6,25 @@ import 'package:f21_demo/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
     firestore: ref.read(firestoreProvider),
     auth: ref.read(authProvider),
+    googleSignIn: ref.read(googleSignInProvider),
   ),
 );
 
 class AuthRepository {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;
+  final GoogleSignIn _googleSignIn;
 
-  AuthRepository({required FirebaseFirestore firestore, required FirebaseAuth auth})
+  AuthRepository({required FirebaseFirestore firestore, required FirebaseAuth auth, required GoogleSignIn googleSignIn})
       : _firestore = firestore,
-        _auth = auth;
+        _auth = auth,
+        _googleSignIn = googleSignIn;
 
   CollectionReference get _users => _firestore.collection('users');
 
@@ -48,6 +52,33 @@ class AuthRepository {
       final UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       UserModel? userModel = await getUserData(userCredential.user!.uid).first;
       return right(userModel);
+    } on FirebaseAuthException catch (e) {
+      return left(Failure(e.message.toString()));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  FutureEither<UserModel> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final googleAuth = await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
+      if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+        final UserModel userModel = UserModel(
+          uid: user!.uid,
+        );
+        await _users.doc(user.uid).set(userModel.toMap());
+        return right(userModel);
+      } else {
+        UserModel? userModel = await getUserData(user!.uid).first;
+        return right(userModel!);
+      }
     } on FirebaseAuthException catch (e) {
       return left(Failure(e.message.toString()));
     } catch (e) {

@@ -2,11 +2,14 @@ import 'package:f21_demo/core/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../core/custom_styles.dart';
+
 class PasswordResetInfoScreen extends StatefulWidget {
   const PasswordResetInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<PasswordResetInfoScreen> createState() => _PasswordResetInfoScreenState();
+  State<PasswordResetInfoScreen> createState() =>
+      _PasswordResetInfoScreenState();
 }
 
 class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
@@ -17,11 +20,11 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 155, 174, 209),
+        backgroundColor: CustomStyles.backgroundColor,
         //toolbarHeight: 0,
         elevation: 0,
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(255, 155, 174, 209),
+          statusBarColor: CustomStyles.backgroundColor,
         ),
       ),
       body: SafeArea(
@@ -29,7 +32,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Container(
-                color: const Color.fromARGB(255, 155, 174, 209),
+                color: CustomStyles.backgroundColor,
                 constraints: BoxConstraints(
                   minWidth: viewportConstraints.maxWidth,
                   minHeight: viewportConstraints.maxHeight,
@@ -73,7 +76,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 31, 4, 99),
+                          color: CustomStyles.primaryColor,
                         ),
                       ),
                       const Spacer(

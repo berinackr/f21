@@ -1,5 +1,6 @@
 import 'package:f21_demo/core/assets.dart';
 import 'package:f21_demo/core/common/loader.dart';
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordAgainController = TextEditingController();
-  void signUp(WidgetRef ref, String email, String password, BuildContext context) {
+  void signUp(
+      WidgetRef ref, String email, String password, BuildContext context) {
     ref.read(authControllerProvider.notifier).signUp(email, password, context);
   }
 
@@ -33,10 +35,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         //toolbarHeight: 0,
-        backgroundColor: const Color.fromARGB(255, 155, 174, 209),
+        backgroundColor: CustomStyles.backgroundColor,
         elevation: 0,
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(255, 155, 174, 209),
+          statusBarColor: CustomStyles.backgroundColor,
         ),
       ),
       body: SafeArea(
@@ -45,7 +47,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
-                color: const Color.fromARGB(255, 155, 174, 209),
+                color: CustomStyles.backgroundColor,
                 constraints: BoxConstraints(
                   minWidth: viewportConstraints.maxWidth,
                   minHeight: viewportConstraints.maxHeight,
@@ -77,7 +79,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                     "Email",
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Color.fromARGB(255, 31, 4, 99),
+                                      color: CustomStyles.primaryColor,
                                     ),
                                   )),
                             ),
@@ -86,19 +88,24 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             ),
                             //Email TextField
                             Padding(
-                              padding: EdgeInsets.fromLTRB(screenHeight / 30, 0, screenHeight / 30, 0),
+                              padding: EdgeInsets.fromLTRB(
+                                  screenHeight / 30, 0, screenHeight / 30, 0),
                               child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr").email().build(),
+                                validator: ValidationBuilder(localeName: "tr")
+                                    .email()
+                                    .build(),
                                 controller: emailController,
                                 autofillHints: const [AutofillHints.email],
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: const InputDecoration(
                                   hintText: "johndoe@gmail.com",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                  fillColor: Color.fromARGB(255, 236, 236, 236),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 15),
+                                  fillColor: CustomStyles.fillColor,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -115,7 +122,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                   "Şifre",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color.fromARGB(255, 31, 4, 99),
+                                    color: CustomStyles.primaryColor,
                                   ),
                                 ),
                               ),
@@ -125,9 +132,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             ),
                             //Password TextField
                             Padding(
-                              padding: EdgeInsets.fromLTRB(screenHeight / 30, 0, screenHeight / 30, 0),
+                              padding: EdgeInsets.fromLTRB(
+                                  screenHeight / 30, 0, screenHeight / 30, 0),
                               child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr").minLength(6).build(),
+                                validator: ValidationBuilder(localeName: "tr")
+                                    .minLength(6)
+                                    .build(),
                                 obscureText: true,
                                 controller: passwordController,
                                 autofillHints: const [AutofillHints.password],
@@ -135,10 +145,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 decoration: const InputDecoration(
                                   hintText: "Çok gizli şifre",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                  fillColor: Color.fromARGB(255, 236, 236, 236),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 15),
+                                  fillColor: CustomStyles.fillColor,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -155,7 +167,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                   "Şifreyi Onayla",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color.fromARGB(255, 31, 4, 99),
+                                    color: CustomStyles.primaryColor,
                                   ),
                                 ),
                               ),
@@ -164,10 +176,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               height: 5,
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(screenHeight / 30, 0, screenHeight / 30, 0),
+                              padding: EdgeInsets.fromLTRB(
+                                  screenHeight / 30, 0, screenHeight / 30, 0),
                               child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr").minLength(6).add((value) {
-                                  return value != passwordController.text ? "şifreler uyuşmuyor" : null;
+                                validator: ValidationBuilder(localeName: "tr")
+                                    .minLength(6)
+                                    .add((value) {
+                                  return value != passwordController.text
+                                      ? "şifreler uyuşmuyor"
+                                      : null;
                                 }).build(),
                                 obscureText: true,
                                 controller: passwordAgainController,
@@ -176,10 +193,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 decoration: const InputDecoration(
                                   hintText: "Çok gizli şifre",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                  fillColor: Color.fromARGB(255, 236, 236, 236),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 15),
+                                  fillColor: CustomStyles.fillColor,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -189,12 +208,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               children: [
                                 const Icon(
                                   Icons.ads_click,
-                                  color: Color.fromARGB(255, 31, 4, 99),
+                                  color: CustomStyles.primaryColor,
                                 ),
                                 TextButton(
                                     onPressed: () {
                                       //tiklayinca sozlesme ekranina gitmeli
-                                      Navigator.of(context).pushNamed("/sozlesmeEkrani");
+                                      Navigator.of(context)
+                                          .pushNamed("/sozlesmeEkrani");
                                     },
                                     child: const Text(
                                       "Sözleşmeyi Okudum, Onayladım.",
@@ -231,25 +251,30 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                       //Kayıt Ol Butonu
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 249, 191, 178)),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: CustomStyles.buttonColor),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               if (!isChecked) {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                    content: Text(
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        content: Text(
                                   "Lütfen öncelikle sözleşmeyi onaylayın!",
-                                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: CustomStyles.errorColor,
+                                      fontWeight: FontWeight.bold),
                                 )));
                                 return;
                               }
-                              signUp(ref, emailController.text, passwordController.text, context);
+                              signUp(ref, emailController.text,
+                                  passwordController.text, context);
                               passwordController.clear();
                               passwordAgainController.clear();
                             }
                           },
                           child: const Text(
                             "Kayıt ol",
-                            style: TextStyle(color: Color.fromARGB(255, 31, 4, 99)),
+                            style: TextStyle(color: CustomStyles.primaryColor),
                           )),
                       const Spacer(
                         flex: 1,

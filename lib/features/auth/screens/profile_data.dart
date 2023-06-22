@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/core/utils.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ class ExampleProfileData extends ConsumerStatefulWidget {
   const ExampleProfileData({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ExampleProfileDataState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ExampleProfileDataState();
 }
 
 class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
@@ -49,9 +51,15 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
     DateTime? babyBirthDate,
     BuildContext context,
   ) {
-    ref
-        .read(authControllerProvider.notifier)
-        .setProfileInfos(username, birthDate, gender, isPregnant, profilePic, months, babyBirthDate, context);
+    ref.read(authControllerProvider.notifier).setProfileInfos(
+        username,
+        birthDate,
+        gender,
+        isPregnant,
+        profilePic,
+        months,
+        babyBirthDate,
+        context);
   }
 
   @override
@@ -60,17 +68,18 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
         appBar: AppBar(
           title: const Text(
             "Profil Bilgileri",
-            style: TextStyle(color: Color.fromARGB(255, 155, 174, 209)),
+            style: TextStyle(color: CustomStyles.backgroundColor),
           ),
           centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 31, 4, 99),
+          backgroundColor: CustomStyles.primaryColor,
           systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Color.fromARGB(255, 155, 174, 209),
+            statusBarColor: CustomStyles.backgroundColor,
           ),
           actions: [
             IconButton(
               onPressed: () => logOut(ref),
-              icon: const Icon(Icons.logout, color: Color.fromARGB(255, 155, 174, 209)),
+              icon:
+                  const Icon(Icons.logout, color: CustomStyles.backgroundColor),
             ),
           ],
         ),
@@ -78,9 +87,11 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Container(
-                color: const Color.fromARGB(255, 155, 174, 209),
-                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                color: CustomStyles.backgroundColor,
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
                 child: FormBuilder(
                   key: _formKey,
                   child: Column(
@@ -92,7 +103,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           radius: const Radius.circular(100),
                           dashPattern: const [10, 4],
                           strokeCap: StrokeCap.round,
-                          color: const Color.fromARGB(255, 31, 4, 99),
+                          color: CustomStyles.primaryColor,
                           child: Container(
                             width: 120,
                             height: 120,
@@ -100,12 +111,14 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: profileFile != null
-                                ? ClipOval(child: Image.file(profileFile!, fit: BoxFit.cover))
+                                ? ClipOval(
+                                    child: Image.file(profileFile!,
+                                        fit: BoxFit.cover))
                                 : const Center(
                                     child: Icon(
                                       Icons.camera_enhance,
                                       size: 30,
-                                      color: Color.fromARGB(255, 31, 4, 99),
+                                      color: CustomStyles.primaryColor,
                                     ),
                                   ),
                           ),
@@ -118,7 +131,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           "Kullanıcı Adı",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Color.fromARGB(255, 31, 4, 99),
+                            color: CustomStyles.primaryColor,
                           ),
                         ),
                       ),
@@ -128,17 +141,24 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                         controller: usernameController,
                         decoration: const InputDecoration(
                           hintText: "Anne",
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
                           filled: true,
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 31, 4, 99), width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                          fillColor: Color.fromARGB(255, 236, 236, 236),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.primaryColor, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          fillColor: CustomStyles.fillColor,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
-                        validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(20).build(),
+                        validator: ValidationBuilder(localeName: "tr")
+                            .minLength(3)
+                            .maxLength(20)
+                            .build(),
                       ),
                       const SizedBox(height: 20),
                       const Align(
@@ -147,7 +167,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           "Doğum Tarihi",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Color.fromARGB(255, 31, 4, 99),
+                            color: CustomStyles.primaryColor,
                           ),
                         ),
                       ),
@@ -166,14 +186,18 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                         inputType: InputType.date,
                         decoration: const InputDecoration(
                           hintText: "Doğum Tarihi",
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                          fillColor: Color.fromARGB(255, 236, 236, 236),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          fillColor: CustomStyles.fillColor,
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 31, 4, 99), width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.primaryColor, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
                       ),
@@ -182,7 +206,8 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                         name: "role",
                         title: const Text(
                           "Gebeyim",
-                          style: TextStyle(color: Color.fromARGB(255, 31, 4, 99), fontSize: 18),
+                          style: TextStyle(
+                              color: CustomStyles.primaryColor, fontSize: 18),
                         ),
                         initialValue: true,
                         onChanged: (value) {
@@ -191,8 +216,9 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,
-                        activeColor: const Color.fromARGB(255, 31, 4, 99),
-                        decoration: const InputDecoration(border: InputBorder.none),
+                        activeColor: CustomStyles.primaryColor,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
                       ),
                       isPregnant
                           ? Column(children: [
@@ -203,7 +229,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                   "Kaç Aylık Hamilesiniz?",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color.fromARGB(255, 31, 4, 99),
+                                    color: CustomStyles.primaryColor,
                                   ),
                                 ),
                               ),
@@ -222,17 +248,19 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                   return Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: const Color.fromARGB(255, 31, 4, 99),
+                                      color: CustomStyles.primaryColor,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
                                       "$value Aylık",
-                                      style: const TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                   );
                                 },
-                                decoration:
-                                    const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(0)),
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.all(0)),
                               ),
                             ])
                           : Column(children: [
@@ -243,7 +271,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                   "Bebeğinizin Doğum Tarihi",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color.fromARGB(255, 31, 4, 99),
+                                    color: CustomStyles.primaryColor,
                                   ),
                                 ),
                               ),
@@ -262,14 +290,19 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                 inputType: InputType.date,
                                 decoration: const InputDecoration(
                                   hintText: "Bebeğinizin Doğum Tarihi",
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                  fillColor: Color.fromARGB(255, 236, 236, 236),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 15),
+                                  fillColor: CustomStyles.fillColor,
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Color.fromARGB(255, 31, 4, 99), width: 2),
-                                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                      borderSide: BorderSide(
+                                          color: CustomStyles.primaryColor,
+                                          width: 2),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0))),
                                   filled: true,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -281,7 +314,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           "Bebeğin Cinsiyeti",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Color.fromARGB(255, 31, 4, 99),
+                            color: CustomStyles.primaryColor,
                           ),
                         ),
                       ),
@@ -302,25 +335,31 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                             child: Text("Belirsiz"),
                           ),
                         ],
-                        dropdownColor: const Color.fromARGB(255, 236, 236, 236),
+                        dropdownColor: CustomStyles.fillColor,
                         initialValue: "Belirsiz",
-                        iconEnabledColor: const Color.fromARGB(255, 31, 4, 99),
+                        iconEnabledColor: CustomStyles.primaryColor,
                         onChanged: (value) {
                           gender = value!;
                         },
-                        iconDisabledColor: const Color.fromARGB(255, 31, 4, 99),
-                        style: const TextStyle(color: Color.fromARGB(255, 31, 4, 99), fontSize: 18),
+                        iconDisabledColor: CustomStyles.primaryColor,
+                        style: const TextStyle(
+                            color: CustomStyles.primaryColor, fontSize: 18),
                         decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                          fillColor: Color.fromARGB(255, 236, 236, 236),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          fillColor: CustomStyles.fillColor,
                           hintText: "Belirsiz",
-                          hintStyle: TextStyle(color: Color.fromARGB(255, 31, 4, 99), fontSize: 18),
+                          hintStyle: TextStyle(
+                              color: CustomStyles.primaryColor, fontSize: 18),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 31, 4, 99), width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.primaryColor, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
                       ),
@@ -329,8 +368,16 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           onPressed: () {
                             print(usernameController.text);
                             if (_formKey.currentState!.validate()) {
-                              setProfileInfos(ref, usernameController.text, birthDate!, gender, isPregnant, profileFile,
-                                  months, birthDateBaby, context);
+                              setProfileInfos(
+                                  ref,
+                                  usernameController.text,
+                                  birthDate!,
+                                  gender,
+                                  isPregnant,
+                                  profileFile,
+                                  months,
+                                  birthDateBaby,
+                                  context);
                             }
                           },
                           child: const Text("Kaydet"))

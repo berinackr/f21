@@ -1,4 +1,5 @@
 import 'package:f21_demo/core/common/loading_screen.dart';
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +36,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         Container(
                           //padding: EdgeInsets.all(20),
                           decoration: const BoxDecoration(
-                            color: Color(0xff764abc),
+                            color: CustomStyles.backgroundColor,
                             //borderRadius: BorderRadius.circular(40),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0xff764def),
+                                color: CustomStyles.fillColor,
                                 offset: Offset(0, 7),
                                 blurRadius: 10,
                               ),
@@ -48,7 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(20),
                             decoration: const BoxDecoration(
-                              color: Color(0xff764abc),
+                              color: CustomStyles.backgroundColor,
                               //borderRadius: BorderRadius.circular(40),
                             ),
                             child: const Align(
@@ -74,11 +75,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           padding: const EdgeInsets.all(20),
                           margin: const EdgeInsets.only(top: 30),
                           decoration: const BoxDecoration(
-                            color: Color(0xff764abc),
+                            color: CustomStyles.backgroundColor,
                             //borderRadius: BorderRadius.circular(40),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0xff764def),
+                                color: CustomStyles.fillColor,
                                 offset: Offset(0, 7),
                                 blurRadius: 10,
                               ),
@@ -90,7 +91,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 appBar: AppBar(
-                  backgroundColor: const Color(0xFF9533FF),
+                  backgroundColor: CustomStyles.primaryColor,
                   actions: [
                     IconButton(
                         icon: toggle
@@ -121,7 +122,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     padding: EdgeInsets.zero,
                     children: [
                       const UserAccountsDrawerHeader(
-                        decoration: BoxDecoration(color: Color(0xFF9533FF)),
+                        decoration:
+                            BoxDecoration(color: CustomStyles.primaryColor),
                         accountName: Text(
                           "Adjsnfc Dsdjksf",
                           style: TextStyle(
@@ -134,7 +136,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        currentAccountPicture: Icon(Icons.person),
+                        currentAccountPicture: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        ),
                       ),
                       ListTile(
                         leading: const Icon(
@@ -240,11 +245,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //--------------------------------------
 
                 bottomNavigationBar: ConvexAppBar(
-                  backgroundColor: const Color(0xFF9533FF),
+                  backgroundColor: CustomStyles.primaryColor,
                   items: const [
                     TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                     TabItem(icon: Icons.home, title: 'Anasayfa'),
-                    TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                    TabItem(
+                        icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                   ],
                   onTap: (int i) => {},
                 ),

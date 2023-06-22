@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +25,7 @@ class Splash extends ConsumerWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        backgroundColor: Colors.indigo.shade300,
+        backgroundColor: CustomStyles.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Center(

@@ -1,3 +1,4 @@
+import 'package:f21_demo/core/providers/settings_repository.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/models/user_model.dart';
 import 'package:f21_demo/router.dart';
@@ -34,6 +35,8 @@ class _MyAppState extends ConsumerState<MyApp> {
         : MaterialApp.router(
             title: 'Flutter f21 Demo 3',
             debugShowCheckedModeBanner: false,
+            themeMode: ref.watch(settingsProvider).isDarkMode() ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: ThemeData.dark(),
             theme: ThemeData(
               primarySwatch: Colors.blue,
               colorScheme: const ColorScheme.light(

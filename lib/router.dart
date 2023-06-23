@@ -5,8 +5,11 @@ import 'package:f21_demo/features/home/screens/home_screen.dart';
 import 'package:f21_demo/features/auth/screens/forgot_password_screen.dart';
 import 'package:f21_demo/features/auth/screens/login_screen.dart';
 import 'package:f21_demo/features/auth/screens/register_screen.dart';
+import 'package:f21_demo/features/profile/screens/profile_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import 'features/settings/screens/settings_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateChangesProvider);
@@ -22,6 +25,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(path: "/", builder: (context, state) => const LoadingScreen()),
       GoRoute(path: "/home", builder: (context, state) => const HomeScreen()),
+      GoRoute(path: '/home/profile', builder: (context, state) => const ProfileScreen(),),
+      GoRoute(path: '/home/settings', builder: (context, state) => const SettingsScreen(),),
       GoRoute(path: "/auth", builder: (context, state) => const LoginScreen()),
       GoRoute(path: "/auth/register", builder: (context, state) => const RegisterScreen()),
       GoRoute(

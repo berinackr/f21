@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/providers/settings_repository.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +23,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    showSnackbarIfDarkModeChanges(ref, context);
     final user = ref.watch(userProvider);
     return user == null
         ? const LoadingScreen()

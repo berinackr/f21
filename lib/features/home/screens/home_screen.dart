@@ -184,9 +184,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                         title: const Text('Çıkış yap'),
                         onTap: () {
-                          // Update the state of the app
-                          // ...
-                          // Then close the drawer
+                          logOut(ref);
                           Navigator.pop(context);
                         },
                       ),

@@ -48,6 +48,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   file_picker: ^5.3.2
   google_sign_in: ^6.1.4
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,11 @@ flutter:
     - assets/images/google_icon.png
     - assets/animations/splash-animation.json
     - assets/animations/loader.json
+    - assets/images/doctor.png
+    - assets/images/forum_icon.png
+    - assets/images/backgroundimg.png
+    - assets/images/meditation_woman.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

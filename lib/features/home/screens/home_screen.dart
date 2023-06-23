@@ -109,9 +109,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         }),
                     IconButton(
                         onPressed: () {
-                          logOut(ref);
+                          toggleDarkMode(ref);
                         },
-                        icon: const Icon(Icons.logout)),
+                        icon: const Icon(Icons.dark_mode)),
                   ],
                   title: const Text('Anasayfa'),
                 ),

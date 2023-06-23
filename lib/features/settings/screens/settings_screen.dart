@@ -31,9 +31,9 @@ class SettingsScreen extends ConsumerWidget {
                   children: [
                      const SettingsScreenTitle(title: "Genel"),
                     ListTile(
-                      leading: Icon(Icons.language),
-                      title: Text("Dil"),
-                      subtitle: Text("Türkçe"),
+                      leading: const Icon(Icons.language),
+                      title: const Text("Dil"),
+                      subtitle: const Text("Türkçe"),
                        onTap: () {
                          ScaffoldMessenger.of(context).showSnackBar(
                            const SnackBar(content: Text("Yalnızca türkçe destekleniyor."))
@@ -43,13 +43,16 @@ class SettingsScreen extends ConsumerWidget {
                      const Divider(),
                     const SettingsScreenTitle(title: "Arayüz ve Ses"),
                     ListTile(
+                      onTap: () {
+                        toggleDarkMode(ref);
+                      },
                       leading: const Icon(Icons.dark_mode),
                       title: const Text("Karanlık Mod"),
                       trailing: Switch(
                         activeColor: CustomStyles.buttonColor,
                         value: switchValue,
                         onChanged: (bool value) {
-                          ref.read(settingsProvider.notifier).toggleDarkMode();
+                          toggleDarkMode(ref);
                         },
                       ),
                     ),

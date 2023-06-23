@@ -16,7 +16,7 @@ class SettingsRepository extends ChangeNotifier{
   }
 }
 
-void showSnackbarIfDarkModeChanges(WidgetRef ref, BuildContext context){
+  void showSnackbarIfDarkModeChanges(WidgetRef ref, BuildContext context){
   final switchValue = ref.watch(settingsProvider).isDarkMode();
   final switchValueChanged = ref.listen(settingsProvider,(previous, next) {
     ScaffoldMessenger.of(context)
@@ -26,7 +26,12 @@ void showSnackbarIfDarkModeChanges(WidgetRef ref, BuildContext context){
             content: Text("Dark mode ${switchValue ? 'kapalı' : 'açık' }."),
           duration: const Duration(seconds: 1),
         )
+        );
+      },
     );
-  },
-  );
-}
+  }
+
+  //anasayfada da dark mode aç kapa özelliği olacağından kod tekrarı olmasın diye ekledim yukarıdaki toggleDarkmode isimli fonksiyon ile aynı değil!
+  void toggleDarkMode(WidgetRef ref){
+    ref.read(settingsProvider.notifier).toggleDarkMode();
+  }

@@ -11,11 +11,12 @@ class _MyBabyScreenBottombarState extends State<MyBabyScreenBottombar> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-          return const SingleChildScrollView(
+          return SingleChildScrollView(
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Text("mybabyscreenbottombar")
+                    Text("mybabyscreenbottombar"),
+
                   ],
                 ),
               ),

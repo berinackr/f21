@@ -71,168 +71,221 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   drawer: SafeArea(
                     child: LayoutBuilder(
                       builder: (context, viewportConstraints) {
-                        return Drawer(
-                          // Add a ListView to the drawer. This ensures the user can scroll
-                          // through the options in the drawer if there isn't enough vertical
-                          // space to fit everything.
-                          child: ListView(
-                            // Important: Remove any padding from the ListView.
-                            padding: EdgeInsets.zero,
-                            children: [
-                              Stack(
+                        return Stack(
+                          children: [
+                            Drawer(
+                              // Add a ListView to the drawer. This ensures the user can scroll
+                              // through the options in the drawer if there isn't enough vertical
+                              // space to fit everything.
+                              child: Stack(
                                 children: [
-                                  UserAccountsDrawerHeader(
-                                    onDetailsPressed: () {
-                                      showProfilePopUp(
-                                          context, viewportConstraints, ref);
-                                    },
-                                    arrowColor: Colors.transparent,
-                                    decoration: const BoxDecoration(
-                                        color: CustomStyles.primaryColor),
-                                    accountName: Text(
-                                      user.username.toString(),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    accountEmail: Text(
-                                      ref
-                                          .read(authRepositoryProvider)
-                                          .getCurrentUser()!
-                                          .email!
-                                          .toString(),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    currentAccountPicture: const CircleAvatar(),
-                                  ),
-                                  Container(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 10, 10, 0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        IconButton(
-                                            icon: toggle
-                                                ? const Icon(
-                                                    Icons.notifications_off,
-                                                    color: Colors.red,
-                                                  )
-                                                : const Icon(
-                                                    Icons.notifications_active,
-                                                    color: Colors.white,
-                                                  ),
-                                            onPressed: () {
-                                              setState(() {
-                                                toggle = !toggle;
-                                              });
-                                            }),
-                                        IconButton(
-                                            onPressed: () {
-                                              toggleDarkMode(ref);
+                                  ListView(
+                                    // Important: Remove any padding from the ListView.
+                                    padding: EdgeInsets.zero,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          UserAccountsDrawerHeader(
+                                            onDetailsPressed: () {
+                                              showProfilePopUp(
+                                                  context, viewportConstraints, ref);
                                             },
-                                            icon: const Icon(Icons.dark_mode)),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.person,
-                                ),
-                                title: const Text('Profilim'),
-                                onTap: () {
-                                  //Profil ekranına gider
-                                  context.push('/home/profile');
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.camera,
-                                ),
-                                title: const Text('Fotoğraflarım'),
-                                onTap: () {
-                                  // Update the state of the app
-                                  // ...
-                                  // Then close the drawer
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.settings,
-                                ),
-                                title: const Text('Ayarlar'),
-                                onTap: () {
-                                  //Ayarlar ekranına gider
-                                  context.push('/home/settings');
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.logout,
-                                ),
-                                title: const Text('Çıkış yap'),
-                                onTap: () {
-                                  logOut(ref);
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.delete,
-                                ),
-                                title: const Text('Hesabı sil'),
-                                onTap: () {
-                                  // Update the state of the app
-                                  // ...
-                                  // Then close the drawer
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              const Divider(),
-                              Container(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: const Align(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    "İletişim Bilgileri",
-                                    //style: Theme.of(context).textTheme.caption,
-                                    textAlign: TextAlign.start,
+                                            arrowColor: Colors.transparent,
+                                            decoration: const BoxDecoration(
+                                                color: CustomStyles.primaryColor),
+                                            accountName: Text(
+                                              user.username.toString(),
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            accountEmail: Text(
+                                              ref
+                                                  .read(authRepositoryProvider)
+                                                  .getCurrentUser()!
+                                                  .email!
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            currentAccountPicture: const CircleAvatar(),
+                                          ),
+                                          Container(
+                                            padding:
+                                                const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                IconButton(
+                                                    icon: toggle
+                                                        ? const Icon(
+                                                            Icons.notifications_off,
+                                                            color: Colors.red,
+                                                          )
+                                                        : const Icon(
+                                                            Icons.notifications_active,
+                                                            color: Colors.white,
+                                                          ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        toggle = !toggle;
+                                                      });
+                                                    }),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      toggleDarkMode(ref);
+                                                    },
+                                                    icon: const Icon(Icons.dark_mode)),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.person,
+                                        ),
+                                        title: const Text('Profilim'),
+                                        onTap: () {
+                                          //Profil ekranına gider
+                                          context.push('/home/profile');
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.camera,
+                                        ),
+                                        title: const Text('Fotoğraflarım'),
+                                        onTap: () {
+                                          // Update the state of the app
+                                          // ...
+                                          // Then close the drawer
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.settings,
+                                        ),
+                                        title: const Text('Ayarlar'),
+                                        onTap: () {
+                                          //Ayarlar ekranına gider
+                                          context.push('/home/settings');
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.logout,
+                                        ),
+                                        title: const Text('Çıkış yap'),
+                                        onTap: () {
+                                          logOut(ref);
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.delete,
+                                        ),
+                                        title: const Text('Hesabı sil'),
+                                        onTap: () {
+                                          // Update the state of the app
+                                          // ...
+                                          // Then close the drawer
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      const Divider(),
+                                      Container(
+                                        padding: const EdgeInsets.only(left: 20),
+                                        child: const Align(
+                                          alignment: AlignmentDirectional.centerStart,
+                                          child: Text(
+                                            "İletişim Bilgileri",
+                                            //style: Theme.of(context).textTheme.caption,
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                      ),
+                                      const AboutListTile(
+                                        icon: Icon(
+                                          Icons.info,
+                                        ),
+                                        applicationIcon: Icon(
+                                          Icons.local_play,
+                                        ),
+                                        applicationName: 'Biberon App',
+                                        applicationVersion: '1.0.0',
+                                        applicationLegalese: '© 2023 Company',
+                                        aboutBoxChildren: [
+                                          ///Content goes he.re..
+                                        ],
+                                        child: Text('About app'),
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(Icons.privacy_tip),
+                                        title: const Text("Privacy Policy"),
+                                        onTap: () {},
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(Icons.contact_mail),
+                                        title: const Text("Contact us"),
+                                        onTap: () {},
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ),
-                              const AboutListTile(
-                                icon: Icon(
-                                  Icons.info,
-                                ),
-                                applicationIcon: Icon(
-                                  Icons.local_play,
-                                ),
-                                applicationName: 'Biberon App',
-                                applicationVersion: '1.0.0',
-                                applicationLegalese: '© 2023 Company',
-                                aboutBoxChildren: [
-                                  ///Content goes he.re..
+                                  Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: SizedBox(
+                                        height: 50,
+                                        width: 120,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.white, // Beyaz çizgi rengi
+                                              width: 2, // Beyaz çizgi kalınlığı
+                                            ),
+                                            borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma
+                                          ),
+                                          child: ElevatedButton.icon(
+                                            style: ElevatedButton.styleFrom(
+                                              foregroundColor: Colors.white,
+                                              backgroundColor: Colors.red[900],
+                                              shadowColor: Colors.black,
+                                              elevation: 4,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(6),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              logOut(ref);
+                                              Navigator.pop(context);
+                                            },
+                                            icon: const Icon(
+                                              Icons.exit_to_app,
+                                              color: Colors.white,
+                                            ),
+                                            label: const Text(
+                                              'Çıkış',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
-                                child: Text('About app'),
                               ),
-                              ListTile(
-                                leading: const Icon(Icons.privacy_tip),
-                                title: const Text("Privacy Policy"),
-                                onTap: () {},
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.contact_mail),
-                                title: const Text("Contact us"),
-                                onTap: () {},
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         );
                       },
                     ),

@@ -17,6 +17,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:readmore/readmore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/providers/settings_repository.dart';
 import '../../auth/repository/auth_repository.dart';
 
@@ -35,10 +36,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    checkDefaultUIMode(ref);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final bottomBarRouter = ref.watch(bottomBarRoutingProvider.notifier);
+    final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
     final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
-    showSnackbarIfDarkModeChanges(ref, context);
     final user = ref.watch(userProvider);
     return user == null
         ? const LoadingScreen()
@@ -241,9 +247,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (index) {
-                      setState(() {
-                        ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);
-                      });
+                      ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);
                     },
                   ),
                 ),

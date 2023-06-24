@@ -46,6 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
     final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
     final user = ref.watch(userProvider);
+    final settings = ref.watch(settingsProvider);
     return user == null
         ? const LoadingScreen()
         : user.username == null
@@ -54,13 +55,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 builder: (BuildContext context,
                         BoxConstraints viewportConstraints) =>
                     Scaffold(
-                  backgroundColor: CustomStyles.backgroundColor,
-                  body: bottomBarList[bottomBarRouter.selectedIndex],
-                  appBar: AppBar(
-                    backgroundColor: CustomStyles.primaryColor,
-                    actions: [
-                      IconButton(
-                        onPressed: () {
+                      backgroundColor: CustomStyles.backgroundColor,
+                      body: bottomBarList[bottomBarRouter.selectedIndex],
+                      appBar: AppBar(
+                        backgroundColor: CustomStyles.primaryColor,
+                        actions: [
+                          IconButton(
+                            onPressed: () {
                           showProfilePopUp(context, viewportConstraints, ref);
                         },
                         icon: const CircleAvatar(),
@@ -118,7 +119,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 IconButton(
-                                                    icon: toggle
+                                                    icon: settings.isSilentMode()
                                                         ? const Icon(
                                                             Icons.notifications_off,
                                                             color: Colors.red,
@@ -128,9 +129,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                             color: Colors.white,
                                                           ),
                                                     onPressed: () {
-                                                      setState(() {
-                                                        toggle = !toggle;
-                                                      });
+                                                      toggleSilentMode(ref);
                                                     }),
                                                 IconButton(
                                                     onPressed: () {

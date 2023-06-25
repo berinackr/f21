@@ -26,17 +26,16 @@ class Splash extends ConsumerWidget {
       ),
       home: Scaffold(
         backgroundColor: CustomStyles.backgroundColor,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: CustomStyles.backgroundColor,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/backgroundimg.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+        body: Stack(children: [
+          Image(
+            image: const AssetImage('assets/images/backgroundimg.png'),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Center(
                 child: Column(
                   children: [
                     const SizedBox(
@@ -78,7 +77,7 @@ class Splash extends ConsumerWidget {
               ),
             ),
           ),
-        ),
+        ]),
       ),
     );
   }

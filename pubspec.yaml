@@ -50,6 +50,8 @@ dependencies:
   google_sign_in: ^6.1.4
   readmore: ^2.2.0
   shared_preferences: ^2.1.2
+  google_mobile_ads: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:

@@ -6,10 +6,13 @@ import 'package:f21_demo/core/common/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -35,7 +38,9 @@ class _MyAppState extends ConsumerState<MyApp> {
         : MaterialApp.router(
             title: 'Flutter f21 Demo 3',
             debugShowCheckedModeBanner: false,
-            themeMode: ref.watch(settingsProvider).isDarkMode() ? ThemeMode.dark : ThemeMode.light,
+            themeMode: ref.watch(settingsProvider).isDarkMode()
+                ? ThemeMode.dark
+                : ThemeMode.light,
             darkTheme: ThemeData.dark(),
             theme: ThemeData(
               primarySwatch: Colors.blue,

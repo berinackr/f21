@@ -12,7 +12,7 @@ class _ForumScreenState extends State<ForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ForumPage"),
+        title: const Text("ForumPage"),
       ),
     );
   }

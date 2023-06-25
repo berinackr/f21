@@ -4,20 +4,13 @@ import 'package:f21_demo/core/providers/bottombar_routing_repository.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:f21_demo/features/home/screens/activity_bottombar.dart';
-import 'package:f21_demo/features/home/screens/forum_screen.dart';
 import 'package:f21_demo/features/home/screens/homescreen_bottombar.dart';
-import 'package:f21_demo/features/home/screens/meditation_screen.dart';
 import 'package:f21_demo/features/home/screens/mybabyscreen_bottombar.dart';
 import 'package:f21_demo/features/profile/widgets/profile_screen_widgets.dart';
-import 'package:f21_demo/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
-import 'package:readmore/readmore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/providers/settings_repository.dart';
 import '../../auth/repository/auth_repository.dart';
 
@@ -44,7 +37,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
-    final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
+    final bottomBarList = [
+      const MyBabyScreenBottombar(),
+      const HomeScreenBottombar(),
+      const ActivityScreenBottombar()
+    ];
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -55,13 +52,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 builder: (BuildContext context,
                         BoxConstraints viewportConstraints) =>
                     Scaffold(
-                      backgroundColor: CustomStyles.backgroundColor,
-                      body: bottomBarList[bottomBarRouter.selectedIndex],
-                      appBar: AppBar(
-                        backgroundColor: CustomStyles.primaryColor,
-                        actions: [
-                          IconButton(
-                            onPressed: () {
+                  backgroundColor: CustomStyles.backgroundColor,
+                  body: bottomBarList[bottomBarRouter.selectedIndex],
+                  appBar: AppBar(
+                    backgroundColor: CustomStyles.primaryColor,
+                    actions: [
+                      IconButton(
+                        onPressed: () {
                           showProfilePopUp(context, viewportConstraints, ref);
                         },
                         icon: const CircleAvatar(),
@@ -88,12 +85,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         children: [
                                           UserAccountsDrawerHeader(
                                             onDetailsPressed: () {
-                                              showProfilePopUp(
-                                                  context, viewportConstraints, ref);
+                                              showProfilePopUp(context,
+                                                  viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
                                             decoration: const BoxDecoration(
-                                                color: CustomStyles.primaryColor),
+                                                color:
+                                                    CustomStyles.primaryColor),
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -110,22 +108,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            currentAccountPicture: const CircleAvatar(),
+                                            currentAccountPicture:
+                                                const CircleAvatar(),
                                           ),
                                           Container(
-                                            padding:
-                                                const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 0),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
                                                 IconButton(
-                                                    icon: settings.isSilentMode()
+                                                    icon: settings
+                                                            .isSilentMode()
                                                         ? const Icon(
-                                                            Icons.notifications_off,
+                                                            Icons
+                                                                .notifications_off,
                                                             color: Colors.red,
                                                           )
                                                         : const Icon(
-                                                            Icons.notifications_active,
+                                                            Icons
+                                                                .notifications_active,
                                                             color: Colors.white,
                                                           ),
                                                     onPressed: () {
@@ -135,7 +138,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                     onPressed: () {
                                                       toggleDarkMode(ref);
                                                     },
-                                                    icon: const Icon(Icons.dark_mode)),
+                                                    icon: const Icon(
+                                                        Icons.dark_mode)),
                                               ],
                                             ),
                                           )
@@ -199,9 +203,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       const Divider(),
                                       Container(
-                                        padding: const EdgeInsets.only(left: 20),
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
                                         child: const Align(
-                                          alignment: AlignmentDirectional.centerStart,
+                                          alignment:
+                                              AlignmentDirectional.centerStart,
                                           child: Text(
                                             "İletişim Bilgileri",
                                             //style: Theme.of(context).textTheme.caption,
@@ -246,10 +252,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Colors.white, // Beyaz çizgi rengi
+                                              color: Colors
+                                                  .white, // Beyaz çizgi rengi
                                               width: 2, // Beyaz çizgi kalınlığı
                                             ),
-                                            borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma
+                                            borderRadius: BorderRadius.circular(
+                                                8), // Kenar yuvarlatma
                                           ),
                                           child: ElevatedButton.icon(
                                             style: ElevatedButton.styleFrom(
@@ -258,7 +266,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               shadowColor: Colors.black,
                                               elevation: 4,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(6),
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
                                               ),
                                             ),
                                             onPressed: () {
@@ -299,7 +308,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (index) {
-                      ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);
+                      ref
+                          .read(bottomBarRoutingProvider.notifier)
+                          .changeIndex(index);
                     },
                   ),
                 ),

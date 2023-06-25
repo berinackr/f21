@@ -50,6 +50,7 @@ dependencies:
   google_sign_in: ^6.1.4
   readmore: ^2.2.0
   shared_preferences: ^2.1.2
+  flutter_markdown: ^0.6.15
 
 dev_dependencies:
   flutter_test:
@@ -82,7 +83,7 @@ flutter:
     - assets/images/forum_icon.png
     - assets/images/backgroundimg.png
     - assets/images/meditation_woman.png
-
+    - assets/texts/user_policy.md
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

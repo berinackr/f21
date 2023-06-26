@@ -3,7 +3,6 @@ import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:f21_demo/features/profile/widgets/profile_screen_widgets.dart';
-import 'package:f21_demo/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -34,8 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : user.username == null
             ? const ExampleProfileData()
             : LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints viewportConstraints) =>
-                Scaffold(
+                builder: (BuildContext context, BoxConstraints viewportConstraints) => Scaffold(
                   //backgroundColor: const Color(0xFF42A5F5),
                   body: Padding(
                     padding: const EdgeInsets.all(15),
@@ -103,18 +101,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     backgroundColor: CustomStyles.primaryColor,
                     actions: [
                       IconButton(
+                        onPressed: () {
+                          showProfilePopUp(context, viewportConstraints, ref);
+                        },
+                        icon: const CircleAvatar(),
+                      ),
+                      IconButton(
                           onPressed: () {
-                            showProfilePopUp(context, viewportConstraints, ref);
+                            context.push('/forum');
                           },
-                          icon: const CircleAvatar(),
-                      )
+                          icon: const Icon(Icons.plus_one))
                     ],
                     title: const Text('Anasayfa'),
                   ),
                   //-------------------------------------
                   drawer: SafeArea(
-                    child: LayoutBuilder(builder: (context, viewportConstraints) {
-                        return  Drawer(
+                    child: LayoutBuilder(
+                      builder: (context, viewportConstraints) {
+                        return Drawer(
                           // Add a ListView to the drawer. This ensures the user can scroll
                           // through the options in the drawer if there isn't enough vertical
                           // space to fit everything.
@@ -129,8 +133,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       showProfilePopUp(context, viewportConstraints, ref);
                                     },
                                     arrowColor: Colors.transparent,
-                                    decoration: const BoxDecoration(
-                                        color: CustomStyles.primaryColor),
+                                    decoration: const BoxDecoration(color: CustomStyles.primaryColor),
                                     accountName: Text(
                                       user.username.toString(),
                                       style: const TextStyle(
@@ -153,13 +156,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         IconButton(
                                             icon: toggle
                                                 ? const Icon(
-                                              Icons.notifications_off,
-                                              color: Colors.red,
-                                            )
+                                                    Icons.notifications_off,
+                                                    color: Colors.red,
+                                                  )
                                                 : const Icon(
-                                              Icons.notifications_active,
-                                              color: Colors.white,
-                                            ),
+                                                    Icons.notifications_active,
+                                                    color: Colors.white,
+                                                  ),
                                             onPressed: () {
                                               setState(() {
                                                 toggle = !toggle;
@@ -282,12 +285,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     items: const [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(
-                          icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (int i) => {},
                   ),
                 ),
-            );
+              );
   }
 }

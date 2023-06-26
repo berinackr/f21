@@ -8,15 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:go_router/go_router.dart';
 
-//FORM VALIDATOR EKLENECEK
-//BUTONLAR BÜYÜYECEK
-//EN ALTTAKİ TEXTLERE CLİCKABLE ÖZELLİĞİ EKLENECEK
-//LOGO RESİM YUVARLAKLAŞTIRILACAK
-//KULLANICIDAN GERÇEKTEN BİLGİ ALACAĞIZ
-
-//----------
-//FİREBASE İLE BAĞLAYACAĞIZ
-
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -57,7 +48,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
-                color: CustomStyles.backgroundColor,
+                decoration: const BoxDecoration(
+                  color: CustomStyles.backgroundColor,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/backgroundimg.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 constraints:
                     BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: IntrinsicHeight(
@@ -169,41 +166,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ],
                           ),
                         ),
-
-                        //DENEME ŞİFRE TASARIMI SONRA DEFAULT OLANLAR YERİNE GEÇİRİLEBİLİR
-                        /*Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            color: Colors.transparent,
-                            child: TextFormField(
-                              cursorColor: const Color.fromARGB(255, 31, 4, 99),
-                              initialValue: '',
-                              //maxLength: 20, //şifrede karakter sınırı yok
-                              decoration: const InputDecoration(
-                                hoverColor: Colors.white,
-                                fillColor: Colors.white,
-                                icon: Icon(Icons.password_outlined),
-                                hintText: "Şifrenizi tekrar girin",
-                                labelText: 'Şifre Tekrar',
-                                labelStyle: TextStyle(
-                                  color: Color(0xFF6200EE),
-                                ),
-                                //helperText: 'Güçlü bir şifre için en az 8 karakter kullanın',
-                                enabledBorder: OutlineInputBorder(
-                                  gapPadding: 5,
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                                  borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    color: Color.fromARGB(255, 31, 4, 99),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        */
-
                         //Login Buttons
                         //Giriş Yap Butonu
                         ElevatedButton(

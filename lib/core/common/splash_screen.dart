@@ -26,50 +26,58 @@ class Splash extends ConsumerWidget {
       ),
       home: Scaffold(
         backgroundColor: CustomStyles.backgroundColor,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 75,
-                  ),
+        body: Stack(children: [
+          Image(
+            image: const AssetImage('assets/images/backgroundimg.png'),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 75,
+                    ),
 
-                  //logo
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(500),
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: 250,
+                    //logo
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(500),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        width: 250,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 45),
-                  const Text(
-                    'BİBERON',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    '"BAŞUCUNUZDAKİ ANNE DESTEĞİ"',
-                    style: TextStyle(
-                        fontSize: 20,
+                    const SizedBox(height: 45),
+                    const Text(
+                      'BİBERON',
+                      style: TextStyle(
+                        fontSize: 40,
                         color: Colors.white,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    child:
-                        Lottie.asset('assets/animations/splash-animation.json'),
-                  ),
-                ],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      '"BAŞUCUNUZDAKİ ANNE DESTEĞİ"',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: Lottie.asset(
+                          'assets/animations/splash-animation.json'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        ]),
       ),
     );
   }

@@ -32,7 +32,13 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Container(
-                color: CustomStyles.backgroundColor,
+                decoration: const BoxDecoration(
+                  color: CustomStyles.backgroundColor,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/backgroundimg.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 constraints: BoxConstraints(
                   minWidth: viewportConstraints.maxWidth,
                   minHeight: viewportConstraints.maxHeight,

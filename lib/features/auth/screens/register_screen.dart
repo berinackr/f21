@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -47,7 +48,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
-                color: CustomStyles.backgroundColor,
+                decoration: const BoxDecoration(
+                  color: CustomStyles.backgroundColor,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/backgroundimg.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 constraints: BoxConstraints(
                   minWidth: viewportConstraints.maxWidth,
                   minHeight: viewportConstraints.maxHeight,
@@ -213,8 +220,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 TextButton(
                                     onPressed: () {
                                       //tiklayinca sozlesme ekranina gitmeli
-                                      Navigator.of(context)
-                                          .pushNamed("/sozlesmeEkrani");
+                                      //Navigator.of(context).pushNamed("/sozlesmeEkrani");
+                                      showContractPopup(context);
                                     },
                                     child: const Text(
                                       "Sözleşmeyi Okudum, Onayladım.",
@@ -289,4 +296,58 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       ),
     );
   }
+}
+
+void showContractPopup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: CustomStyles.fillColor,
+        //iconColor: CustomStyles.primaryColor,
+        //shadowColor: CustomStyles.backgroundColor,
+        //surfaceTintColor: CustomStyles.primaryColor,
+        title: const Center(
+            child: Text('Kullanıcı Sözleşmesi ve Gizlilik Politikası')
+        ),
+        titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,color: CustomStyles.primaryColor, fontSize: 15),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25))
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: FutureBuilder(
+            future: DefaultAssetBundle.of(context).loadString('assets/texts/user_policy.md'),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData){
+                return Markdown(data: snapshot.data!);
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
+        actions: [
+          Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                backgroundColor: CustomStyles.primaryColor, // Background color
+              ),
+              child: const Text(
+                'Kapat',
+                style: TextStyle(color: Colors.white),
+
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }

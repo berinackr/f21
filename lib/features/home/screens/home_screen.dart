@@ -52,7 +52,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 builder: (BuildContext context,
                         BoxConstraints viewportConstraints) =>
                     Scaffold(
-                  backgroundColor: CustomStyles.backgroundColor,
                   body: bottomBarList[bottomBarRouter.selectedIndex],
                   appBar: AppBar(
                     backgroundColor: CustomStyles.primaryColor,

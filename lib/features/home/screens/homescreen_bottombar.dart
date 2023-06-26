@@ -38,9 +38,10 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
               children: [
                 Container(
                   decoration: BoxDecoration(
+                    border: Border.all(color: CustomStyles.primaryColor),
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xffffe6e9),
-                    //borderRadius: BorderRadius.circular(40),
+                    color: Colors.white,
+                    boxShadow: const [BoxShadow(spreadRadius: 1)],
                   ),
 
                   //anasayfadaki doktor önerisi kısmı
@@ -115,8 +116,11 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
 
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xffff9565)),
+                    border: Border.all(color: CustomStyles.primaryColor),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: const [BoxShadow(spreadRadius: 1)],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Column(
@@ -152,7 +156,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             width: 80,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: const Color(0xffff9565),
+                              color: Colors.white,
                               boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 10,
@@ -176,8 +180,10 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
 
                 Container(
                   decoration: BoxDecoration(
+                    border: Border.all(color: CustomStyles.primaryColor),
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xffa1e5de),
+                    color: Colors.white,
+                    boxShadow: const [BoxShadow(spreadRadius: 1)],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
@@ -215,7 +221,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             width: 80,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: const Color(0xffa1e5de),
+                              color: Colors.white,
                               boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 10,

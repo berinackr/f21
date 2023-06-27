@@ -20,6 +20,7 @@ class ForumFeedScreen extends ConsumerStatefulWidget {
 
 class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
   final ScrollController scrollController = ScrollController();
+  bool isMostLiked = false;
 
   @override
   void initState() {
@@ -44,11 +45,23 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
       appBar: AppBar(
         title: Text("$categoryName - Forum"),
         actions: [
-          IconButton(
+          Transform.rotate(
+            angle: isMostLiked ? 0 : 180 * 3.14 / 180,
+            child: IconButton(
               onPressed: () {
-                context.push('/forum/${widget.id}/share');
+                setState(() {
+                  isMostLiked = !isMostLiked;
+                });
               },
-              icon: const Icon(Icons.add_circle_outline_sharp)),
+              icon: const Icon(Icons.sort),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              context.push('/forum/${widget.id}/share');
+            },
+            icon: const Icon(Icons.add_circle_outline_sharp),
+          ),
         ],
       ),
       body: CustomScrollView(
@@ -56,7 +69,8 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
         restorationId: "forum_feed_screen",
         slivers: [
           Consumer(builder: (context, ref, child) {
-            final state = ref.watch(postsProvider(widget.id));
+            final state =
+                isMostLiked ? ref.watch(mostLikedPostProvider(widget.id)) : ref.watch(postsProvider(widget.id));
             return state.when(
               data: (posts) {
                 return posts.isEmpty
@@ -72,6 +86,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
                             return Post(
                               post: posts[index],
                               index: index,
+                              isMostLiked: isMostLiked,
                             );
                           },
                           childCount: posts.length,
@@ -100,6 +115,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
                       return Post(
                         post: posts[index],
                         index: index,
+                        isMostLiked: isMostLiked,
                       );
                     },
                     childCount: posts.length,
@@ -113,6 +129,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
                       return Post(
                         post: posts[index],
                         index: index,
+                        isMostLiked: isMostLiked,
                       );
                     },
                     childCount: posts.length,
@@ -130,14 +147,15 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
 }
 
 class Post extends ConsumerWidget {
-  const Post({super.key, required this.post, required this.index});
+  const Post({super.key, required this.post, required this.index, required this.isMostLiked});
   final PostModel post;
   final int index;
+  final bool isMostLiked;
 
   void upvotePost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).upvotePost(post, context, index);
+      ref.read(forumControllerProvider.notifier).upvotePost(post, context, index, isMostLiked);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -146,7 +164,7 @@ class Post extends ConsumerWidget {
   void downvotePost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).downvotePost(post, context, index);
+      ref.read(forumControllerProvider.notifier).downvotePost(post, context, index, isMostLiked);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -155,7 +173,7 @@ class Post extends ConsumerWidget {
   void bookmarkPost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, index);
+      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, index, isMostLiked);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }

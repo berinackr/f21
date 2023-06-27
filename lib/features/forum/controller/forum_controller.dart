@@ -5,10 +5,8 @@ import 'package:f21_demo/features/forum/controller/pagination_state/pagination_s
 import 'package:f21_demo/models/comment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
-
 import 'package:f21_demo/core/providers/storage_repository_provider.dart';
 import 'package:f21_demo/core/utils.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
@@ -33,6 +31,16 @@ final postsProvider = StateNotifierProvider.autoDispose
               categoryId,
               item,
             );
+      },
+      itemsPerBatch: 20)
+    ..init();
+});
+
+final mostLikedPostProvider = StateNotifierProvider.autoDispose
+    .family<PaginationNotifier<PostModel>, PaginationState<PostModel>, String>((ref, String categoryId) {
+  return PaginationNotifier(
+      fetchNextPosts: (item) {
+        return ref.read(forumControllerProvider.notifier).getMostLikedPostsByCategory(categoryId, item);
       },
       itemsPerBatch: 20)
     ..init();
@@ -191,6 +199,10 @@ class ForumController extends StateNotifier<bool> {
     return _forumRepository.fetchAllPostsByCategory(categoryId, lastPost);
   }
 
+  Future<List<PostModel>> getMostLikedPostsByCategory(String categoryId, PostModel? lastPost) {
+    return _forumRepository.fetchAllMostLikedPostsByCategory(categoryId, lastPost);
+  }
+
   Future<List<PostModel>> getPostsByUser(String uid, PostModel? lastPost) {
     return _forumRepository.fetchAllPostsByUser(uid, lastPost);
   }
@@ -215,7 +227,7 @@ class ForumController extends StateNotifier<bool> {
     return _forumRepository.streamPostById(postId);
   }
 
-  void upvotePost(PostModel post, BuildContext context, int? index) async {
+  void upvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -223,8 +235,9 @@ class ForumController extends StateNotifier<bool> {
     res.fold((l) => showSnackBar(context, l.message), (r) {
       index == null
           ? null
-          : getPostById(post.id)
-              .then((r) => _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+          : getPostById(post.id).then((r) => isMostLiked
+              ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
+              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }
@@ -257,7 +270,7 @@ class ForumController extends StateNotifier<bool> {
     state = false;
   }
 
-  void downvotePost(PostModel post, BuildContext context, int? index) async {
+  void downvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -265,13 +278,14 @@ class ForumController extends StateNotifier<bool> {
     res.fold((l) => showSnackBar(context, l.message), (r) {
       index == null
           ? null
-          : getPostById(post.id)
-              .then((r) => _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+          : getPostById(post.id).then((r) => isMostLiked
+              ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
+              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }
 
-  void bookmarkPost(PostModel post, BuildContext context, int? index) async {
+  void bookmarkPost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -279,8 +293,9 @@ class ForumController extends StateNotifier<bool> {
     res.fold((l) => showSnackBar(context, l.message), (r) {
       index == null
           ? null
-          : getPostById(post.id)
-              .then((r) => _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+          : getPostById(post.id).then((r) => isMostLiked
+              ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
+              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }

@@ -54,6 +54,33 @@ class ForumRepository {
     }
   }
 
+  Future<List<PostModel>> fetchAllMostLikedPostsByCategory(String categoryId, PostModel? lastPost) {
+    if (lastPost == null) {
+      return _posts
+          .where("categoryId", isEqualTo: categoryId)
+          .limit(20)
+          .orderBy("totalVote", descending: true)
+          .get()
+          .then((documentSnapshot) {
+        return documentSnapshot.docs.map<PostModel>((data) {
+          return PostModel.fromMap(data.data() as Map<String, dynamic>);
+        }).toList();
+      });
+    } else {
+      return _posts
+          .where("categoryId", isEqualTo: categoryId)
+          .orderBy("totalVote", descending: true)
+          .startAfter([lastPost.totalVote])
+          .limit(20)
+          .get()
+          .then((documentSnapshot) {
+            return documentSnapshot.docs.map<PostModel>((data) {
+              return PostModel.fromMap(data.data() as Map<String, dynamic>);
+            }).toList();
+          });
+    }
+  }
+
   Future<List<PostModel>> fetchAllPostsByUser(String userId, PostModel? lastPost) async {
     if (lastPost == null) {
       final documentSnapshot =
@@ -196,17 +223,20 @@ class ForumRepository {
     try {
       if (post.downvotes.contains(userId)) {
         _posts.doc(post.id).update({
-          "downvotes": FieldValue.arrayRemove([userId])
+          "downvotes": FieldValue.arrayRemove([userId]),
+          "totalVote": FieldValue.increment(1),
         });
       }
 
       if (post.upvotes.contains(userId)) {
         return right(_posts.doc(post.id).update({
-          "upvotes": FieldValue.arrayRemove([userId])
+          "upvotes": FieldValue.arrayRemove([userId]),
+          "totalVote": FieldValue.increment(-1),
         }));
       } else {
         return right(_posts.doc(post.id).update({
-          "upvotes": FieldValue.arrayUnion([userId])
+          "upvotes": FieldValue.arrayUnion([userId]),
+          "totalVote": FieldValue.increment(1),
         }));
       }
     } on FirebaseException catch (e) {
@@ -220,17 +250,20 @@ class ForumRepository {
     try {
       if (post.upvotes.contains(userId)) {
         _posts.doc(post.id).update({
-          "upvotes": FieldValue.arrayRemove([userId])
+          "upvotes": FieldValue.arrayRemove([userId]),
+          "totalVote": FieldValue.increment(-1),
         });
       }
 
       if (post.downvotes.contains(userId)) {
         return right(_posts.doc(post.id).update({
-          "downvotes": FieldValue.arrayRemove([userId])
+          "downvotes": FieldValue.arrayRemove([userId]),
+          "totalVote": FieldValue.increment(1),
         }));
       } else {
         return right(_posts.doc(post.id).update({
-          "downvotes": FieldValue.arrayUnion([userId])
+          "downvotes": FieldValue.arrayUnion([userId]),
+          "totalVote": FieldValue.increment(-1),
         }));
       }
     } on FirebaseException catch (e) {

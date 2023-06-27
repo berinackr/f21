@@ -38,7 +38,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   void upvotePost(BuildContext context, WidgetRef ref, PostModel post) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).upvotePost(post, context, null);
+      ref.read(forumControllerProvider.notifier).upvotePost(post, context, null, true);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -47,7 +47,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   void downvotePost(BuildContext context, WidgetRef ref, PostModel post) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).downvotePost(post, context, null);
+      ref.read(forumControllerProvider.notifier).downvotePost(post, context, null, true);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -56,7 +56,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   void bookmarkPost(BuildContext context, WidgetRef ref, PostModel post) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, null);
+      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, null, true);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }

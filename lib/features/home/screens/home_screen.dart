@@ -54,7 +54,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         onPressed: () {
                           showProfilePopUp(context, viewportConstraints, ref);
                         },
-                        icon: const CircleAvatar(),
+                        icon: CircleAvatar(
+                          backgroundImage: NetworkImage(user.profilePic!),
+                        ),
                       )
                     ],
                     title: const Text('Anasayfa'),
@@ -94,7 +96,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            currentAccountPicture: const CircleAvatar(),
+                                            currentAccountPicture: CircleAvatar(
+                                              backgroundImage: NetworkImage(user.profilePic!),
+                                            ),
                                           ),
                                           Container(
                                             padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),

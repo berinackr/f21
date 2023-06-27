@@ -36,7 +36,7 @@ class SettingsScreen extends ConsumerWidget {
                       subtitle: const Text("Türkçe"),
                        onTap: () {
                          ScaffoldMessenger.of(context).showSnackBar(
-                           const SnackBar(content: Text("Yalnızca türkçe destekleniyor."))
+                           const SnackBar(content: Text("Şimdilik yalnızca Türkçe destekleniyor."))
                          );
                        },
                     ),

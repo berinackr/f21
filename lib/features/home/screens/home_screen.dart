@@ -141,6 +141,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       ListTile(
                                         leading: const Icon(
+                                          Icons.bookmark,
+                                        ),
+                                        title: const Text('Kaydedilenler'),
+                                        onTap: () {
+                                          context.push("/home/bookmarks");
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
                                           Icons.camera,
                                         ),
                                         title: const Text('Fotoğraflarım'),

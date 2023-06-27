@@ -1,6 +1,7 @@
 import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/screens/password_reset_info_screen.dart';
+import 'package:f21_demo/features/forum/screens/bookmarked_posts_screen.dart';
 import 'package:f21_demo/features/forum/screens/forum_feed_screen.dart';
 import 'package:f21_demo/features/forum/screens/forum_screen.dart';
 import 'package:f21_demo/features/forum/screens/post_screen.dart';
@@ -37,6 +38,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/home/settings',
         builder: (context, state) => const SettingsScreen(),
       ),
+      GoRoute(path: "/home/bookmarks", builder: (context, state) => const BookMarkedPostsScreen()),
       GoRoute(path: "/auth", builder: (context, state) => const LoginScreen()),
       GoRoute(path: "/auth/register", builder: (context, state) => const RegisterScreen()),
       GoRoute(

@@ -33,7 +33,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   DateTime? birthDateBaby;
   double? months;
   String gender = "Belirsiz";
-  bool isPregnant = true;
+  late bool isPregnant = ref.read(userProvider)!.isPregnant!;
 
   //controllers
   final _usernameController = TextEditingController();
@@ -53,9 +53,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   void _setInitialValuesOfFormFields(UserModel? user, FirebaseAuth userAuth){
-    _usernameController.text = user!.username!.toString();
-    _emailController.text = userAuth.currentUser!.email!;
-    _passwordController.text = "*****";
+    setState(() {
+      _usernameController.text = user!.username!.toString();
+      _emailController.text = userAuth.currentUser!.email!;
+      _passwordController.text = "*****";
+    });
     //TODO: Ben değerleri aşağıdaki fromda bulunan değerleri elle atadım ancak _formKey kullanılarak ilgili alanların initialValue'leri bu fonksiyonda atanabilir.
   }
 
@@ -82,7 +84,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final FirebaseAuth userAuth = ref.watch(authProvider);
 
     _setInitialValuesOfFormFields(user, userAuth);
-
     return WillPopScope(
       onWillPop: () {
         if(_isSaved){
@@ -100,7 +101,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           actions: [
             Row(
               children: [
-                Text("Bilgilerimi Düzenle"),
+                const Text("Bilgilerimi Düzenle"),
                 Switch(
                   value: _isEditing,
                     onChanged: (value) {
@@ -226,6 +227,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        //TODO: Doğum tarihi
                         FormBuilderDateTimePicker(
                           enabled: _isEditing,
                           validator: (value) {
@@ -237,8 +239,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             return null;
                           },
                           name: "birthDate",
-                          firstDate: DateTime(DateTime.now().year - 18),
-                          initialDate: user!.birthDate,
+                          lastDate: DateTime(DateTime.now().year - 18),
+                          initialDate: user!.birthDate ?? DateTime.now(),
+                          initialValue: user!.birthDate ?? DateTime.now(),
                           onChanged: (value) {
                             setState(() {
                               birthDate = value;
@@ -250,6 +253,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        //TODO: Gebelik durumu
                         FormBuilderSwitch(
                           enabled: _isEditing,
                           name: "role",
@@ -259,7 +263,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             style: const TextStyle(
                                 color: CustomStyles.primaryColor, fontSize: 18),
                           ),
-                          initialValue: user!.isPregnant!,
+                          initialValue: isPregnant,
                           onChanged: (value) {
                             setState(() {
                               isPregnant = value!;
@@ -284,6 +288,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               ),
                             ),
                             const SizedBox(height: 5),
+                            //TODO: Hamilelik ayları
                             FormBuilderSlider(
                               label: "Kaç Aylık Hamilesiniz?",
                               enabled: _isEditing,
@@ -316,6 +321,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             ),
                           ])
                               : Column(children: [
+                                //TODO: Bebeğin doğum tarihi ayarla
                             FormBuilderDateTimePicker(
                               validator: (value) {
                                 if (value == null && !isPregnant) {
@@ -323,6 +329,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 }
                                 return null;
                               },
+                              initialValue: user.babyBirthDate ?? DateTime.now(),
                               initialDate: user.babyBirthDate ?? DateTime.now(),
                               name: "birthDate",
                               onChanged: (value) {
@@ -337,6 +344,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             ),
                           ]),
                         const SizedBox(height: 20),
+                        //TODO: Bebeğin Cinsiyeti
                         FormBuilderDropdown(
                           enabled: _isEditing,
                           name: "gender",
@@ -371,6 +379,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        //TODO: Bebeğin Kilosu
                         if(_isEditing)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -380,7 +389,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                                   ),
                                   onPressed: () {
-                                    //TODO: Buna basıldığında tüm _formKey ile eski haline getirilmeli ya da pop yapıp yeniden bu sayfa açılabilir???
+                                    //TODO: Buna basıldığında tüm _formKey ile eski haline getirilmeli ya da pop yapıp yeniden bu sayfa açılabilir??? Şimdilik ikinciyi yapıyor
                                     setState(() {
                                       _isSaved = true;
                                     });

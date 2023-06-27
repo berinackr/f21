@@ -30,11 +30,11 @@ void showProfilePopUp(BuildContext context, BoxConstraints viewportConstraints, 
           children: [
             SizedBox(
               height: viewportConstraints.maxHeight * 0.5 * 0.5,
-              child: const FittedBox(
+              child: FittedBox(
                   fit: BoxFit.contain,
                   child: CircleAvatar(
-                    //backgroundImage: Buraya user görseli gelecek firebase'den çekilen,
                     radius: 20,
+                    backgroundImage: NetworkImage(currentUserInfo!.profilePic!),
                   )),
             ),
             Text(currentUserInfo?.username ?? "Misafir Kullanici"),

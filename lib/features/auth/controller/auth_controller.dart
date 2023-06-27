@@ -108,7 +108,7 @@ class AuthController extends StateNotifier<bool> {
       gender: gender,
       isPregnant: isPregnant,
       profilePic:
-          "https://firebasestorage.googleapis.com/v0/b/ouaf21-3bfc0.appspot.com/o/default.png?alt=media&token=5270b81e-77ed-4cb2-a357-dd7057045f0e",
+          "https://firebasestorage.googleapis.com/v0/b/ouaf21-3bfc0.appspot.com/o/default.png?alt=media&token=a5b22e61-cfdd-4569-9741-e65cea7a2954",
       uid: user!.uid,
       months: months,
       babyBirthDate: babyBirthDate,

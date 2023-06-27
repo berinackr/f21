@@ -1,9 +1,9 @@
 import 'package:f21_demo/core/google_ads.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:readmore/readmore.dart';
 import '../../../core/custom_styles.dart';
-import 'forum_screen.dart';
 import 'meditation_screen.dart';
 
 class HomeScreenBottombar extends StatefulWidget {
@@ -60,8 +60,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             const SizedBox(width: 10),
                             const Text(
                               "Haftanın Doktor Önerisi",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 10),
                             const Icon(
@@ -90,12 +89,8 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             trimCollapsedText: "Devamını Oku",
                             trimExpandedText: "Küçült",
                             style: TextStyle(fontSize: 18),
-                            lessStyle: TextStyle(
-                                color: CustomStyles.primaryColor,
-                                fontWeight: FontWeight.bold),
-                            moreStyle: TextStyle(
-                                color: CustomStyles.primaryColor,
-                                fontWeight: FontWeight.bold),
+                            lessStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
+                            moreStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -146,10 +141,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ForumScreen()));
+                            context.push("/forum");
                           },
                           child: Container(
                             height: 80,
@@ -210,11 +202,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MeditationScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
                           },
                           child: Container(
                             height: 80,

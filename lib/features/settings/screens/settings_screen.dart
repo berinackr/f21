@@ -9,6 +9,8 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final settings = ref.watch(settingsProvider);
     return Scaffold(
       appBar: AppBar(
@@ -29,18 +31,19 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                     const SettingsScreenTitle(title: "Genel"),
+                    const SettingsScreenTitle(title: "Genel"),
                     ListTile(
                       leading: const Icon(Icons.language),
                       title: const Text("Dil"),
                       subtitle: const Text("Türkçe"),
-                       onTap: () {
-                         ScaffoldMessenger.of(context).showSnackBar(
-                           const SnackBar(content: Text("Şimdilik yalnızca Türkçe destekleniyor."))
-                         );
-                       },
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Şimdilik yalnızca Türkçe destekleniyor.")));
+                      },
                     ),
-                     const Divider(),
+                    const Divider(),
                     const SettingsScreenTitle(title: "Arayüz ve Ses"),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,17 +67,18 @@ class SettingsScreen extends ConsumerWidget {
                             toggleSilentMode(ref);
                           },
                           leading: settings.isSilentMode()
-                                  ? const Icon(
-                                Icons.notifications_off,
-                                color: Colors.red,
-                              )
-                                  : const Icon(
-                                Icons.notifications_active,
-                              ),
+                              ? const Icon(
+                                  Icons.notifications_off,
+                                  color: Colors.red,
+                                )
+                              : const Icon(
+                                  Icons.notifications_active,
+                                ),
                           title: const Text("Bildirimleri sessize al."),
                           trailing: Switch(
                             activeColor: CustomStyles.buttonColor,
-                            value: settings.isSilentMode(), //buraya bildirim state'i gelcek
+                            value: settings
+                                .isSilentMode(), //buraya bildirim state'i gelcek
                             onChanged: (bool value) {
                               toggleSilentMode(ref);
                             },
@@ -103,4 +107,3 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 }
-

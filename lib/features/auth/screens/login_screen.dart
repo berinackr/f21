@@ -30,6 +30,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final isLoading = ref.watch(authControllerProvider);
     var screenSize = MediaQuery.of(context).size;
     final double screenHeight = screenSize.height;
@@ -82,7 +84,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 padding: EdgeInsets.only(
                                     top: screenHeight / 60,
                                     left: screenHeight / 30),
-                                child: const Align(
+                                child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       "Email",
@@ -106,13 +108,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   controller: emailController,
                                   autofillHints: const [AutofillHints.email],
                                   keyboardType: TextInputType.emailAddress,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     hintText: "johndoe@gmail.com",
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         vertical: 15, horizontal: 15),
                                     filled: true,
                                     fillColor: CustomStyles.fillColor,
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                     ),
@@ -124,7 +126,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 padding: EdgeInsets.only(
                                     top: screenHeight / 60,
                                     left: screenHeight / 30),
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Şifre",
@@ -150,13 +152,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   controller: passwordController,
                                   autofillHints: const [AutofillHints.password],
                                   autocorrect: false,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     hintText: "Passw0rd!",
                                     filled: true,
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         vertical: 15, horizontal: 15),
                                     fillColor: CustomStyles.fillColor,
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                     ),
@@ -178,7 +180,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 passwordController.clear();
                               }
                             },
-                            child: const Text(
+                            child: Text(
                               "Giriş Yap",
                               style:
                                   TextStyle(color: CustomStyles.primaryColor),
@@ -207,7 +209,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       backgroundColor: Colors.transparent,
                                       child: Image.asset(Assets.googleIconPath),
                                     ),
-                                    const Text(
+                                    Text(
                                       "Google ile Giriş Yap",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -236,7 +238,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     onPressed: () {
                                       context.push("/auth/forget");
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "Şifremi Unuttum",
                                       style: TextStyle(
                                           color: CustomStyles.primaryColor,
@@ -247,7 +249,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       onPressed: () {
                                         context.push("/auth/register");
                                       },
-                                      child: const Text(
+                                      child: Text(
                                         "Kayıt Ol",
                                         style: TextStyle(
                                             fontSize: 17,

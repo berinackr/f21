@@ -11,11 +11,13 @@ class MeditationScreen extends StatefulWidget {
 class _MeditationScreenState extends State<MeditationScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: CustomStyles.primaryColor,
-          image: DecorationImage(
+          image: const DecorationImage(
               image: AssetImage('assets/images/home-bg.png'),
               fit: BoxFit.cover),
         ),

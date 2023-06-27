@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/custom_styles.dart';
+
 class MyBabyScreenBottombar extends StatefulWidget {
   const MyBabyScreenBottombar({super.key});
 
@@ -10,6 +12,8 @@ class MyBabyScreenBottombar extends StatefulWidget {
 class _MyBabyScreenBottombarState extends State<MyBabyScreenBottombar> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return LayoutBuilder(
       builder: (context, constraints) {
         return const SingleChildScrollView(

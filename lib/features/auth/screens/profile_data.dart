@@ -14,7 +14,8 @@ class ExampleProfileData extends ConsumerStatefulWidget {
   const ExampleProfileData({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ExampleProfileDataState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ExampleProfileDataState();
 }
 
 class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
@@ -50,13 +51,21 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
     DateTime? babyBirthDate,
     BuildContext context,
   ) {
-    ref
-        .read(authControllerProvider.notifier)
-        .setProfileInfos(username, birthDate, gender, isPregnant, profilePic, months, babyBirthDate, context);
+    ref.read(authControllerProvider.notifier).setProfileInfos(
+        username,
+        birthDate,
+        gender,
+        isPregnant,
+        profilePic,
+        months,
+        babyBirthDate,
+        context);
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -64,14 +73,15 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
             style: TextStyle(color: CustomStyles.backgroundColor),
           ),
           centerTitle: true,
-          backgroundColor: CustomStyles.primaryColor,
+          backgroundColor: CustomStyles.titleColor,
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: CustomStyles.backgroundColor,
           ),
           actions: [
             IconButton(
               onPressed: () => logOut(ref),
-              icon: const Icon(Icons.logout, color: CustomStyles.backgroundColor),
+              icon:
+                  const Icon(Icons.logout, color: CustomStyles.backgroundColor),
             ),
           ],
         ),
@@ -80,8 +90,10 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
             return SingleChildScrollView(
               child: Container(
                 color: CustomStyles.backgroundColor,
-                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
                 child: FormBuilder(
                   key: _formKey,
                   child: Column(
@@ -93,7 +105,7 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           radius: const Radius.circular(100),
                           dashPattern: const [10, 4],
                           strokeCap: StrokeCap.round,
-                          color: CustomStyles.primaryColor,
+                          color: CustomStyles.titleColor,
                           child: Container(
                             width: 120,
                             height: 120,
@@ -101,25 +113,27 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: profileFile != null
-                                ? ClipOval(child: Image.file(profileFile!, fit: BoxFit.cover))
-                                : const Center(
+                                ? ClipOval(
+                                    child: Image.file(profileFile!,
+                                        fit: BoxFit.cover))
+                                : Center(
                                     child: Icon(
                                       Icons.camera_enhance,
                                       size: 30,
-                                      color: CustomStyles.primaryColor,
+                                      color: CustomStyles.titleColor,
                                     ),
                                   ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Kullanıcı Adı",
                           style: TextStyle(
                             fontSize: 20,
-                            color: CustomStyles.primaryColor,
+                            color: CustomStyles.titleColor,
                           ),
                         ),
                       ),
@@ -127,28 +141,35 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                       FormBuilderTextField(
                         name: "username",
                         controller: usernameController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Anne",
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
                           filled: true,
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.titleColor, width: 2),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(10.0))),
                           fillColor: CustomStyles.fillColor,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
-                        validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(20).build(),
+                        validator: ValidationBuilder(localeName: "tr")
+                            .minLength(3)
+                            .maxLength(20)
+                            .build(),
                       ),
                       const SizedBox(height: 20),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Doğum Tarihi",
                           style: TextStyle(
                             fontSize: 20,
-                            color: CustomStyles.primaryColor,
+                            color: CustomStyles.titleColor,
                           ),
                         ),
                       ),
@@ -165,25 +186,30 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           birthDate = value;
                         },
                         inputType: InputType.date,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Doğum Tarihi",
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
                           fillColor: CustomStyles.fillColor,
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.titleColor, width: 2),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(10.0))),
                           filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
                       FormBuilderSwitch(
                         name: "role",
-                        title: const Text(
+                        title: Text(
                           "Gebeyim",
-                          style: TextStyle(color: CustomStyles.primaryColor, fontSize: 18),
+                          style: TextStyle(
+                              color: CustomStyles.titleColor, fontSize: 18),
                         ),
                         initialValue: true,
                         onChanged: (value) {
@@ -192,19 +218,20 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,
-                        activeColor: CustomStyles.primaryColor,
-                        decoration: const InputDecoration(border: InputBorder.none),
+                        activeColor: CustomStyles.titleColor,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
                       ),
                       isPregnant
                           ? Column(children: [
                               const SizedBox(height: 20),
-                              const Align(
+                              Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Kaç Aylık Hamilesiniz?",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: CustomStyles.primaryColor,
+                                    color: CustomStyles.titleColor,
                                   ),
                                 ),
                               ),
@@ -223,28 +250,30 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                   return Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: CustomStyles.primaryColor,
+                                      color: CustomStyles.titleColor,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
                                       "$value Aylık",
-                                      style: const TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                   );
                                 },
-                                decoration:
-                                    const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(0)),
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.all(0)),
                               ),
                             ])
                           : Column(children: [
                               const SizedBox(height: 20),
-                              const Align(
+                              Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Bebeğinizin Doğum Tarihi",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: CustomStyles.primaryColor,
+                                    color: CustomStyles.titleColor,
                                   ),
                                 ),
                               ),
@@ -261,28 +290,33 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                                   birthDateBaby = value;
                                 },
                                 inputType: InputType.date,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "Bebeğinizin Doğum Tarihi",
-                                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 15),
                                   fillColor: CustomStyles.fillColor,
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                      borderSide: BorderSide(
+                                          color: CustomStyles.titleColor,
+                                          width: 2),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10.0))),
                                   filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  border: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
                             ]),
                       const SizedBox(height: 20),
-                      const Align(
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Bebeğin Cinsiyeti",
                           style: TextStyle(
                             fontSize: 20,
-                            color: CustomStyles.primaryColor,
+                            color: CustomStyles.titleColor,
                           ),
                         ),
                       ),
@@ -305,23 +339,29 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                         ],
                         dropdownColor: CustomStyles.fillColor,
                         initialValue: "Belirsiz",
-                        iconEnabledColor: CustomStyles.primaryColor,
+                        iconEnabledColor: CustomStyles.titleColor,
                         onChanged: (value) {
                           gender = value!;
                         },
-                        iconDisabledColor: CustomStyles.primaryColor,
-                        style: const TextStyle(color: CustomStyles.primaryColor, fontSize: 18),
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                        iconDisabledColor: CustomStyles.titleColor,
+                        style: TextStyle(
+                            color: CustomStyles.titleColor, fontSize: 18),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
                           fillColor: CustomStyles.fillColor,
                           hintText: "Belirsiz",
-                          hintStyle: TextStyle(color: CustomStyles.primaryColor, fontSize: 18),
+                          hintStyle: TextStyle(
+                              color: CustomStyles.titleColor, fontSize: 18),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              borderSide: BorderSide(
+                                  color: CustomStyles.titleColor, width: 2),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(10.0))),
                           filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
                       ),
@@ -329,8 +369,16 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
                       ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              setProfileInfos(ref, usernameController.text, birthDate!, gender, isPregnant, profileFile,
-                                  months, birthDateBaby, context);
+                              setProfileInfos(
+                                  ref,
+                                  usernameController.text,
+                                  birthDate!,
+                                  gender,
+                                  isPregnant,
+                                  profileFile,
+                                  months,
+                                  birthDateBaby,
+                                  context);
                             }
                           },
                           child: const Text("Kaydet"))

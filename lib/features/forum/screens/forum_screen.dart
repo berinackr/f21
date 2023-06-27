@@ -8,14 +8,18 @@ class ForumScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forum - Kategoriler'),
       ),
-      body: SafeArea(child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
+      body: SafeArea(child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
         return SingleChildScrollView(
           child: Container(
-            constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+            constraints:
+                BoxConstraints(minHeight: viewportConstraints.maxHeight),
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
             child: Column(
                 children: Categories.all
@@ -42,10 +46,10 @@ class ForumScreen extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     e.name,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600,
-                                      color: CustomStyles.primaryColor,
+                                      color: CustomStyles.titleColor,
                                     ),
                                   ),
                                   Container(height: 10),
@@ -53,7 +57,7 @@ class ForumScreen extends StatelessWidget {
                                     e.description,
                                     style: TextStyle(
                                       fontSize: 15,
-                                      color: Colors.grey[700],
+                                      color: CustomStyles.forumTextColor,
                                     ),
                                   ),
                                   Row(
@@ -63,9 +67,10 @@ class ForumScreen extends StatelessWidget {
                                         style: TextButton.styleFrom(
                                           foregroundColor: Colors.transparent,
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           "KEŞFET",
-                                          style: TextStyle(color: CustomStyles.primaryColor),
+                                          style: TextStyle(
+                                              color: CustomStyles.titleColor),
                                         ),
                                         onPressed: () {
                                           context.push('/forum/${e.id}');
@@ -75,9 +80,10 @@ class ForumScreen extends StatelessWidget {
                                         style: TextButton.styleFrom(
                                           foregroundColor: Colors.transparent,
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           "SORU SOR",
-                                          style: TextStyle(color: CustomStyles.primaryColor),
+                                          style: TextStyle(
+                                              color: CustomStyles.titleColor),
                                         ),
                                         onPressed: () {
                                           context.push('/forum/${e.id}/share');

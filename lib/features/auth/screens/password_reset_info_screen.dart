@@ -15,6 +15,8 @@ class PasswordResetInfoScreen extends StatefulWidget {
 class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     var screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width;
 
@@ -77,7 +79,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                       ),
                       const Spacer(flex: 1),
                       //Info Label
-                      const Text(
+                      Text(
                         "Lütfen posta kutunuzu kontrol ediniz. Eğer bu mail adresi sistemimize kayıtlı ise yeni şifreniz mail adresinize gönderilecektir.",
                         textAlign: TextAlign.center,
                         style: TextStyle(

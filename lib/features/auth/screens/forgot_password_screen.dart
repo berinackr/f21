@@ -14,6 +14,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     var screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width;
 
@@ -59,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       //Şifremi Sıfırla Label
-                      const Text(
+                      Text(
                         "ŞİFREMİ SIFIRLA",
                         style: TextStyle(
                           fontSize: 20,
@@ -70,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       //Info Label
-                      const Text(
+                      Text(
                         "Lütfen sisteme kayıtlı olan email adresinizi giriniz.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -86,12 +88,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         constraints: BoxConstraints(
                           maxWidth: screenWidth * 0.8,
                         ),
-                        child: const TextField(
+                        child: TextField(
                           decoration: InputDecoration(
                             hintText: "johndoe@gmail.com",
                             filled: true,
                             fillColor: CustomStyles.fillColor,
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
                             ),
@@ -110,7 +112,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     content: Text("Mail gönderildi!")));
                             context.push("/auth/forget/reset");
                           },
-                          child: const Text(
+                          child: Text(
                             "Mail Gönder",
                             style: TextStyle(color: CustomStyles.primaryColor),
                           )),

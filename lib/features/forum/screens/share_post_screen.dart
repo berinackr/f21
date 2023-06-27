@@ -15,7 +15,8 @@ class SharePostScreen extends ConsumerStatefulWidget {
   final String id;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SharePostScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SharePostScreenState();
 }
 
 class _SharePostScreenState extends ConsumerState<SharePostScreen> {
@@ -34,6 +35,8 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final categoryName = Categories.getCategoryNameById(int.parse(widget.id));
     final isLoading = ref.watch(forumControllerProvider);
     return Scaffold(
@@ -44,7 +47,8 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
               onPressed: () {
                 if (_formKey.currentState!.saveAndValidate()) {
                   final data = _formKey.currentState!.value;
-                  final forumController = ref.read(forumControllerProvider.notifier);
+                  final forumController =
+                      ref.read(forumControllerProvider.notifier);
                   forumController.sharePost(
                     title: data['title'],
                     content: data['content'],
@@ -65,24 +69,27 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
           ],
         ),
         body: SafeArea(
-          child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          child: LayoutBuilder(builder:
+              (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Container(
-                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
                 child: isLoading
                     ? const Loader()
                     : FormBuilder(
                         key: _formKey,
                         child: Column(
                           children: [
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "Başlık*",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -90,28 +97,36 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                             FormBuilderTextField(
                               name: "title",
                               controller: titleController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Annelere bir sorum var",
-                                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                    borderSide: BorderSide(
+                                        color: CustomStyles.titleColor,
+                                        width: 2),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
-                              validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(144).build(),
+                              validator: ValidationBuilder(localeName: "tr")
+                                  .minLength(3)
+                                  .maxLength(144)
+                                  .build(),
                             ),
                             const SizedBox(height: 20),
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "İçerik*",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -120,28 +135,36 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                               name: "content",
                               controller: contentController,
                               maxLines: 10,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Merhaba anneler, ...",
-                                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                    borderSide: BorderSide(
+                                        color: CustomStyles.titleColor,
+                                        width: 2),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
-                              validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(500).build(),
+                              validator: ValidationBuilder(localeName: "tr")
+                                  .minLength(3)
+                                  .maxLength(500)
+                                  .build(),
                             ),
                             const SizedBox(height: 20),
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "Fotoğraf",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -153,7 +176,8 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: CustomStyles.fillColor,
-                                  border: Border.all(color: CustomStyles.primaryColor, width: 1),
+                                  border: Border.all(
+                                      color: CustomStyles.titleColor, width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: postFile != null
@@ -164,10 +188,10 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                                           fit: BoxFit.cover,
                                         ),
                                       )
-                                    : const Icon(
+                                    : Icon(
                                         Icons.add_a_photo,
                                         size: 50,
-                                        color: CustomStyles.primaryColor,
+                                        color: CustomStyles.titleColor,
                                       ),
                               ),
                             )

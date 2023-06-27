@@ -7,7 +7,7 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Lottie.asset('assets/animations/loader.json'),
+      child: Lottie.asset('assets/animations/loader.json', height: 100),
     );
   }
 }

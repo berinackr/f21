@@ -1,25 +1,18 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:f21_demo/core/common/loading_screen.dart';
 import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/core/providers/bottombar_routing_repository.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
+import 'package:f21_demo/features/auth/repository/auth_repository.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
 import 'package:f21_demo/features/home/screens/activity_bottombar.dart';
-import 'package:f21_demo/features/home/screens/forum_screen.dart';
 import 'package:f21_demo/features/home/screens/homescreen_bottombar.dart';
-import 'package:f21_demo/features/home/screens/meditation_screen.dart';
 import 'package:f21_demo/features/home/screens/mybabyscreen_bottombar.dart';
 import 'package:f21_demo/features/profile/widgets/profile_screen_widgets.dart';
-import 'package:f21_demo/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
-import 'package:readmore/readmore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/providers/settings_repository.dart';
-import '../../auth/repository/auth_repository.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -46,15 +39,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
     final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
     final user = ref.watch(userProvider);
+    final settings = ref.watch(settingsProvider);
     return user == null
         ? const LoadingScreen()
         : user.username == null
             ? const ExampleProfileData()
             : LayoutBuilder(
-                builder: (BuildContext context,
-                        BoxConstraints viewportConstraints) =>
-                    Scaffold(
-                  backgroundColor: CustomStyles.backgroundColor,
+                builder: (BuildContext context, BoxConstraints viewportConstraints) => Scaffold(
                   body: bottomBarList[bottomBarRouter.selectedIndex],
                   appBar: AppBar(
                     backgroundColor: CustomStyles.primaryColor,
@@ -63,7 +54,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         onPressed: () {
                           showProfilePopUp(context, viewportConstraints, ref);
                         },
-                        icon: const CircleAvatar(),
+                        icon: CircleAvatar(
+                          backgroundImage: NetworkImage(user.profilePic!),
+                        ),
                       )
                     ],
                     title: const Text('Anasayfa'),
@@ -87,12 +80,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         children: [
                                           UserAccountsDrawerHeader(
                                             onDetailsPressed: () {
-                                              showProfilePopUp(
-                                                  context, viewportConstraints, ref);
+                                              showProfilePopUp(context, viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
-                                            decoration: const BoxDecoration(
-                                                color: CustomStyles.primaryColor),
+                                            decoration: const BoxDecoration(color: CustomStyles.primaryColor),
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -100,25 +91,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                             accountEmail: Text(
-                                              ref
-                                                  .read(authRepositoryProvider)
-                                                  .getCurrentUser()!
-                                                  .email!
-                                                  .toString(),
+                                              ref.read(authRepositoryProvider).getCurrentUser()!.email!.toString(),
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            currentAccountPicture: const CircleAvatar(),
+                                            currentAccountPicture: CircleAvatar(
+                                              backgroundImage: NetworkImage(user.profilePic!),
+                                            ),
                                           ),
                                           Container(
-                                            padding:
-                                                const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 IconButton(
-                                                    icon: toggle
+                                                    icon: settings.isSilentMode()
                                                         ? const Icon(
                                                             Icons.notifications_off,
                                                             color: Colors.red,
@@ -128,9 +116,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                             color: Colors.white,
                                                           ),
                                                     onPressed: () {
-                                                      setState(() {
-                                                        toggle = !toggle;
-                                                      });
+                                                      toggleSilentMode(ref);
                                                     }),
                                                 IconButton(
                                                     onPressed: () {
@@ -150,6 +136,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         onTap: () {
                                           //Profil ekranına gider
                                           context.push('/home/profile');
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      ListTile(
+                                        leading: const Icon(
+                                          Icons.bookmark,
+                                        ),
+                                        title: const Text('Kaydedilenler'),
+                                        onTap: () {
+                                          context.push("/home/bookmarks");
                                           Navigator.pop(context);
                                         },
                                       ),
@@ -296,8 +292,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     items: const [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(
-                          icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (index) {
                       ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);

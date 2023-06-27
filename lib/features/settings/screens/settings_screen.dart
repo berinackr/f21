@@ -9,7 +9,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final switchValue = ref.watch(settingsProvider).isDarkMode();
+    final settings = ref.watch(settingsProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ayarlar"),
@@ -36,25 +36,51 @@ class SettingsScreen extends ConsumerWidget {
                       subtitle: const Text("Türkçe"),
                        onTap: () {
                          ScaffoldMessenger.of(context).showSnackBar(
-                           const SnackBar(content: Text("Yalnızca türkçe destekleniyor."))
+                           const SnackBar(content: Text("Şimdilik yalnızca Türkçe destekleniyor."))
                          );
                        },
                     ),
                      const Divider(),
                     const SettingsScreenTitle(title: "Arayüz ve Ses"),
-                    ListTile(
-                      onTap: () {
-                        toggleDarkMode(ref);
-                      },
-                      leading: const Icon(Icons.dark_mode),
-                      title: const Text("Karanlık Mod"),
-                      trailing: Switch(
-                        activeColor: CustomStyles.buttonColor,
-                        value: switchValue,
-                        onChanged: (bool value) {
-                          toggleDarkMode(ref);
-                        },
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ListTile(
+                          onTap: () {
+                            toggleDarkMode(ref);
+                          },
+                          leading: const Icon(Icons.dark_mode),
+                          title: const Text("Karanlık Mod"),
+                          trailing: Switch(
+                            activeColor: CustomStyles.buttonColor,
+                            value: settings.isDarkMode(),
+                            onChanged: (bool value) {
+                              toggleDarkMode(ref);
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          onTap: () {
+                            toggleSilentMode(ref);
+                          },
+                          leading: settings.isSilentMode()
+                                  ? const Icon(
+                                Icons.notifications_off,
+                                color: Colors.red,
+                              )
+                                  : const Icon(
+                                Icons.notifications_active,
+                              ),
+                          title: const Text("Bildirimleri sessize al."),
+                          trailing: Switch(
+                            activeColor: CustomStyles.buttonColor,
+                            value: settings.isSilentMode(), //buraya bildirim state'i gelcek
+                            onChanged: (bool value) {
+                              toggleSilentMode(ref);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     const Divider(),
                     const Spacer(),

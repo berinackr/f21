@@ -162,7 +162,63 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ---
 
 # Sprint 2
-##Soon ...
+
+- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
+
+- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+- **Puan tamamlama mantığı**: Toplamda proje boyunca tamamlanması gereken 300 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde ilk sprint'in en azından 100 ile başlaması gerektiğine karar verildi. 
+
+- **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. (Benzer bir mentalite kurmalıyız. Product owner ile birlikte user stories yazılmalı)
+
+Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+## **Daily Scrums**: 
+  - 22 Haziran : 
+  
+   	➤ Review ve Retrospektif toplantı gerçekleştirildi.
+
+
+        ➤ Sprint 1 için readme dosyası tamamlandı.
+
+  - 26 Haziran : 
+  
+         ➤ Sprint 2 için yeniden görev dağılımı yapıldı
+         ➤ Daily Scrumlar whatsapptan devam edecek
+         ➤ 2. Sprintte nereye kadar ilerleyeceğimiz belirlendi
+         ➤ Trello, yerine miro kullanacağız, orada hazır şablonumuz var
+         ➤ 25 Haziran Pazar günü yapılacak Daily Scrum'un Discord üzerinden gerçekleştirilmesine karar verdik böylece o zamana kadarki üç     günlük süreçte görevlerde aksaklık veya yavaşlatma oluşturan bir husus var ise birlikte çözebiliriz, kendi görevlerini             tamamlayanlar yeniden görev alabilir vs.
+         ➤ Bir de Bayramdan bir gün öncesinde 27 Haziran Salı günü bir toplantı yaparız diye konuştuk. Burada da bu sprintte tamamladığımız     görevlerin hepsini merge edip conflictleri gidereceğiz. Ardından kalan ufak tefek hatalar ve varsa UI sorunları/geliştirmeleri ile uğraşacağız.
+
+
+- **Sprint board update**: Sprint board screenshotları: 
+![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
+[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
+
+![Backlog 2]() 
+![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
+
+![Backlog 3]()
+
+- **Ürün Durumu**: Ekran görüntüleri:
+ ![1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127400.png)
+ ![2](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127401.png)
+ ![3](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127405.png)
+ ![4](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127414.png)
+ ![5](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127449.png)
+
+- **Sprint Review**: 
+    * Alınan kararlar:  Yaptğımız işleri özetledik, Product Owner'ımız tamamlanmayan ya da üzerinden yeniden geçilmesi gereken konulardan bahsetti. Özellikle UI temasının daha modern ve farklı animasyonlara sahip olacak şekilde revize edilmesinde karar aldık. Ne kadar yol katettiğimizi ve ne kadar yolumuz kaldığını gözden geçirdik.
+
+- **Sprint Retrospective:**
+  - Daha modern UI'lar geliştirmeli, sayfalar büyük küçük ekran için daha responsive hâle getirilmeli
+  - Üzerinde çalışılan görev hakkında ekip üyelerine geri bildirim verilmeli
+  - Toplantı süreleri daha kısa tutulmalı
+  - Yazdığımız kodlarda daha açıklayıcı yorum satırları kullanılmalı ya da ekip üyelerine brifing veirlmeli
+
+-**Diğer Notlar**:
+- Slack'te buluştuk, daha sonra discorda geçmeye karar verdik.
+- Herkesin uygun olduğu durumlarda Scrum Toplantıları Discord üzerinden yapılacak, diğer günlerde Whatsapp üzerinden gerçekleştirilecek.
 
 ---
 

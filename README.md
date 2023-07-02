@@ -211,17 +211,14 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
  ![8](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334877.png)
 
 - **Sprint Review**: 
-    * Alınan kararlar:  Yaptğımız işleri özetledik, Product Owner'ımız tamamlanmayan ya da üzerinden yeniden geçilmesi gereken konulardan bahsetti. Özellikle UI temasının daha modern ve farklı animasyonlara sahip olacak şekilde revize edilmesinde karar aldık. Ne kadar yol katettiğimizi ve ne kadar yolumuz kaldığını gözden geçirdik.
+    * Alınan kararlar:  Kullanıcın ChatGPT ile sorularına yanıt araması için belirlenen prompt daha da geliştirilmeli. Alaksız yanıtlar verilmesinin önüne geçilmeli. Dönemsel bilgilendirme ekranının yalnızca o ayın bilgilendirmesini göstermektense tüm dönemlerdeki bilgilerin kullanıcının isteğine göre gösterilebilmesine karar verildi.
 
 - **Sprint Retrospective:**
-  - Daha modern UI'lar geliştirmeli, sayfalar büyük küçük ekran için daha responsive hâle getirilmeli
-  - Üzerinde çalışılan görev hakkında ekip üyelerine geri bildirim verilmeli
-  - Toplantı süreleri daha kısa tutulmalı
-  - Yazdığımız kodlarda daha açıklayıcı yorum satırları kullanılmalı ya da ekip üyelerine brifing veirlmeli
+    - UI düzenlerken flexbox vb yerine ekran boyutuna oranlayarak padding ile kullanılmalı.
+    - Daha esnek görevler verilmeli.
 
 -**Diğer Notlar**:
-- Slack'te buluştuk, daha sonra discorda geçmeye karar verdik.
-- Herkesin uygun olduğu durumlarda Scrum Toplantıları Discord üzerinden yapılacak, diğer günlerde Whatsapp üzerinden gerçekleştirilecek.
+- Daily Scrums başlığı altında yazanlar Discordda görüntülü olarak toplandığımız scrumlarda alınan kararların notlarıdır. Diğer günlerde toplantılar Whatsapp üzerinden gerçekleştirildi.
 
 ---
 

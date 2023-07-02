@@ -195,17 +195,20 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
 [Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
 
-![Backlog 2]() 
+![Backlog 2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/OUA-F21.jpg) 
 ![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
 
 ![Backlog 3]()
 
 - **Ürün Durumu**: Ekran görüntüleri:
- ![1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127400.png)
- ![2](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127401.png)
- ![3](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127405.png)
- ![4](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127414.png)
- ![5](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127449.png)
+ ![1](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334754.png)
+ ![2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334767.png)
+ ![3](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334782.png)
+ ![4](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334792.png)
+ ![5](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334804.png)
+ ![6](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334817.png)
+ ![7](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334831.png)
+ ![8](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334877.png)
 
 - **Sprint Review**: 
     * Alınan kararlar:  Yaptğımız işleri özetledik, Product Owner'ımız tamamlanmayan ya da üzerinden yeniden geçilmesi gereken konulardan bahsetti. Özellikle UI temasının daha modern ve farklı animasyonlara sahip olacak şekilde revize edilmesinde karar aldık. Ne kadar yol katettiğimizi ve ne kadar yolumuz kaldığını gözden geçirdik.

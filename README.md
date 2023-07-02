@@ -36,9 +36,9 @@ Biberon App
 
 ## Product Backlog URL
 
-[Trello Sprint 1 Backlog](https://trello.com/b/ENjBjrcE/1sprit-%C3%A7al%C4%B1%C5%9Fmalar%C4%B1)
+[Miro Sprint 1 Backlog](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207)
 
-[Trello Sprint 2 Backlog](N/A)
+[Miro Sprint 2 Backlog](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
 
 [Trello Sprint 3 Backlog](N/A)
 
@@ -130,15 +130,6 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
         ➤ Sprint 1 için readme dosyası tamamlandı.
 
 
-
-- **Sprint board update**: Sprint board screenshotları: 
-![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
-[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
-
-![Backlog 2]() 
-
-![Backlog 3]()
-
 - **Ürün Durumu**: Ekran görüntüleri:
  ![1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127400.png)
  ![2](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127401.png)
@@ -176,20 +167,27 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ## **Daily Scrums**: 
   - 22 Haziran : 
   
-   	➤ Review ve Retrospektif toplantı gerçekleştirildi.
+   		➤ Review ve Retrospektif toplantı gerçekleştirildi.
 
+        	➤ Sprint 1 için readme dosyası tamamlandı.
+    
+  - 23 Haziran : 
+  
+   			➤ 25 Haziran Pazar günü yapılacak Daily Scrum'un Discord üzerinden gerçekleştirilmesine karar verdik böylece o zamana 			kadarki üç  günlük süreçte görevlerde aksaklık veya yavaşlatma oluşturan bir husus var ise birlikte çözebiliriz, kendi görevlerini tamamlayanlar yeniden görev alabilir vs.
 
-        ➤ Sprint 1 için readme dosyası tamamlandı.
+	    ➤ Bir de Bayramdan bir gün öncesinde 27 Haziran Salı günü bir toplantı yaparız diye konuştuk. Burada da bu sprintte tamamladığımız     görevlerin hepsini merge edip conflictleri gidereceğiz. Ardından kalan ufak tefek hatalar ve varsa UI sorunları/geliştirmeleri ile uğraşacağız. Ancak yarınki toplantı yeterli gelirse 27'sinde toplantıyı Discord üzerinden yapmayacağız.
+	
 
   - 26 Haziran : 
   
-         ➤ Sprint 2 için yeniden görev dağılımı yapıldı
-         ➤ Daily Scrumlar whatsapptan devam edecek
-         ➤ 2. Sprintte nereye kadar ilerleyeceğimiz belirlendi
-         ➤ Trello, yerine miro kullanacağız, orada hazır şablonumuz var
-         ➤ 25 Haziran Pazar günü yapılacak Daily Scrum'un Discord üzerinden gerçekleştirilmesine karar verdik böylece o zamana kadarki üç     günlük süreçte görevlerde aksaklık veya yavaşlatma oluşturan bir husus var ise birlikte çözebiliriz, kendi görevlerini             tamamlayanlar yeniden görev alabilir vs.
-         ➤ Bir de Bayramdan bir gün öncesinde 27 Haziran Salı günü bir toplantı yaparız diye konuştuk. Burada da bu sprintte tamamladığımız     görevlerin hepsini merge edip conflictleri gidereceğiz. Ardından kalan ufak tefek hatalar ve varsa UI sorunları/geliştirmeleri ile uğraşacağız.
-
+         ➤ Sprint 2 için yeniden görev dağılımı yapıldı.
+    
+         ➤ Daily Scrumlar whatsapptan devam edecek.
+    
+         ➤ 2. Sprintte nereye kadar ilerleyeceğimiz belirlendi.
+    
+         ➤ Trello, yerine miro kullanacağız, orada hazır şablonumuz var.
+    
 
 - **Sprint board update**: Sprint board screenshotları: 
 ![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)

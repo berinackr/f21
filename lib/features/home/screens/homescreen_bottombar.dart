@@ -1,5 +1,6 @@
 import 'package:f21_demo/core/google_ads.dart';
 import 'package:f21_demo/features/forum/screens/forum_screen.dart';
+import 'package:f21_demo/features/home/screens/audioplayer_screen.dart';
 import 'package:f21_demo/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

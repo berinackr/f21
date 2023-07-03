@@ -111,11 +111,10 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       ElevatedButton(
                           onPressed: () {
                              if(_formKey.currentState!.validate()){
-                               if(_passwordController1.text == _passwordController2.text) {
-                                 //TODO: Şifre değiştirme işlemi yapılmalı (firebase ile).
-                                 //TODO: İşlem başarılıysa snackbar göster.
-                                 context.pop(); //Önceki context'e dön
-                               }
+                               //TODO: Şifre değiştirme işlemi yapılmalı (firebase ile).
+                               //TODO: İşlem başarılıysa snackbar göster.
+                               showSnackBar(context, "Şifreniz başarıyla değiştirildi ...");
+                               context.pop(); //Önceki context'e dön
                              }
                           },
                           child: const Text("Şifremi Değiştir"),

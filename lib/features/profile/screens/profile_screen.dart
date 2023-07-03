@@ -196,6 +196,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         const SizedBox(height: 20),
                         //TODO: Password
                         FormBuilderTextField(
+
                           onTap: () {
                             if (_isEditing) {
                               context.push('/home/profile/change_pass');

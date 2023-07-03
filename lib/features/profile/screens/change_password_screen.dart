@@ -17,6 +17,13 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   final _passwordController1 = TextEditingController();
   final _passwordController2 = TextEditingController();
+  //For Show/Hide Password Button
+  bool isShowPassword = false;
+  void _toggleShowPassword(){
+    setState(() {
+      isShowPassword = !isShowPassword;
+    });
+  }
 
   @override
   void initState() {
@@ -52,9 +59,15 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                     children: [
                       FormBuilderTextField(
                         name: "password_1",
-                        obscureText: true,
+                        obscureText: isShowPassword,
                         controller: _passwordController1,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _toggleShowPassword();
+                            },
+                            icon: isShowPassword ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                          ),
                           label: const Text("Yeni Şifreniz"),
                           hintText: "Yeni şifrenizi girin.",
                           contentPadding: const EdgeInsets.symmetric(
@@ -67,9 +80,15 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       const SizedBox(height: 20),
                       FormBuilderTextField(
                         name: "password_2",
-                        obscureText: true,
+                        obscureText: isShowPassword,
                         controller: _passwordController2,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _toggleShowPassword();
+                            },
+                            icon: isShowPassword ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                          ),
                           label: const Text("Şifre Tekrar"),
                           hintText: "Yeni şifrenizi tekrar girin",
                           contentPadding: const EdgeInsets.symmetric(

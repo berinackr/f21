@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/custom_styles.dart';
 
@@ -197,14 +198,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         FormBuilderTextField(
                           onTap: () {
                             if (_isEditing) {
-                              //TODO: şifre değiştir ekranına git
+                              context.push('/home/profile/change_pass');
                             }
                           },
                           readOnly: true,
                           name: "username",
                           controller: _passwordController,
                           decoration: InputDecoration(
-                            label: Text("Şifre"),
+                            label: const Text("Şifre"),
                             hintText: "*********",
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),

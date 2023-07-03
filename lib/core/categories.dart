@@ -6,7 +6,11 @@ class Category {
   final String description;
   final int id;
   final String photoPath;
-  Category({required this.name, required this.id, required this.description, required this.photoPath});
+  Category(
+      {required this.name,
+      required this.id,
+      required this.description,
+      required this.photoPath});
 }
 
 class Categories {
@@ -16,36 +20,37 @@ class Categories {
         id: 1,
         description:
             "Gebelik dönemiyle ilgili sorularınızı paylaşabilir, deneyimlerinizi paylaşabilir ve gebelikle ilgili bilgileri edinebilirsiniz.",
-        photoPath: Assets.exampleForumBannerPath),
+        photoPath: Assets.examplePregnantBannerPath),
     Category(
         name: "Doğum",
         id: 2,
         description:
             "Doğum deneyimlerinizi paylaşabilir, doğum öncesi hazırlıklar hakkında bilgi alabilir ve diğer annelerle doğum konusunda destek alışverişi yapabilirsiniz.",
-        photoPath: Assets.exampleForumBannerPath),
+        photoPath: Assets.exampleBirthBannerPath),
     Category(
         name: 'Annelik',
         id: 3,
-        description: "Anneler arasında dayanışma, deneyim paylaşımı ve anne-bebek ilişkisi hakkında konuşma platformu.",
-        photoPath: Assets.exampleForumBannerPath),
+        description:
+            "Anneler arasında dayanışma, deneyim paylaşımı ve anne-bebek ilişkisi hakkında konuşma platformu.",
+        photoPath: Assets.exampleMotherBannerPath),
     Category(
         name: 'Beslenme',
         id: 4,
         description:
             "Bebek ve anne beslenmesi, emzirme, katı gıdalara geçiş ve sağlıklı beslenmeyle ilgili konuları paylaşabilir ve bilgi alabilirsiniz.",
-        photoPath: Assets.exampleForumBannerPath),
+        photoPath: Assets.exampleHealtyNutritionBannerPath),
     Category(
         name: 'Sağlık',
         id: 5,
         description:
             "Anne ve bebek sağlığı, bakımı, hastalıklar, aşılar ve genel sağlık konuları hakkında bilgi paylaşımı ve destek alışverişi yapabilirsiniz.",
-        photoPath: Assets.exampleForumBannerPath),
+        photoPath: Assets.exampleHealthBannerPath),
     Category(
         name: 'Psikoloji',
         id: 6,
         description:
             "Anne psikolojisi, doğum sonrası duygusal değişimler, stres yönetimi, ebeveynlik zorlukları ve psikolojik destek konularında tartışma ve paylaşım platformu",
-        photoPath: Assets.exampleForumBannerPath),
+        photoPath: Assets.examplePsychologyBannerPath),
   ];
 
   static final Map<int, Category> _categoriesById = {

@@ -165,6 +165,9 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
 
 ## **Daily Scrums**: 
+  - ![Daily Scrum Görüntüleri 1 ](https://github.com/akademif21/f21/blob/main/screenshots/sprint2/daily_scrums_1.png?raw=true)
+  - ![Daily Scrum Görüntüleri 2 ](https://github.com/akademif21/f21/blob/main/screenshots/sprint2/daily_scrums_2.png?raw=true)
+  
   - 22 Haziran : 
   
    		➤ Review ve Retrospektif toplantı gerçekleştirildi.

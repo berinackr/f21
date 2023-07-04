@@ -1,4 +1,5 @@
 import 'package:f21_demo/core/providers/firebase_providers.dart';
+import 'package:f21_demo/core/utils.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/custom_styles.dart';
 
@@ -43,10 +45,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       _isEditing = !_isEditing;
       _isSaved = false;
     } else {
-      ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(const SnackBar(
-            content: Text("Değişiklikleri kaydetmeden çıkamazsınız.")));
+      showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.");
     }
   }
 
@@ -88,11 +87,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         if (_isSaved) {
           return Future.value(true);
         } else {
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(const SnackBar(
-                content: Text(
-                    "Değişiklikleri kaydetmeden çıkamazsınız.\nLütfen sayfanın altındaki butonları kullanın.")));
+          showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.\nLütfen sayfanın altındaki butonları kullanın.");
           return Future.value(false);
         }
       },
@@ -135,26 +130,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         //TODO: Profil Resmi
                         InkWell(
                           onLongPress: () {
-                            ScaffoldMessenger.of(context)
-                              ..removeCurrentSnackBar()
-                              ..showSnackBar(const SnackBar(
-                                  content: Text(
-                                      "Profil resminizi değiştirmek için Bilgilerimi Düzenle'yi aktifleştirin ve bu alana tıklayın ...")));
-                          },
+                              showSnackBar(context, "Profil resminizi değiştirmek için Bilgilerimi Düzenle'yi aktifleştirin ve bu alana tıklayın ...");
+                            },
                           onTap: () {
                             //TODO: Görsel seçme işlemi
                             if (_isEditing) {
-                              ScaffoldMessenger.of(context)
-                                ..removeCurrentSnackBar()
-                                ..showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Görsel seçme fonksiyonu çalışmalı")));
+                              showSnackBar(context, "Görsel seçme fonksiyonu çalışmalı");
                             } else {
-                              ScaffoldMessenger.of(context)
-                                ..removeCurrentSnackBar()
-                                ..showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Öncelikile bilgilerimi düzenleyi aktifleştirin!")));
+                              showSnackBar(context, "Öncelikile bilgilerimi düzenleyi aktifleştirin!");
                             }
                           },
                           child: Center(
@@ -197,11 +180,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         //TODO: Email
                         FormBuilderTextField(
                           onTap: () {
-                            ScaffoldMessenger.of(context)
-                              ..removeCurrentSnackBar()
-                              ..showSnackBar(const SnackBar(
-                                  content: Text(
-                                      "E-mail adresinizi değiştirmezsiniz!")));
+                            showSnackBar(context,  "E-mail adresinizi değiştirmezsiniz!");
                           },
                           readOnly: true,
                           name: "email",
@@ -217,16 +196,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         const SizedBox(height: 20),
                         //TODO: Password
                         FormBuilderTextField(
+
                           onTap: () {
                             if (_isEditing) {
-                              //TODO: şifre değiştir ekranına git
+                              context.push('/home/profile/change_pass');
                             }
                           },
                           readOnly: true,
                           name: "username",
                           controller: _passwordController,
                           decoration: InputDecoration(
-                            label: Text("Şifre"),
+                            label: const Text("Şifre"),
                             hintText: "*********",
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),

@@ -8,8 +8,7 @@ class PasswordResetInfoScreen extends StatefulWidget {
   const PasswordResetInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<PasswordResetInfoScreen> createState() =>
-      _PasswordResetInfoScreenState();
+  State<PasswordResetInfoScreen> createState() => _PasswordResetInfoScreenState();
 }
 
 class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
@@ -80,7 +79,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                       const Spacer(flex: 1),
                       //Info Label
                       Text(
-                        "Lütfen posta kutunuzu kontrol ediniz. Eğer bu mail adresi sistemimize kayıtlı ise yeni şifreniz mail adresinize gönderilecektir.",
+                        "Lütfen posta kutunuzu kontrol ediniz. Eğer bu mail adresi sistemimize kayıtlı ise yeni şifrenizi oluşturabileceğiniz linki içeren bir mail alacaksınız.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 24,

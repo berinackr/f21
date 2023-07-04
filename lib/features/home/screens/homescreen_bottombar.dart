@@ -1,9 +1,6 @@
 import 'package:f21_demo/core/google_ads.dart';
 import 'package:f21_demo/features/forum/screens/forum_screen.dart';
-import 'package:f21_demo/features/home/screens/audioplayer_screen.dart';
-import 'package:f21_demo/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:readmore/readmore.dart';
 import '../../../core/custom_styles.dart';
@@ -40,9 +37,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
           child: Container(
             decoration: BoxDecoration(
               color: CustomStyles.primaryColor,
-              image: const DecorationImage(
-                  image: AssetImage('assets/images/home-bg.png'),
-                  fit: BoxFit.cover),
+              image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
             ),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -71,10 +66,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               const SizedBox(width: 10),
                               const Text(
                                 "Haftanın Doktor Önerisi",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                               const SizedBox(width: 10),
                               Icon(
@@ -102,14 +94,9 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               trimMode: TrimMode.Line,
                               trimCollapsedText: "Devamını Oku",
                               trimExpandedText: "Küçült",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white),
-                              lessStyle: TextStyle(
-                                  color: CustomStyles.primaryColor,
-                                  fontWeight: FontWeight.bold),
-                              moreStyle: TextStyle(
-                                  color: CustomStyles.primaryColor,
-                                  fontWeight: FontWeight.bold),
+                              style: const TextStyle(fontSize: 18, color: Colors.white),
+                              lessStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
+                              moreStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -129,9 +116,8 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                   //anasayfadan forum kısmına geçiş
 
                   Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: CustomStyles.backgroundColor),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomStyles.backgroundColor),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -152,18 +138,13 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(fontSize: 18, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForumScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ForumScreen()));
                             },
                             child: Container(
                               height: 80,
@@ -217,18 +198,14 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(fontSize: 18, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MeditationScreen()));
+                                  context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
                             },
                             child: Container(
                               height: 80,

@@ -1,5 +1,4 @@
 import 'package:f21_demo/core/custom_styles.dart';
-import 'package:f21_demo/features/home/screens/playlist_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'audioplayer_screen.dart';
@@ -20,9 +19,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
       body: Container(
         decoration: BoxDecoration(
           color: CustomStyles.primaryColor,
-          image: const DecorationImage(
-              image: AssetImage('assets/images/home-bg.png'),
-              fit: BoxFit.cover),
+          image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
         ),
         child: CustomScrollView(
           slivers: [
@@ -39,8 +36,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
             ),
             sliverList(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 child: const Text(
                   'Unutmayın bebekler 17. haftadan itibaren sesleri duymaya başlar. Bu sakinleştirici seslerle beraber hem kendinizi hem bebeğinizi rahatlatın.',
                   textAlign: TextAlign.center,
@@ -126,10 +122,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 InkWell(
                   onTap: () {
                     playListIndex().setPlayListIndex(0);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AudioPlayerScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -151,8 +144,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/night-card.png'),
+                                image: AssetImage('assets/images/night-card.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -197,10 +189,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   onTap: () {
                     playListIndex().setPlayListIndex(1);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AudioPlayerScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -222,8 +211,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/night-card2.png'),
+                                image: AssetImage('assets/images/night-card2.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -273,10 +261,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   child: InkWell(
                     onTap: () {
                       playListIndex().setPlayListIndex(2);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AudioPlayerScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -289,8 +274,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/night-card2.png'),
+                                image: AssetImage('assets/images/night-card2.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -340,10 +324,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   child: InkWell(
                     onTap: () {
                       playListIndex().setPlayListIndex(3);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AudioPlayerScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -356,8 +337,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/night-card.png'),
+                                image: AssetImage('assets/images/night-card.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -438,9 +418,7 @@ class IconBoxUI extends StatelessWidget {
             width: 60,
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? CustomStyles.backgroundColor
-                  : const Color(0xff586894),
+              color: isSelected ? CustomStyles.backgroundColor : const Color(0xff586894),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(

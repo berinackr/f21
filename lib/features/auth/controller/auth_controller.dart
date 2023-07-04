@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:f21_demo/core/utils.dart";
+import 'package:go_router/go_router.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
@@ -83,6 +84,19 @@ class AuthController extends StateNotifier<bool> {
   void logout() async {
     _ref.read(userProvider.notifier).update((state) => null);
     _authRepository.logOut();
+  }
+
+  void resetPassword(String email, BuildContext context) async {
+    state = true;
+    final res = await _authRepository.sendPasswordResetEmail(email);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) {
+        showSnackBar(context, "Email gönderildi");
+        context.push("/auth/forget/reset");
+      },
+    );
+    state = false;
   }
 
   User? getCurrentUser() {

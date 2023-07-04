@@ -1,7 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:fpdart/fpdart.dart';
 
 void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
@@ -16,11 +15,11 @@ Future<FilePickerResult?> pickImage() async {
 }
 
 //ValidationBuilder classına şifreleri karşılaştırma eklentisi
-extension CustomValidationBuilderRepeatPassword on ValidationBuilder{
+extension CustomValidationBuilderRepeatPassword on ValidationBuilder {
   repeatPassword(TextEditingController passwd1, TextEditingController passwd2) => add((value) {
-    if (passwd1.text != passwd2.text) {
-      return 'Şifreler eşleşmiyor!';
-    }
-    return null;
-  });
+        if (passwd1.text != passwd2.text) {
+          return 'Şifreler eşleşmiyor!';
+        }
+        return null;
+      });
 }

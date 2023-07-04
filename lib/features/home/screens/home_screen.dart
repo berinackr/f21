@@ -5,6 +5,7 @@ import 'package:f21_demo/core/providers/bottombar_routing_repository.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/repository/auth_repository.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
+import 'package:f21_demo/features/auth/screens/register_screen.dart';
 import 'package:f21_demo/features/home/screens/activity_bottombar.dart';
 import 'package:f21_demo/features/home/screens/homescreen_bottombar.dart';
 import 'package:f21_demo/features/home/screens/mybabyscreen_bottombar.dart';
@@ -39,11 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
-    final bottomBarList = [
-      const MyBabyScreenBottombar(),
-      const HomeScreenBottombar(),
-      const ActivityScreenBottombar()
-    ];
+    final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -51,9 +48,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : user.username == null
             ? const ExampleProfileData()
             : LayoutBuilder(
-                builder: (BuildContext context,
-                        BoxConstraints viewportConstraints) =>
-                    Scaffold(
+                builder: (BuildContext context, BoxConstraints viewportConstraints) => Scaffold(
                   body: bottomBarList[bottomBarRouter.selectedIndex],
                   appBar: AppBar(
                     backgroundColor: CustomStyles.primaryColor,
@@ -88,13 +83,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         children: [
                                           UserAccountsDrawerHeader(
                                             onDetailsPressed: () {
-                                              showProfilePopUp(context,
-                                                  viewportConstraints, ref);
+                                              showProfilePopUp(context, viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    CustomStyles.primaryColor),
+                                            decoration: BoxDecoration(color: CustomStyles.primaryColor),
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -102,38 +94,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                             accountEmail: Text(
-                                              ref
-                                                  .read(authRepositoryProvider)
-                                                  .getCurrentUser()!
-                                                  .email!
-                                                  .toString(),
+                                              ref.read(authRepositoryProvider).getCurrentUser()!.email!.toString(),
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                             currentAccountPicture: CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  user.profilePic!),
+                                              backgroundImage: NetworkImage(user.profilePic!),
                                             ),
                                           ),
                                           Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 10, 10, 0),
+                                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                              mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 IconButton(
-                                                    icon: settings
-                                                            .isSilentMode()
+                                                    icon: settings.isSilentMode()
                                                         ? const Icon(
-                                                            Icons
-                                                                .notifications_off,
+                                                            Icons.notifications_off,
                                                             color: Colors.red,
                                                           )
                                                         : const Icon(
-                                                            Icons
-                                                                .notifications_active,
+                                                            Icons.notifications_active,
                                                             color: Colors.white,
                                                           ),
                                                     onPressed: () {
@@ -143,8 +125,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                     onPressed: () {
                                                       toggleDarkMode(ref);
                                                     },
-                                                    icon: const Icon(
-                                                        Icons.dark_mode)),
+                                                    icon: Icon(
+                                                      Icons.dark_mode,
+                                                      color: isDarkMode ? Colors.black : Colors.white,
+                                                    )),
                                               ],
                                             ),
                                           )
@@ -218,11 +202,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       const Divider(),
                                       Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 20),
+                                        padding: const EdgeInsets.only(left: 20),
                                         child: const Align(
-                                          alignment:
-                                              AlignmentDirectional.centerStart,
+                                          alignment: AlignmentDirectional.centerStart,
                                           child: Text(
                                             "İletişim Bilgileri",
                                             //style: Theme.of(context).textTheme.caption,
@@ -243,17 +225,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         aboutBoxChildren: [
                                           ///Content goes he.re..
                                         ],
-                                        child: Text('About app'),
+                                        child: Text('Hakkımızda'),
                                       ),
                                       ListTile(
                                         leading: const Icon(Icons.privacy_tip),
-                                        title: const Text("Privacy Policy"),
-                                        onTap: () {},
+                                        title: const Text("Gizlilik Politikası"),
+                                        onTap: () {
+                                          showContractPopup(context);
+                                        },
                                       ),
-                                      ListTile(
-                                        leading: const Icon(Icons.contact_mail),
-                                        title: const Text("Contact us"),
-                                        onTap: () {},
+                                      const AboutListTile(
+                                        icon: Icon(
+                                          Icons.contact_mail,
+                                        ),
+                                        applicationIcon: Icon(
+                                          Icons.local_play,
+                                        ),
+                                        applicationName: 'Biberon App',
+                                        aboutBoxChildren: [Text("biberonapp@gmail.com")],
+                                        child: Text('Bize Ulaşın'),
                                       ),
                                     ],
                                   ),
@@ -267,12 +257,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: CustomStyles
-                                                  .fillColor, // Beyaz çizgi rengi
+                                              color: CustomStyles.fillColor, // Beyaz çizgi rengi
                                               width: 2, // Beyaz çizgi kalınlığı
                                             ),
-                                            borderRadius: BorderRadius.circular(
-                                                8), // Kenar yuvarlatma
+                                            borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma
                                           ),
                                           child: ElevatedButton.icon(
                                             style: ElevatedButton.styleFrom(
@@ -281,8 +269,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               shadowColor: Colors.black,
                                               elevation: 4,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
+                                                borderRadius: BorderRadius.circular(6),
                                               ),
                                             ),
                                             onPressed: () {
@@ -319,13 +306,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     items: const [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(
-                          icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (index) {
-                      ref
-                          .read(bottomBarRoutingProvider.notifier)
-                          .changeIndex(index);
+                      ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);
                     },
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'package:f21_demo/core/categories.dart';
 import 'package:f21_demo/core/common/loader.dart';
 import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/core/utils.dart';
+import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/forum/controller/forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -15,8 +16,7 @@ class SharePostScreen extends ConsumerStatefulWidget {
   final String id;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SharePostScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SharePostScreenState();
 }
 
 class _SharePostScreenState extends ConsumerState<SharePostScreen> {
@@ -39,16 +39,20 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
     CustomStyles().responsiveTheme(isDarkMode);
     final categoryName = Categories.getCategoryNameById(int.parse(widget.id));
     final isLoading = ref.watch(forumControllerProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     return Scaffold(
         appBar: AppBar(
           title: Text('$categoryName - Soru Sor'),
           actions: [
             TextButton(
               onPressed: () {
+                if (user == null) {
+                  showSnackBar(context, "Soru sormadan önce giriş yapmalısınız");
+                  return;
+                }
                 if (_formKey.currentState!.saveAndValidate()) {
                   final data = _formKey.currentState!.value;
-                  final forumController =
-                      ref.read(forumControllerProvider.notifier);
+                  final forumController = ref.read(forumControllerProvider.notifier);
                   forumController.sharePost(
                     title: data['title'],
                     content: data['content'],
@@ -69,14 +73,16 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
           ],
         ),
         body: SafeArea(
-          child: LayoutBuilder(builder:
-              (BuildContext context, BoxConstraints viewportConstraints) {
+          child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
+            if (user == null) {
+              return const Center(
+                child: Text("Soru sorabilmek için önce giriş yapmalısınız."),
+              );
+            }
             return SingleChildScrollView(
               child: Container(
-                constraints:
-                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
                 child: isLoading
                     ? const Loader()
                     : FormBuilder(
@@ -99,25 +105,17 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                               controller: titleController,
                               decoration: InputDecoration(
                                 hintText: "Annelere bir sorum var",
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: CustomStyles.titleColor,
-                                        width: 2),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0))),
+                                    borderSide: BorderSide(color: CustomStyles.titleColor, width: 2),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
                                 border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
-                              validator: ValidationBuilder(localeName: "tr")
-                                  .minLength(3)
-                                  .maxLength(144)
-                                  .build(),
+                              validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(144).build(),
                             ),
                             const SizedBox(height: 20),
                             Align(
@@ -137,25 +135,17 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                               maxLines: 10,
                               decoration: InputDecoration(
                                 hintText: "Merhaba anneler, ...",
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: CustomStyles.titleColor,
-                                        width: 2),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0))),
+                                    borderSide: BorderSide(color: CustomStyles.titleColor, width: 2),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
                                 border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
-                              validator: ValidationBuilder(localeName: "tr")
-                                  .minLength(3)
-                                  .maxLength(500)
-                                  .build(),
+                              validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(500).build(),
                             ),
                             const SizedBox(height: 20),
                             Align(
@@ -176,8 +166,7 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: CustomStyles.fillColor,
-                                  border: Border.all(
-                                      color: CustomStyles.titleColor, width: 1),
+                                  border: Border.all(color: CustomStyles.titleColor, width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: postFile != null

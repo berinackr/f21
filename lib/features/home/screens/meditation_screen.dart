@@ -1,6 +1,8 @@
 import 'package:f21_demo/core/custom_styles.dart';
 import 'package:flutter/material.dart';
 
+import 'audioplayer_screen.dart';
+
 class MeditationScreen extends StatefulWidget {
   const MeditationScreen({super.key});
 
@@ -11,13 +13,13 @@ class MeditationScreen extends StatefulWidget {
 class _MeditationScreenState extends State<MeditationScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: CustomStyles.primaryColor,
-          image: DecorationImage(
-              image: AssetImage('assets/images/home-bg.png'),
-              fit: BoxFit.cover),
+          image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
         ),
         child: CustomScrollView(
           slivers: [
@@ -34,8 +36,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
             ),
             sliverList(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 child: const Text(
                   'Unutmayın bebekler 17. haftadan itibaren sesleri duymaya başlar. Bu sakinleştirici seslerle beraber hem kendinizi hem bebeğinizi rahatlatın.',
                   textAlign: TextAlign.center,
@@ -47,42 +48,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 ),
               ),
             ),
-            sliverList(
-                child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 0,
-              ),
-              height: 130,
-              child: ListView(
-                // shrinkWrap: true,
-                primary: false,
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  IconBoxUI(
-                    icon: 'assets/images/all.png',
-                    title: 'Tümü',
-                    isSelected: true,
-                  ),
-                  IconBoxUI(
-                    icon: 'assets/images/love.png',
-                    title: 'Beğenilen',
-                  ),
-                  IconBoxUI(
-                    icon: 'assets/images/happy.png',
-                    title: 'Neşeli',
-                  ),
-                  IconBoxUI(
-                    icon: 'assets/images/sleep.png',
-                    title: 'Uyku',
-                  ),
-                  IconBoxUI(
-                    icon: 'assets/images/child.png',
-                    title: 'Çocuk',
-                  ),
-                ],
-              ),
-            )),
             sliverList(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -115,11 +80,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
                         )
                       ],
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Meditasyon',
                             style: TextStyle(
                               color: Colors.white,
@@ -127,13 +92,13 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 10,
                             ),
                             child: Text(
-                              'Tüm playlisti karışık şekilde çalmaya başla',
+                              'Aşağıdaki playlistlerden birini seç ve rahatlamaya başla',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 13,
@@ -141,21 +106,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               ),
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 10,
-                              ),
-                              elevation: 5,
-                              foregroundColor: Colors.black.withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                            ),
-                            child: Text('Start'.toUpperCase()),
-                          )
                         ],
                       ),
                     ),
@@ -169,183 +119,137 @@ class _MeditationScreenState extends State<MeditationScreen> {
               crossAxisSpacing: 10,
               // mainAxisSpacing: 10,
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: CustomStyles.primaryColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomStyles.primaryColor,
-                            borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/night-card.png'),
-                              fit: BoxFit.cover,
+                InkWell(
+                  onTap: () {
+                    playListIndex().setPlayListIndex(0);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: CustomStyles.primaryColor,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: CustomStyles.primaryColor,
+                              borderRadius: BorderRadius.circular(15),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/night-card.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Uyku',
-                                  style: TextStyle(
-                                    color: Color(0xffE6E7F2),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                        const Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Uyku',
+                                    style: TextStyle(
+                                      color: Color(0xffE6E7F2),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Hemen uykuya dal',
-                                  style: TextStyle(
-                                    color: Color(0xff98A1BD),
-                                    fontSize: 14,
+                                  SizedBox(
+                                    height: 8,
                                   ),
-                                )
-                              ],
-                            ),
-                          ))
-                    ],
+                                  Text(
+                                    'Hemen uykuya dal',
+                                    style: TextStyle(
+                                      color: Color(0xff98A1BD),
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: CustomStyles.primaryColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomStyles.primaryColor,
-                            borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image:
-                                  AssetImage('assets/images/night-card2.png'),
-                              fit: BoxFit.cover,
+                InkWell(
+                  onTap: () {
+                    playListIndex().setPlayListIndex(1);
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: CustomStyles.primaryColor,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: CustomStyles.primaryColor,
+                              borderRadius: BorderRadius.circular(15),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/night-card2.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Sakinleş',
-                                  style: TextStyle(
-                                    color: Color(0xffE6E7F2),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                        const Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Sakinleş',
+                                    style: TextStyle(
+                                      color: Color(0xffE6E7F2),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Sakinleştirici mekan sesleri',
-                                  style: TextStyle(
-                                    color: Color(0xff98A1BD),
-                                    fontSize: 14,
+                                  SizedBox(
+                                    height: 8,
                                   ),
-                                )
-                              ],
-                            ),
-                          ))
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: CustomStyles.primaryColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomStyles.primaryColor,
-                            borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image:
-                                  AssetImage('assets/images/night-card2.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Piyano',
-                                  style: TextStyle(
-                                    color: Color(0xffE6E7F2),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Huzurlu Piyano Sesleri',
-                                  style: TextStyle(
-                                    color: Color(0xff98A1BD),
-                                    fontSize: 14,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ))
-                    ],
+                                  Text(
+                                    'Sakinleştirici mekan sesleri',
+                                    style: TextStyle(
+                                      color: Color(0xff98A1BD),
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -354,55 +258,124 @@ class _MeditationScreenState extends State<MeditationScreen> {
                     color: CustomStyles.primaryColor,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CustomStyles.primaryColor,
-                            borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/night-card.png'),
-                              fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      playListIndex().setPlayListIndex(2);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: CustomStyles.primaryColor,
+                              borderRadius: BorderRadius.circular(15),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/night-card2.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 5,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Neşelen',
-                                  style: TextStyle(
-                                    color: Color(0xffE6E7F2),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                        const Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Piyano',
+                                    style: TextStyle(
+                                      color: Color(0xffE6E7F2),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Neşeli Müzikler',
-                                  style: TextStyle(
-                                    color: Color(0xff98A1BD),
-                                    fontSize: 14,
+                                  SizedBox(
+                                    height: 8,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'Huzurlu Piyano Sesleri',
+                                    style: TextStyle(
+                                      color: Color(0xff98A1BD),
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: CustomStyles.primaryColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      playListIndex().setPlayListIndex(3);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: CustomStyles.primaryColor,
+                              borderRadius: BorderRadius.circular(15),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/night-card.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ))
-                    ],
+                          ),
+                        ),
+                        const Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Neşelen',
+                                    style: TextStyle(
+                                      color: Color(0xffE6E7F2),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'Neşeli Müzikler',
+                                    style: TextStyle(
+                                      color: Color(0xff98A1BD),
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -445,9 +418,7 @@ class IconBoxUI extends StatelessWidget {
             width: 60,
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? CustomStyles.backgroundColor
-                  : const Color(0xff586894),
+              color: isSelected ? CustomStyles.backgroundColor : const Color(0xff586894),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(

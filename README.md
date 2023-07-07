@@ -36,9 +36,9 @@ Biberon App
 
 ## Product Backlog URL
 
-[Trello Sprint 1 Backlog](https://trello.com/b/ENjBjrcE/1sprit-%C3%A7al%C4%B1%C5%9Fmalar%C4%B1)
+[Miro Sprint 1 Backlog](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207)
 
-[Trello Sprint 2 Backlog](N/A)
+[Miro Sprint 2 Backlog](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
 
 [Trello Sprint 3 Backlog](N/A)
 
@@ -130,15 +130,6 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
         ➤ Sprint 1 için readme dosyası tamamlandı.
 
 
-
-- **Sprint board update**: Sprint board screenshotları: 
-![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
-[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
-
-![Backlog 2]() 
-
-![Backlog 3]()
-
 - **Ürün Durumu**: Ekran görüntüleri:
  ![1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127400.png)
  ![2](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/Screenshot_1687127401.png)
@@ -162,7 +153,73 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ---
 
 # Sprint 2
-##Soon ...
+
+- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
+
+- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+- **Puan tamamlama mantığı**: Toplamda proje boyunca tamamlanması gereken 300 puanlık backlog bulunmaktadır. 3 sprint'e bölündüğünde ilk sprint'in en azından 100 ile başlaması gerektiğine karar verildi. 
+
+- **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. (Benzer bir mentalite kurmalıyız. Product owner ile birlikte user stories yazılmalı)
+
+Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+## **Daily Scrums**: 
+  - ![Daily Scrum Görüntüleri 1 ](https://github.com/akademif21/f21/blob/main/screenshots/sprint2/daily_scrums_1.png?raw=true)
+  - ![Daily Scrum Görüntüleri 2 ](https://github.com/akademif21/f21/blob/main/screenshots/sprint2/daily_scrums_2.png?raw=true)
+  
+  - 22 Haziran : 
+  
+   		➤ Review ve Retrospektif toplantı gerçekleştirildi.
+
+        	➤ Sprint 1 için readme dosyası tamamlandı.
+    
+  - 23 Haziran : 
+  
+   			➤ 25 Haziran Pazar günü yapılacak Daily Scrum'un Discord üzerinden gerçekleştirilmesine karar verdik böylece o zamana 			kadarki üç  günlük süreçte görevlerde aksaklık veya yavaşlatma oluşturan bir husus var ise birlikte çözebiliriz, kendi görevlerini tamamlayanlar yeniden görev alabilir vs.
+
+	    ➤ Bir de Bayramdan bir gün öncesinde 27 Haziran Salı günü bir toplantı yaparız diye konuştuk. Burada da bu sprintte tamamladığımız     görevlerin hepsini merge edip conflictleri gidereceğiz. Ardından kalan ufak tefek hatalar ve varsa UI sorunları/geliştirmeleri ile uğraşacağız. Ancak yarınki toplantı yeterli gelirse 27'sinde toplantıyı Discord üzerinden yapmayacağız.
+	
+
+  - 26 Haziran : 
+  
+         ➤ Sprint 2 için yeniden görev dağılımı yapıldı.
+    
+         ➤ Daily Scrumlar whatsapptan devam edecek.
+    
+         ➤ 2. Sprintte nereye kadar ilerleyeceğimiz belirlendi.
+    
+         ➤ Trello, yerine miro kullanacağız, orada hazır şablonumuz var.
+    
+
+- **Sprint board update**: Sprint board screenshotları: 
+![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
+[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
+
+![Backlog 2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/OUA-F21.jpg) 
+![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
+
+![Backlog 3]()
+
+- **Ürün Durumu**: Ekran görüntüleri:
+ ![1](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334754.png)
+ ![2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334767.png)
+ ![3](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334782.png)
+ ![4](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334792.png)
+ ![5](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334804.png)
+ ![6](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334817.png)
+ ![7](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334831.png)
+ ![8](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334877.png)
+
+- **Sprint Review**: 
+    * Alınan kararlar:  Kullanıcın ChatGPT ile sorularına yanıt araması için belirlenen prompt daha da geliştirilmeli. Alaksız yanıtlar verilmesinin önüne geçilmeli. Dönemsel bilgilendirme ekranının yalnızca o ayın bilgilendirmesini göstermektense tüm dönemlerdeki bilgilerin kullanıcının isteğine göre gösterilebilmesine karar verildi.
+
+- **Sprint Retrospective:**
+    - UI düzenlerken flexbox vb yerine ekran boyutuna oranlayarak padding ile kullanılmalı.
+    - Daha esnek görevler verilmeli.
+
+-**Diğer Notlar**:
+- Daily Scrums başlığı altında yazanlar Discordda görüntülü olarak toplandığımız scrumlarda alınan kararların notlarıdır. Diğer günlerde toplantılar Whatsapp üzerinden gerçekleştirildi.
 
 ---
 

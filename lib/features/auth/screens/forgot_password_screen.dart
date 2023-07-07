@@ -1,27 +1,39 @@
 import 'package:f21_demo/core/assets.dart';
+import 'package:f21_demo/core/common/loader.dart';
 import 'package:f21_demo/core/custom_styles.dart';
+import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_validator/form_validator.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  void resetPassword(WidgetRef ref, String email, BuildContext context) {
+    ref.read(authControllerProvider.notifier).resetPassword(email, context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isLoading = ref.watch(authControllerProvider);
+    CustomStyles().responsiveTheme(isDarkMode);
     var screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomStyles.backgroundColor,
+        backgroundColor: CustomStyles.primaryColor,
         //toolbarHeight: 0,
-        elevation: 0,
+        elevation: 2,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: CustomStyles.backgroundColor,
         ),
@@ -29,6 +41,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
+            if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
                 decoration: const BoxDecoration(
@@ -70,7 +83,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       //Info Label
-                      const Text(
+                      Text(
                         "Lütfen sisteme kayıtlı olan email adresinizi giriniz.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -86,14 +99,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         constraints: BoxConstraints(
                           maxWidth: screenWidth * 0.8,
                         ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            hintText: "johndoe@gmail.com",
-                            filled: true,
-                            fillColor: CustomStyles.fillColor,
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                        child: Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            autofillHints: const [AutofillHints.email],
+                            validator: ValidationBuilder(localeName: "tr").email().build(),
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              hintText: "johndoe@gmail.com",
+                              filled: true,
+                              fillColor: CustomStyles.fillColor,
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              ),
                             ),
                           ),
                         ),
@@ -102,15 +120,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: CustomStyles.buttonColor),
+                          style: ElevatedButton.styleFrom(backgroundColor: CustomStyles.buttonColor),
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Mail gönderildi!")));
-                            context.push("/auth/forget/reset");
+                            if (_formKey.currentState!.validate()) {
+                              resetPassword(ref, emailController.text, context);
+                            }
                           },
-                          child: const Text(
+                          child: Text(
                             "Mail Gönder",
                             style: TextStyle(color: CustomStyles.primaryColor),
                           )),

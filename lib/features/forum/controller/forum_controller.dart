@@ -102,9 +102,9 @@ class PaginationNotifier<T> extends StateNotifier<PaginationState<T>> {
     }
   }
 
-  void reset() {
+  Future<void> reset() {
     _items.clear();
-    fetchFirstBatch();
+    return fetchFirstBatch();
   }
 
   Future<void> fetchFirstBatch() async {
@@ -227,7 +227,7 @@ class ForumController extends StateNotifier<bool> {
     return _forumRepository.streamPostById(postId);
   }
 
-  void upvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
+  void upvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked, bool isBookmarked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -237,7 +237,9 @@ class ForumController extends StateNotifier<bool> {
           ? null
           : getPostById(post.id).then((r) => isMostLiked
               ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
-              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+              : isBookmarked
+                  ? _ref.read(bookmarkedPostsProvider(user.uid).notifier).updateOnePost(r, index)
+                  : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }
@@ -270,7 +272,7 @@ class ForumController extends StateNotifier<bool> {
     state = false;
   }
 
-  void downvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
+  void downvotePost(PostModel post, BuildContext context, int? index, bool isMostLiked, bool isBookmarked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -280,12 +282,14 @@ class ForumController extends StateNotifier<bool> {
           ? null
           : getPostById(post.id).then((r) => isMostLiked
               ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
-              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+              : isBookmarked
+                  ? _ref.read(bookmarkedPostsProvider(user.uid).notifier).updateOnePost(r, index)
+                  : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }
 
-  void bookmarkPost(PostModel post, BuildContext context, int? index, bool isMostLiked) async {
+  void bookmarkPost(PostModel post, BuildContext context, int? index, bool isMostLiked, bool isBookmarked) async {
     if (state) return;
     state = true;
     final user = _ref.read(userProvider)!;
@@ -295,7 +299,9 @@ class ForumController extends StateNotifier<bool> {
           ? null
           : getPostById(post.id).then((r) => isMostLiked
               ? _ref.read(mostLikedPostProvider(post.categoryId).notifier).updateOnePost(r, index)
-              : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
+              : isBookmarked
+                  ? _ref.read(bookmarkedPostsProvider(user.uid).notifier).reset()
+                  : _ref.read(postsProvider(post.categoryId).notifier).updateOnePost(r, index));
     });
     state = false;
   }

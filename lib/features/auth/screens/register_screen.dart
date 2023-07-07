@@ -27,6 +27,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final isLoading = ref.watch(authControllerProvider);
     var screenSize = MediaQuery.of(context).size;
     final double screenHeight = screenSize.height;
@@ -80,7 +82,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: const Align(
+                              child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Email",
@@ -104,13 +106,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 controller: emailController,
                                 autofillHints: const [AutofillHints.email],
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "johndoe@gmail.com",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 15),
                                   fillColor: CustomStyles.fillColor,
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
                                   ),
@@ -123,7 +125,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             //Password Label
                             Padding(
                               padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: const Align(
+                              child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Şifre",
@@ -149,13 +151,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 controller: passwordController,
                                 autofillHints: const [AutofillHints.password],
                                 autocorrect: false,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "Çok gizli şifre",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 15),
                                   fillColor: CustomStyles.fillColor,
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
                                   ),
@@ -168,7 +170,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             //Password Label
                             Padding(
                               padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: const Align(
+                              child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Şifreyi Onayla",
@@ -197,13 +199,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                 controller: passwordAgainController,
                                 autofillHints: const [AutofillHints.password],
                                 autocorrect: false,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "Çok gizli şifre",
                                   filled: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 15),
                                   fillColor: CustomStyles.fillColor,
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
                                   ),
@@ -213,7 +215,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.ads_click,
                                   color: CustomStyles.primaryColor,
                                 ),
@@ -279,7 +281,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               passwordAgainController.clear();
                             }
                           },
-                          child: const Text(
+                          child: Text(
                             "Kayıt ol",
                             style: TextStyle(color: CustomStyles.primaryColor),
                           )),
@@ -308,18 +310,20 @@ void showContractPopup(BuildContext context) {
         //shadowColor: CustomStyles.backgroundColor,
         //surfaceTintColor: CustomStyles.primaryColor,
         title: const Center(
-            child: Text('Kullanıcı Sözleşmesi ve Gizlilik Politikası')
-        ),
-        titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,color: CustomStyles.primaryColor, fontSize: 15),
+            child: Text('Kullanıcı Sözleşmesi ve Gizlilik Politikası')),
+        titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: CustomStyles.primaryColor,
+            fontSize: 15),
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(25))
-        ),
+            borderRadius: BorderRadius.all(Radius.circular(25))),
         content: SizedBox(
           width: double.maxFinite,
           child: FutureBuilder(
-            future: DefaultAssetBundle.of(context).loadString('assets/texts/user_policy.md'),
+            future: DefaultAssetBundle.of(context)
+                .loadString('assets/texts/user_policy.md'),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              if (snapshot.hasData){
+              if (snapshot.hasData) {
                 return Markdown(data: snapshot.data!);
               } else {
                 return const Center(child: CircularProgressIndicator());
@@ -332,14 +336,12 @@ void showContractPopup(BuildContext context) {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                    borderRadius: BorderRadius.circular(15)),
                 backgroundColor: CustomStyles.primaryColor, // Background color
               ),
               child: const Text(
                 'Kapat',
                 style: TextStyle(color: Colors.white),
-
               ),
               onPressed: () {
                 Navigator.of(context).pop();

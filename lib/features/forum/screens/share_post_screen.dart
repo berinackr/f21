@@ -4,6 +4,7 @@ import 'package:f21_demo/core/categories.dart';
 import 'package:f21_demo/core/common/loader.dart';
 import 'package:f21_demo/core/custom_styles.dart';
 import 'package:f21_demo/core/utils.dart';
+import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/forum/controller/forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -34,14 +35,21 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final categoryName = Categories.getCategoryNameById(int.parse(widget.id));
     final isLoading = ref.watch(forumControllerProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     return Scaffold(
         appBar: AppBar(
           title: Text('$categoryName - Soru Sor'),
           actions: [
             TextButton(
               onPressed: () {
+                if (user == null) {
+                  showSnackBar(context, "Soru sormadan önce giriş yapmalısınız");
+                  return;
+                }
                 if (_formKey.currentState!.saveAndValidate()) {
                   final data = _formKey.currentState!.value;
                   final forumController = ref.read(forumControllerProvider.notifier);
@@ -66,6 +74,11 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
         ),
         body: SafeArea(
           child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
+            if (user == null) {
+              return const Center(
+                child: Text("Soru sorabilmek için önce giriş yapmalısınız."),
+              );
+            }
             return SingleChildScrollView(
               child: Container(
                 constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
@@ -76,13 +89,13 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "Başlık*",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -90,28 +103,28 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                             FormBuilderTextField(
                               name: "title",
                               controller: titleController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Annelere bir sorum var",
-                                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                    borderSide: BorderSide(color: CustomStyles.titleColor, width: 2),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
                               validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(144).build(),
                             ),
                             const SizedBox(height: 20),
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "İçerik*",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -120,28 +133,28 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                               name: "content",
                               controller: contentController,
                               maxLines: 10,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Merhaba anneler, ...",
-                                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                 filled: true,
                                 focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomStyles.primaryColor, width: 2),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                                    borderSide: BorderSide(color: CustomStyles.titleColor, width: 2),
+                                    borderRadius: const BorderRadius.all(Radius.circular(10.0))),
                                 fillColor: CustomStyles.fillColor,
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
                               validator: ValidationBuilder(localeName: "tr").minLength(3).maxLength(500).build(),
                             ),
                             const SizedBox(height: 20),
-                            const Align(
+                            Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "Fotoğraf",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.titleColor,
                                 ),
                               ),
                             ),
@@ -153,7 +166,7 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: CustomStyles.fillColor,
-                                  border: Border.all(color: CustomStyles.primaryColor, width: 1),
+                                  border: Border.all(color: CustomStyles.titleColor, width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: postFile != null
@@ -164,10 +177,10 @@ class _SharePostScreenState extends ConsumerState<SharePostScreen> {
                                           fit: BoxFit.cover,
                                         ),
                                       )
-                                    : const Icon(
+                                    : Icon(
                                         Icons.add_a_photo,
                                         size: 50,
-                                        color: CustomStyles.primaryColor,
+                                        color: CustomStyles.titleColor,
                                       ),
                               ),
                             )

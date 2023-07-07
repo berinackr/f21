@@ -19,8 +19,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  void signIn(
-      WidgetRef ref, String email, String password, BuildContext context) {
+  void signIn(WidgetRef ref, String email, String password, BuildContext context) {
     ref.read(authControllerProvider.notifier).signIn(email, password, context);
   }
 
@@ -30,6 +29,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final isLoading = ref.watch(authControllerProvider);
     var screenSize = MediaQuery.of(context).size;
     final double screenHeight = screenSize.height;
@@ -39,8 +40,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: CustomStyles.backgroundColor),
+        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: CustomStyles.backgroundColor),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -55,8 +55,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                constraints:
-                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,10 +78,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                    top: screenHeight / 60,
-                                    left: screenHeight / 30),
-                                child: const Align(
+                                padding: EdgeInsets.only(top: screenHeight / 60, left: screenHeight / 30),
+                                child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       "Email",
@@ -95,36 +92,27 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               //Email TextField
                               Padding(
                                 padding: EdgeInsets.fromLTRB(
-                                    screenHeight / 30,
-                                    screenHeight / 100,
-                                    screenHeight / 30,
-                                    screenHeight / 30),
+                                    screenHeight / 30, screenHeight / 100, screenHeight / 30, screenHeight / 30),
                                 child: TextFormField(
-                                  validator: ValidationBuilder(localeName: "tr")
-                                      .email()
-                                      .build(),
+                                  validator: ValidationBuilder(localeName: "tr").email().build(),
                                   controller: emailController,
                                   autofillHints: const [AutofillHints.email],
                                   keyboardType: TextInputType.emailAddress,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     hintText: "johndoe@gmail.com",
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 15),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                     filled: true,
                                     fillColor: CustomStyles.fillColor,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
+                                    border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     ),
                                   ),
                                 ),
                               ),
                               //Password Label
                               Padding(
-                                padding: EdgeInsets.only(
-                                    top: screenHeight / 60,
-                                    left: screenHeight / 30),
-                                child: const Align(
+                                padding: EdgeInsets.only(top: screenHeight / 60, left: screenHeight / 30),
+                                child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Şifre",
@@ -138,27 +126,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               //Password TextField
                               Padding(
                                 padding: EdgeInsets.fromLTRB(
-                                    screenHeight / 30,
-                                    screenHeight / 100,
-                                    screenHeight / 30,
-                                    screenHeight / 30),
+                                    screenHeight / 30, screenHeight / 100, screenHeight / 30, screenHeight / 30),
                                 child: TextFormField(
-                                  validator: ValidationBuilder(localeName: "tr")
-                                      .minLength(6)
-                                      .build(),
+                                  validator: ValidationBuilder(localeName: "tr").minLength(6).build(),
                                   obscureText: true,
                                   controller: passwordController,
                                   autofillHints: const [AutofillHints.password],
                                   autocorrect: false,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     hintText: "Passw0rd!",
                                     filled: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 15),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                                     fillColor: CustomStyles.fillColor,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
+                                    border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                     ),
                                   ),
                                 ),
@@ -168,28 +149,48 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         //Login Buttons
                         //Giriş Yap Butonu
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomStyles.buttonColor),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                signIn(ref, emailController.text,
-                                    passwordController.text, context);
-                                passwordController.clear();
-                              }
-                            },
-                            child: const Text(
-                              "Giriş Yap",
-                              style:
-                                  TextStyle(color: CustomStyles.primaryColor),
-                            )),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(screenHeight / 30, 0, screenHeight / 30, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: CustomStyles.buttonColor),
+                                onPressed: () {
+                                  context.push("/guest/home");
+                                },
+                                child: Text(
+                                  "Misafir olarak devam et",
+                                  style: TextStyle(color: CustomStyles.primaryColor),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: CustomStyles.buttonColor),
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      signIn(ref, emailController.text, passwordController.text, context);
+                                      passwordController.clear();
+                                    }
+                                  },
+                                  child: Text(
+                                    "Giriş Yap",
+                                    style: TextStyle(color: CustomStyles.primaryColor),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
                         //Google ile Giriş Yap Butonu
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomStyles.buttonColor),
+                            style: ElevatedButton.styleFrom(backgroundColor: CustomStyles.buttonColor),
                             onPressed: () {
                               signInWithGoogle(ref, context);
                             },
@@ -200,18 +201,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(5),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     CircleAvatar(
                                       backgroundColor: Colors.transparent,
                                       child: Image.asset(Assets.googleIconPath),
                                     ),
-                                    const Text(
+                                    Text(
                                       "Google ile Giriş Yap",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: CustomStyles.primaryColor),
+                                      style: TextStyle(fontSize: 15, color: CustomStyles.primaryColor),
                                     ),
                                   ],
                                 ),
@@ -226,28 +224,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth / 20),
+                              padding: EdgeInsets.symmetric(horizontal: screenWidth / 20),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton(
                                     onPressed: () {
                                       context.push("/auth/forget");
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "Şifremi Unuttum",
-                                      style: TextStyle(
-                                          color: CustomStyles.primaryColor,
-                                          fontSize: 17),
+                                      style: TextStyle(color: CustomStyles.primaryColor, fontSize: 17),
                                     ),
                                   ),
                                   TextButton(
                                       onPressed: () {
                                         context.push("/auth/register");
                                       },
-                                      child: const Text(
+                                      child: Text(
                                         "Kayıt Ol",
                                         style: TextStyle(
                                             fontSize: 17,

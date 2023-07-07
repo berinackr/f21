@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/controller/auth_controller.dart';
+import '../../../core/custom_styles.dart';
 
 class MyBabyScreenBottombar extends ConsumerStatefulWidget {
   const MyBabyScreenBottombar({super.key});
@@ -10,7 +11,9 @@ class MyBabyScreenBottombar extends ConsumerStatefulWidget {
 }
 
 
+
 class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
+
   var titleList = [
     "1. Ay Gebelik",
     "2. Ay Gebelik",
@@ -122,8 +125,11 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
     Icon(Icons.grade, color: Colors.orangeAccent, size: 36,),
     Icon(Icons.filter_2, color: Colors.orangeAccent, size: 36,),
   ];
+
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     double width = MediaQuery.of(context).size.width * 0.8;
     return Padding(
       padding: const EdgeInsets.all(14.0),
@@ -136,11 +142,11 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
               width: 600,
               height: 200,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                  color: Colors.deepPurple,
-                  width: 1,
-                )
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: Colors.deepPurple,
+                    width: 1,
+                  )
               ),
               child: ListView.builder(
                   itemCount: iconList.length,
@@ -176,17 +182,17 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                                   SizedBox(height: 1,),
                                   Container(
                                     width: width,
-                                      child: Text(infoList[index],
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: "YsabeauInfant",
-                                          fontWeight: FontWeight.normal,
-                                          color: Color.fromARGB(255, 64, 64, 64),
-                                        ),
+                                    child: Text(infoList[index],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: "YsabeauInfant",
+                                        fontWeight: FontWeight.normal,
+                                        color: Color.fromARGB(255, 64, 64, 64),
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -222,14 +228,14 @@ showAlertDialog(BuildContext context, String info) {
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(33))
         ),
         content: SizedBox(
-            width: double.maxFinite,
-            child: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  Text(info),
-                ],
-              ),
+          width: double.maxFinite,
+          child: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(info),
+              ],
             ),
+          ),
         ),
         actions: [
           Center(
@@ -332,17 +338,16 @@ class SorButonu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ElevatedButton(
-        onPressed: (){
-          print("object");
-        },
-        child: const Text("SOR", style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 155, 48, 255)),),
-        style: ElevatedButton.styleFrom(
-        primary: Colors.orangeAccent,
-    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-        ),
-      )
+        child: ElevatedButton(
+          onPressed: (){
+            print("object");
+          },
+          child: const Text("SOR", style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 155, 48, 255)),),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.orangeAccent,
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          ),
+        )
     );
   }
 }
-

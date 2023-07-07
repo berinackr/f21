@@ -5,6 +5,7 @@ import 'package:f21_demo/core/providers/bottombar_routing_repository.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
 import 'package:f21_demo/features/auth/repository/auth_repository.dart';
 import 'package:f21_demo/features/auth/screens/profile_data.dart';
+import 'package:f21_demo/features/auth/screens/register_screen.dart';
 import 'package:f21_demo/features/home/screens/activity_bottombar.dart';
 import 'package:f21_demo/features/home/screens/homescreen_bottombar.dart';
 import 'package:f21_demo/features/home/screens/mybabyscreen_bottombar.dart';
@@ -36,8 +37,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
-    final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
+    final bottomBarList = [MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -83,7 +86,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               showProfilePopUp(context, viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
-                                            decoration: const BoxDecoration(color: CustomStyles.primaryColor),
+                                            decoration: BoxDecoration(color: CustomStyles.primaryColor),
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -122,7 +125,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                     onPressed: () {
                                                       toggleDarkMode(ref);
                                                     },
-                                                    icon: const Icon(Icons.dark_mode)),
+                                                    icon: Icon(
+                                                      Icons.dark_mode,
+                                                      color: isDarkMode ? Colors.black : Colors.white,
+                                                    )),
                                               ],
                                             ),
                                           )
@@ -219,17 +225,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         aboutBoxChildren: [
                                           ///Content goes he.re..
                                         ],
-                                        child: Text('About app'),
+                                        child: Text('Hakkımızda'),
                                       ),
                                       ListTile(
                                         leading: const Icon(Icons.privacy_tip),
-                                        title: const Text("Privacy Policy"),
-                                        onTap: () {},
+                                        title: const Text("Gizlilik Politikası"),
+                                        onTap: () {
+                                          showContractPopup(context);
+                                        },
                                       ),
-                                      ListTile(
-                                        leading: const Icon(Icons.contact_mail),
-                                        title: const Text("Contact us"),
-                                        onTap: () {},
+                                      const AboutListTile(
+                                        icon: Icon(
+                                          Icons.contact_mail,
+                                        ),
+                                        applicationIcon: Icon(
+                                          Icons.local_play,
+                                        ),
+                                        applicationName: 'Biberon App',
+                                        aboutBoxChildren: [Text("biberonapp@gmail.com")],
+                                        child: Text('Bize Ulaşın'),
                                       ),
                                     ],
                                   ),
@@ -243,7 +257,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Colors.white, // Beyaz çizgi rengi
+                                              color: CustomStyles.fillColor, // Beyaz çizgi rengi
                                               width: 2, // Beyaz çizgi kalınlığı
                                             ),
                                             borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma

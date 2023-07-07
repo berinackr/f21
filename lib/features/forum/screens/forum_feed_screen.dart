@@ -31,13 +31,19 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final categoryName = Categories.getCategoryNameById(int.parse(widget.id));
     scrollController.addListener(() {
       double maxScroll = scrollController.position.maxScrollExtent;
       double currentScroll = scrollController.position.pixels;
       double delta = MediaQuery.of(context).size.height * 0.20;
       if (maxScroll - currentScroll <= delta) {
-        ref.read(postsProvider(widget.id).notifier).fetchNextBatch();
+        if (isMostLiked) {
+          ref.read(mostLikedPostProvider(widget.id).notifier).fetchNextBatch();
+        } else {
+          ref.read(postsProvider(widget.id).notifier).fetchNextBatch();
+        }
       }
     });
     return Scaffold(
@@ -64,83 +70,92 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        controller: scrollController,
-        restorationId: "forum_feed_screen",
-        slivers: [
-          Consumer(builder: (context, ref, child) {
-            final state =
-                isMostLiked ? ref.watch(mostLikedPostProvider(widget.id)) : ref.watch(postsProvider(widget.id));
-            return state.when(
-              data: (posts) {
-                return posts.isEmpty
-                    ? const SliverToBoxAdapter(
-                        child: Column(children: [
-                          SizedBox(height: 20),
-                          Text("Bu kategoride henüz bir paylaşım yok!"),
-                        ]),
-                      )
-                    : SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            return Post(
-                              post: posts[index],
-                              index: index,
-                              isMostLiked: isMostLiked,
-                            );
-                          },
-                          childCount: posts.length,
-                        ),
-                      );
-              },
-              error: (e, stk) => SliverToBoxAdapter(
-                child: Center(
-                  child: Column(
-                    children: [
-                      const Icon(Icons.error),
-                      const SizedBox(height: 20),
-                      Text(e.toString()),
-                      Text(stk.toString()),
-                    ],
+      body: RefreshIndicator(
+        onRefresh: () {
+          if (isMostLiked) {
+            return ref.read(mostLikedPostProvider(widget.id).notifier).reset();
+          } else {
+            return ref.read(postsProvider(widget.id).notifier).reset();
+          }
+        },
+        child: CustomScrollView(
+          controller: scrollController,
+          restorationId: "forum_feed_screen",
+          slivers: [
+            Consumer(builder: (context, ref, child) {
+              final state =
+                  isMostLiked ? ref.watch(mostLikedPostProvider(widget.id)) : ref.watch(postsProvider(widget.id));
+              return state.when(
+                data: (posts) {
+                  return posts.isEmpty
+                      ? const SliverToBoxAdapter(
+                          child: Column(children: [
+                            SizedBox(height: 20),
+                            Text("Bu kategoride henüz bir paylaşım yok!"),
+                          ]),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              return Post(
+                                post: posts[index],
+                                index: index,
+                                isMostLiked: isMostLiked,
+                              );
+                            },
+                            childCount: posts.length,
+                          ),
+                        );
+                },
+                error: (e, stk) => SliverToBoxAdapter(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const Icon(Icons.error),
+                        const SizedBox(height: 20),
+                        Text(e.toString()),
+                        Text(stk.toString()),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              loading: () => const SliverToBoxAdapter(
-                child: Loader(),
-              ),
-              onGoingError: (posts, e, stk) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return Post(
-                        post: posts[index],
-                        index: index,
-                        isMostLiked: isMostLiked,
-                      );
-                    },
-                    childCount: posts.length,
-                  ),
-                );
-              },
-              onGoingLoading: (posts) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return Post(
-                        post: posts[index],
-                        index: index,
-                        isMostLiked: isMostLiked,
-                      );
-                    },
-                    childCount: posts.length,
-                  ),
-                );
-              },
-            );
-          }),
-          NoMoreItems(id: widget.id),
-          OnGoingBottomWidget(id: widget.id),
-        ],
+                loading: () => const SliverToBoxAdapter(
+                  child: Loader(),
+                ),
+                onGoingError: (posts, e, stk) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return Post(
+                          post: posts[index],
+                          index: index,
+                          isMostLiked: isMostLiked,
+                        );
+                      },
+                      childCount: posts.length,
+                    ),
+                  );
+                },
+                onGoingLoading: (posts) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return Post(
+                          post: posts[index],
+                          index: index,
+                          isMostLiked: isMostLiked,
+                        );
+                      },
+                      childCount: posts.length,
+                    ),
+                  );
+                },
+              );
+            }),
+            NoMoreItems(id: widget.id, isMostLiked: isMostLiked),
+            OnGoingBottomWidget(id: widget.id, isMostLiked: isMostLiked),
+          ],
+        ),
       ),
     );
   }
@@ -155,7 +170,7 @@ class Post extends ConsumerWidget {
   void upvotePost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).upvotePost(post, context, index, isMostLiked);
+      ref.read(forumControllerProvider.notifier).upvotePost(post, context, index, isMostLiked, false);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -164,7 +179,7 @@ class Post extends ConsumerWidget {
   void downvotePost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).downvotePost(post, context, index, isMostLiked);
+      ref.read(forumControllerProvider.notifier).downvotePost(post, context, index, isMostLiked, false);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -173,7 +188,7 @@ class Post extends ConsumerWidget {
   void bookmarkPost(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     if (user != null) {
-      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, index, isMostLiked);
+      ref.read(forumControllerProvider.notifier).bookmarkPost(post, context, index, isMostLiked, false);
     } else {
       showSnackBar(context, "Önce giriş yapmalısınız!");
     }
@@ -204,7 +219,7 @@ class Post extends ConsumerWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
                       radius: 20,
-                      backgroundColor: CustomStyles.primaryColor,
+                      backgroundColor: CustomStyles.titleColor,
                       backgroundImage: NetworkImage(post.userPhotoUrl),
                     ),
                   ),
@@ -213,10 +228,10 @@ class Post extends ConsumerWidget {
                     children: [
                       Text(
                         post.username,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 16, color: CustomStyles.primaryColor),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: CustomStyles.titleColor),
                       ),
-                      Text(timeago.format(post.createdAt), style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                      Text(timeago.format(post.createdAt),
+                          style: TextStyle(fontSize: 12, color: CustomStyles.forumTextColor)),
                     ],
                   ),
                 ],
@@ -226,10 +241,10 @@ class Post extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   post.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
-                    color: CustomStyles.primaryColor,
+                    color: CustomStyles.titleColor,
                   ),
                 ),
               ),
@@ -275,12 +290,12 @@ class Post extends ConsumerWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: liked ? CustomStyles.primaryColor.withOpacity(0.1) : null,
+                              color: liked ? CustomStyles.titleColor.withOpacity(0.1) : null,
                             ),
                             child: Icon(
                               Icons.arrow_upward_rounded,
                               size: 20,
-                              color: liked ? CustomStyles.primaryColor : null,
+                              color: liked ? CustomStyles.titleColor : null,
                             ),
                           ),
                         ),
@@ -291,9 +306,9 @@ class Post extends ConsumerWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: liked
-                                ? CustomStyles.primaryColor
+                                ? CustomStyles.titleColor
                                 : downvoted
-                                    ? CustomStyles.buttonColor
+                                    ? CustomStyles.titleColor
                                     : null,
                           ),
                         ),
@@ -304,10 +319,10 @@ class Post extends ConsumerWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: downvoted ? CustomStyles.buttonColor.withOpacity(0.2) : null,
+                              color: downvoted ? CustomStyles.titleColor.withOpacity(0.2) : null,
                             ),
-                            child: Icon(Icons.arrow_downward,
-                                size: 20, color: downvoted ? CustomStyles.buttonColor : null),
+                            child:
+                                Icon(Icons.arrow_downward, size: 20, color: downvoted ? CustomStyles.titleColor : null),
                           ),
                         ),
                       ],
@@ -334,12 +349,12 @@ class Post extends ConsumerWidget {
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: bookmarked ? CustomStyles.primaryColor.withOpacity(0.2) : null,
+                          color: bookmarked ? CustomStyles.titleColor.withOpacity(0.2) : null,
                         ),
                         child: Icon(
                           bookmarked ? Icons.bookmark : Icons.bookmark_border,
                           size: 20,
-                          color: bookmarked ? CustomStyles.primaryColor : null,
+                          color: bookmarked ? CustomStyles.titleColor : null,
                         ),
                       ),
                     )
@@ -353,8 +368,9 @@ class Post extends ConsumerWidget {
 }
 
 class OnGoingBottomWidget extends ConsumerWidget {
-  const OnGoingBottomWidget({super.key, required this.id});
+  const OnGoingBottomWidget({super.key, required this.id, required this.isMostLiked});
   final String id;
+  final bool isMostLiked;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -362,7 +378,7 @@ class OnGoingBottomWidget extends ConsumerWidget {
         child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Consumer(builder: (context, ref, child) {
-              final state = ref.watch(postsProvider(id));
+              final state = isMostLiked ? ref.watch(mostLikedPostProvider(id)) : ref.watch(postsProvider(id));
               return state.maybeWhen(
                   orElse: () => const SizedBox.shrink(),
                   onGoingLoading: (items) {
@@ -383,17 +399,20 @@ class OnGoingBottomWidget extends ConsumerWidget {
 }
 
 class NoMoreItems extends ConsumerWidget {
-  const NoMoreItems({super.key, required this.id});
+  const NoMoreItems({super.key, required this.id, required this.isMostLiked});
   final String id;
+  final bool isMostLiked;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(postsProvider(id));
+    final state = isMostLiked ? ref.watch(mostLikedPostProvider(id)) : ref.watch(postsProvider(id));
     return SliverToBoxAdapter(
       child: state.maybeWhen(
           orElse: () => const SizedBox.shrink(),
           data: (items) {
-            final noMoreItems = ref.read(postsProvider(id).notifier).noMoreItems;
+            final noMoreItems = isMostLiked
+                ? ref.read(mostLikedPostProvider(id).notifier).noMoreItems
+                : ref.read(postsProvider(id).notifier).noMoreItems;
             return noMoreItems
                 ? items.isEmpty
                     ? const SizedBox.shrink()
@@ -426,9 +445,9 @@ class ScrollToTopButton extends StatelessWidget {
                   onPressed: () async {
                     scrollController.animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                   },
-                  backgroundColor: CustomStyles.primaryColor,
+                  backgroundColor: CustomStyles.titleColor,
                   tooltip: "En başa dön",
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_upward_sharp,
                     color: CustomStyles.fillColor,
                   ),

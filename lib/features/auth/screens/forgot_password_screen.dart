@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       //Şifremi Sıfırla Label
-                      const Text(
+                      Text(
                         "ŞİFREMİ SIFIRLA",
                         style: TextStyle(
                           fontSize: 20,

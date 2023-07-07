@@ -40,7 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
-    final bottomBarList = [const MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
+    final bottomBarList = [MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null

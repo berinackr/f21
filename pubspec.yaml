@@ -60,6 +60,7 @@ dependencies:
   just_audio: ^0.9.34
   just_audio_background: ^0.0.1-beta.10
   rxdart: ^0.27.7
+  game_levels_scrolling_map: ^0.0.7
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:f21_demo/core/providers/firebase_providers.dart';
@@ -13,7 +16,6 @@ import 'package:form_validator/form_validator.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/custom_styles.dart';
-import '../../../core/providers/connection_checker_repository.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -30,6 +32,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   bool _isEditing = false;
   bool _isSaved = true;
   bool _isDownloadCompleted = false;
+  //check internet connection
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   //userInfoStates
   File? _profilePicFile; //güncelleneceği zaman localden upload edilen kontrol et null ise _profilePic değerini indirip al
@@ -93,16 +99,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   bool oneTimeWorkController = false;
 
   //functions
-  void _toggleSwitch(bool isDeviceConnected) {
-    if(isDeviceConnected){
-      if (_isSaved) {
-        _isEditing = !_isEditing;
-        _isSaved = false;
-      } else {
-        showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.");
-      }
-    }else{
-      showSnackBar(context, "Bağlantı yok.");
+  void _toggleSwitch() {
+    if (_isSaved) {
+      _isEditing = !_isEditing;
+      _isSaved = false;
+    } else {
+      showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.");
     }
   }
 
@@ -129,6 +131,36 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     // TODO: implement initState
     oneTimeWorkController = true;
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
+  }
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      showSnackBar(context,"Couldn\'t check connectivity status $e");
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      _connectionStatus = result;
+    });
   }
 
   @override
@@ -136,6 +168,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _usernameController.dispose();
     _passwordController.dispose();
     _emailController.dispose();
+    _connectivitySubscription.cancel();
     super.dispose();
   }
 
@@ -146,8 +179,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   //providers
     final UserModel? user = ref.read(userProvider);
     final FirebaseAuth userAuth = ref.read(authProvider);
-    final ConnectionCheckerRepository connection = ref.watch(connectionCheckerProvider);
-
     if(oneTimeWorkController){
       _setInitialValuesOfFormFields(user, userAuth).then((value) {
             _isDownloadCompleted = true;
@@ -176,9 +207,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Switch(
                   value: _isEditing,
                   onChanged: (value) {
-                    setState(() {
-                      _toggleSwitch(connection.isDeviceConnected);
-                    });
+                    if(_connectionStatus != ConnectivityResult.none){
+                      setState(() {
+                        _toggleSwitch();
+                      });
+                    }
+                    else{
+                      showSnackBar(context, "İnternet bağlantısı yok. Lütfen internet bağlantınızı kontrol edin.");
+                    }
                   },
                 )
               ],
@@ -225,13 +261,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 CircleAvatar(
                                   radius: 64,
                                   //TODO: Buraya kullanıcı resmi gelecek firebase ile çekilen resim
-                                  backgroundImage: FileImage(_profilePicFile!),
+                                  //backgroundImage: AssetImage("assets/images/profile_default_img.png") ,
+                                  backgroundImage: _profilePicFile == null ? const AssetImage("assets/images/profile_default_img.png") as ImageProvider<Object> : FileImage(_profilePicFile!) ,
                                   ),
                                 const Positioned(
                                   bottom: 0,
                                   right: 0,
                                   child: Icon(size: 35, Icons.image_rounded),
-                                )
+                                ),
+                                _connectionStatus == ConnectivityResult.none
+                                    ? const Positioned.fill(child: Center(child: CircularProgressIndicator(color: Colors.purpleAccent,)))
+                                    : const Padding(padding: EdgeInsets.symmetric()),
                               ],
                             ),
                           ),
@@ -243,7 +283,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           name: "username",
                           controller: _usernameController,
                           decoration: InputDecoration(
-                            label: const Text("Kullanıcı Adı"),
+                            label:  const Text("Kullanıcı Adı"),
                             hintText: "Kullanıcı adı",
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
@@ -463,7 +503,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                         Colors.red),
                                   ),
                                   onPressed: () {
-                                    showSnackBar(context, "İptal edildi");
+                                    showSnackBar(context, "Değişiklikler iptal edildi.");
                                     //TODO: Buna basıldığında tüm _formKey ile eski haline getirilmeli ya da pop yapıp yeniden bu sayfa açılabilir??? Şimdilik ikinciyi yapıyor
                                     setState(() {
                                       _isSaved = true;
@@ -479,28 +519,33 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                         Colors.green),
                                   ),
                                   onPressed: () {
-                                    try{
-                                      if (_formKey.currentState!.validate()) {
-                                        ref.read(authControllerProvider.notifier).setProfileInfos(
-                                            _usernameController.text,
-                                            _birthDate!,
-                                            _gender!,
-                                            _isPregnant,
-                                            _profilePicFile,
-                                            _months,
-                                            _birthDateBaby,
-                                            context
-                                        );
-                                        setState(() {
-                                          _isSaved = true;
-                                        });
-                                        showSnackBar(context, "Başarılı");
-                                        Navigator.pop(context);
-                                      }else{
-                                        showSnackBar(context, "Bir şeyler ters gitti");
+                                    if(_connectionStatus != ConnectivityResult.none){
+                                      try{
+                                        if (_formKey.currentState!.validate()) {
+                                          ref.read(authControllerProvider.notifier).setProfileInfos(
+                                              _usernameController.text,
+                                              _birthDate!,
+                                              _gender!,
+                                              _isPregnant,
+                                              _profilePicFile,
+                                              _months,
+                                              _birthDateBaby,
+                                              context
+                                          );
+                                          setState(() {
+                                            _isSaved = true;
+                                          });
+                                          showSnackBar(context, "Başarılı");
+                                          Navigator.pop(context);
+                                        }else{
+                                          showSnackBar(context, "Bir şeyler ters giti");
+                                        }
+                                      }on Exception catch (_, ex){
+                                        print("RECO : $ex");
                                       }
-                                    }on Exception catch (_, ex){
-                                      print("RECO : $ex");
+                                    }
+                                    else{
+                                      showSnackBar(context, "İnternet bağlantısı yok.\nSayfadan çıkmak için değişiklikleri iptal edin.");
                                     }
                                   },
                                   child: const Text("Kaydet")),

@@ -13,6 +13,7 @@ import 'package:form_validator/form_validator.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/custom_styles.dart';
+import '../../../core/providers/connection_checker_repository.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -92,12 +93,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   bool oneTimeWorkController = false;
 
   //functions
-  void _toggleSwitch() {
-    if (_isSaved) {
-      _isEditing = !_isEditing;
-      _isSaved = false;
-    } else {
-      showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.");
+  void _toggleSwitch(bool isDeviceConnected) {
+    if(isDeviceConnected){
+      if (_isSaved) {
+        _isEditing = !_isEditing;
+        _isSaved = false;
+      } else {
+        showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.");
+      }
+    }else{
+      showSnackBar(context, "Bağlantı yok.");
     }
   }
 
@@ -141,6 +146,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   //providers
     final UserModel? user = ref.read(userProvider);
     final FirebaseAuth userAuth = ref.read(authProvider);
+    final ConnectionCheckerRepository connection = ref.watch(connectionCheckerProvider);
 
     if(oneTimeWorkController){
       _setInitialValuesOfFormFields(user, userAuth).then((value) {
@@ -171,7 +177,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   value: _isEditing,
                   onChanged: (value) {
                     setState(() {
-                      _toggleSwitch();
+                      _toggleSwitch(connection.isDeviceConnected);
                     });
                   },
                 )

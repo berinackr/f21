@@ -193,7 +193,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         if (_isSaved) {
           return Future.value(true);
         } else {
-          showSnackBar(context, "Değişiklikleri kaydetmeden çıkamazsınız.\nLütfen sayfanın altındaki butonları kullanın.");
+          //TODO : Burada hazır showSnackBar metodunu kullanma back uttonu da kotrol ettiği için yeni context vermek gerekiyor! Aşağıdaki gibi kalsın!!
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(const SnackBar( duration: Duration(seconds: 1),content: Text("Değişiklikleri kaydetmeden çıkamazsınız.\nLütfen sayfanın altındaki butonları kullanın.",)));
           return Future.value(false);
         }
       },

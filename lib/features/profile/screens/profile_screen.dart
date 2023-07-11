@@ -1,3 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 import 'package:f21_demo/core/providers/firebase_providers.dart';
 import 'package:f21_demo/core/utils.dart';
 import 'package:f21_demo/features/auth/controller/auth_controller.dart';
@@ -25,19 +31,72 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   //states
   bool _isEditing = false;
   bool _isSaved = true;
+  bool _isDownloadCompleted = false;
+  //check internet connection
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   //userInfoStates
-  //File? profileFile;
-  DateTime? birthDate;
-  DateTime? birthDateBaby;
-  double? months;
-  String gender = "Belirsiz";
-  late bool isPregnant = ref.read(userProvider)!.isPregnant!;
+  File? _profilePicFile; //güncelleneceği zaman localden upload edilen kontrol et null ise _profilePic değerini indirip al
+  String? _profilePic; //firebase'den gelen url
+  DateTime? _birthDate;
+  DateTime? _birthDateBaby;
+  double? _months;
+  String? _gender;
+  late bool _isPregnant;
+
+  void selectProfileImage() async {
+    final res = await pickImage();
+    if (res != null) {
+      setState(() {
+        _profilePicFile = File(res.files.first.path!);
+      });
+    }
+  }
+
+  downloadExistingProfileImageFromFirebaseAsFile(String imageUrl) async {
+    var response = await http.get(Uri.parse(imageUrl));
+    if (response.statusCode == 200) {
+      var contentType = response.headers['content-type'];
+      if(contentType != null){
+        var fileExtension = getFileExtensionFromContentType(contentType);
+        var fileName = 'existing_pofile_pic$fileExtension';
+        var appDocDir = await getApplicationDocumentsDirectory();
+        var filePath = '${appDocDir.path}/$fileName';
+        var file = File(filePath);
+        await file.writeAsBytes(response.bodyBytes).then((value) {
+            setState(() {
+              _profilePicFile = file;
+            });
+          },
+        );
+      }
+    } else {
+      print('Var olan profil resmi indirilirken bir sorun oluştu : ${response.statusCode}');
+    }
+  }
+
+  String getFileExtensionFromContentType(String contentType) {
+    if (contentType == 'image/jpeg') {
+      return '.jpg';
+    } else if (contentType == 'image/png') {
+      return '.png';
+    } else if (contentType == 'image/gif') {
+      return '.gif';
+    }
+    // Diğer dosya türleri için ilgili uzantıları burada belirtebilirsiniz.
+    // Örneğin: 'image/svg+xml' -> '.svg'
+
+    // Varsayılan olarak, bilinmeyen dosya türleri için bir uzantı döndürebilirsiniz.
+    return '.unknown';
+  }
 
   //controllers
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool oneTimeWorkController = false;
 
   //functions
   void _toggleSwitch() {
@@ -49,12 +108,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
-  void _setInitialValuesOfFormFields(UserModel? user, FirebaseAuth userAuth) {
+  Future<void> _setInitialValuesOfFormFields(UserModel? user, FirebaseAuth userAuth) async {
     setState(() {
-      _usernameController.text = user!.username!.toString();
+      //Profil resmi değerini de burada almak lazım set ettikten sonra ekranda gösterirken de bu set ettiğin değişkeni kullanarak göster
+      _profilePic = user!.profilePic!;
+      _usernameController.text = user.username!.toString();
       _emailController.text = userAuth.currentUser!.email!;
       _passwordController.text = "*****";
+      _months = user.months;
+      _gender = user.gender ?? "Belirsiz";
+      _birthDate = user.birthDate;
+      _birthDateBaby = user.babyBirthDate;
+      _isPregnant = ref.read(userProvider)!.isPregnant!;//bu metodun retun değeri yok direkt olarak yukarıdaki _profilePicFile'a eşitler
     });
+    downloadExistingProfileImageFromFirebaseAsFile(_profilePic!);
     //TODO: Ben değerleri aşağıdaki fromda bulunan değerleri elle atadım ancak _formKey kullanılarak ilgili alanların initialValue'leri bu fonksiyonda atanabilir.
   }
 
@@ -62,7 +129,38 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    oneTimeWorkController = true;
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
+  }
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      showSnackBar(context,"Couldn\'t check connectivity status $e");
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      _connectionStatus = result;
+    });
   }
 
   @override
@@ -70,6 +168,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _usernameController.dispose();
     _passwordController.dispose();
     _emailController.dispose();
+    _connectivitySubscription.cancel();
     super.dispose();
   }
 
@@ -77,11 +176,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    //providers
-    final UserModel? user = ref.watch(userProvider);
-    final FirebaseAuth userAuth = ref.watch(authProvider);
+  //providers
+    final UserModel? user = ref.read(userProvider);
+    final FirebaseAuth userAuth = ref.read(authProvider);
+    if(oneTimeWorkController){
+      _setInitialValuesOfFormFields(user, userAuth).then((value) {
+            _isDownloadCompleted = true;
+        },
+      );
+      oneTimeWorkController = false;
+    }
 
-    _setInitialValuesOfFormFields(user, userAuth);
+
     return WillPopScope(
       onWillPop: () {
         if (_isSaved) {
@@ -101,9 +207,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Switch(
                   value: _isEditing,
                   onChanged: (value) {
-                    setState(() {
-                      _toggleSwitch();
-                    });
+                    if(_connectionStatus != ConnectivityResult.none){
+                      setState(() {
+                        _toggleSwitch();
+                      });
+                    }
+                    else{
+                      showSnackBar(context, "İnternet bağlantısı yok. Lütfen internet bağlantınızı kontrol edin.");
+                    }
                   },
                 )
               ],
@@ -128,14 +239,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       key: _formKey,
                       child: Column(children: [
                         //TODO: Profil Resmi
-                        InkWell(
+                        _isDownloadCompleted ? InkWell(
                           onLongPress: () {
-                              showSnackBar(context, "Profil resminizi değiştirmek için Bilgilerimi Düzenle'yi aktifleştirin ve bu alana tıklayın ...");
-                            },
+                            String textMessage = "Profil resminizi değiştirmek için Bilgilerimi Düzenle'yi aktifleştirin ve bu alana tıklayın ...";
+                            if (_isEditing) {
+                              textMessage = "Profil resminizi değiştirmek için görsele bir kez tıklayın.";
+                            }
+                            showSnackBar(context, textMessage);
+                          },
                           onTap: () {
                             //TODO: Görsel seçme işlemi
                             if (_isEditing) {
-                              showSnackBar(context, "Görsel seçme fonksiyonu çalışmalı");
+                              selectProfileImage(); //seçilen profil resmi ana ekranda gösterilmeli (bir bool değişken koyarsın en tepeye o değiştiğinde localden image göster çalışır aksi halde url'den image göster çalışır)
                             } else {
                               showSnackBar(context, "Öncelikile bilgilerimi düzenleyi aktifleştirin!");
                             }
@@ -146,18 +261,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 CircleAvatar(
                                   radius: 64,
                                   //TODO: Buraya kullanıcı resmi gelecek firebase ile çekilen resim
-                                  backgroundImage:
-                                      NetworkImage(user!.profilePic!),
-                                ),
+                                  //backgroundImage: AssetImage("assets/images/profile_default_img.png") ,
+                                  backgroundImage: _profilePicFile == null ? const AssetImage("assets/images/profile_default_img.png") as ImageProvider<Object> : FileImage(_profilePicFile!) ,
+                                  ),
                                 const Positioned(
                                   bottom: 0,
                                   right: 0,
                                   child: Icon(size: 35, Icons.image_rounded),
-                                )
+                                ),
+                                _connectionStatus == ConnectivityResult.none
+                                    ? const Positioned.fill(child: Center(child: CircularProgressIndicator(color: Colors.purpleAccent,)))
+                                    : const Padding(padding: EdgeInsets.symmetric()),
                               ],
                             ),
                           ),
-                        ),
+                        )  : const Center(child: CircularProgressIndicator()),
                         const SizedBox(height: 20),
                         //TODO: Kullanıcı adı
                         FormBuilderTextField(
@@ -165,7 +283,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           name: "username",
                           controller: _usernameController,
                           decoration: InputDecoration(
-                            label: const Text("Kullanıcı Adı"),
+                            label:  const Text("Kullanıcı Adı"),
                             hintText: "Kullanıcı adı",
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 15),
@@ -220,7 +338,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           validator: (value) {
                             if (value == null) {
                               return "Doğum tarihi boş bırakılamaz";
-                            } else if (((DateTime.now().year - value!.year) <
+                            } else if (((DateTime.now().year - value.year) <
                                 18)) {
                               return "18 yaşından küçükler bu uygulamayı kullanamaz!";
                             }
@@ -228,11 +346,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           },
                           name: "birthDate",
                           lastDate: DateTime(DateTime.now().year - 18),
-                          initialDate: user!.birthDate ?? DateTime.now(),
-                          initialValue: user!.birthDate ?? DateTime.now(),
+                          initialDate: _birthDate,
+                          initialValue: _birthDate,
                           onChanged: (value) {
                             setState(() {
-                              birthDate = value;
+                              _birthDate = value;
                             });
                           },
                           inputType: InputType.date,
@@ -245,96 +363,98 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         FormBuilderSwitch(
                           enabled: _isEditing,
                           name: "role",
-                          subtitle: Text(isPregnant
+                          subtitle: Text(_isPregnant
                               ? "Henüz doğum yapmadım."
                               : "Doğum yaptım."),
                           title: Text(
-                            isPregnant ? "Gebeyim" : "Anneyim",
+                            _isPregnant ? "Gebeyim" : "Anneyim",
                             style: TextStyle(
                                 color: CustomStyles.titleColor, fontSize: 18),
                           ),
-                          initialValue: isPregnant,
+                          initialValue: _isPregnant,
                           onChanged: (value) {
                             setState(() {
-                              isPregnant = value!;
+                              _isPregnant = value!;
                             });
                           },
                           controlAffinity: ListTileControlAffinity.leading,
                           activeColor: CustomStyles.titleColor,
                           decoration:
-                              const InputDecoration(border: InputBorder.none),
+                          const InputDecoration(border: InputBorder.none),
                         ),
                         const SizedBox(height: 20),
-                        isPregnant
+                        _isPregnant
                             ? Column(children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Kaç Aylık Hamilesiniz?",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: CustomStyles.titleColor,
-                                    ),
-                                  ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Kaç Aylık Hamilesiniz?",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: CustomStyles.titleColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          //TODO: Hamilelik ayları
+                          FormBuilderSlider(
+                            label: "Kaç Aylık Hamilesiniz?",
+                            enabled: _isEditing,
+                            name: "months",
+                            min: 1,
+                            max: 9,
+                            initialValue: _months ?? 2,
+                            divisions: 8,
+                            displayValues: DisplayValues.current,
+                            onChanged: (value) {
+                              _months = value;
+                            },
+                            valueWidget: (value) {
+                              return Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: CustomStyles.titleColor,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                const SizedBox(height: 5),
-                                //TODO: Hamilelik ayları
-                                FormBuilderSlider(
-                                  label: "Kaç Aylık Hamilesiniz?",
-                                  enabled: _isEditing,
-                                  name: "months",
-                                  min: 1,
-                                  max: 9,
-                                  initialValue: user.months?.toDouble() ?? 2,
-                                  divisions: 8,
-                                  displayValues: DisplayValues.current,
-                                  onChangeEnd: (value) {
-                                    months = value;
-                                  },
-                                  valueWidget: (value) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        color: CustomStyles.titleColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Text(
-                                        "$value Aylık",
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    );
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      contentPadding: EdgeInsets.all(0)),
+                                child: Text(
+                                  "$value Aylık",
+                                  style: const TextStyle(
+                                      color: Colors.white),
                                 ),
-                              ])
+                              );
+                            },
+                            decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.all(0)),
+                          ),
+                        ])
                             : Column(children: [
-                                //TODO: Bebeğin doğum tarihi ayarla
-                                FormBuilderDateTimePicker(
-                                  validator: (value) {
-                                    if (value == null && !isPregnant) {
-                                      return "Doğum tarihi boş bırakılamaz";
-                                    }
-                                    return null;
-                                  },
-                                  initialValue:
-                                      user.babyBirthDate ?? DateTime.now(),
-                                  initialDate:
-                                      user.babyBirthDate ?? DateTime.now(),
-                                  name: "birthDate",
-                                  onChanged: (value) {
-                                    birthDateBaby = value;
-                                  },
-                                  inputType: InputType.date,
-                                  decoration: const InputDecoration(
-                                    label: Text("Bebeğinizin Doğum Tarihi"),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 15),
-                                  ),
-                                ),
-                              ]),
+                          //TODO: Bebeğin doğum tarihi ayarla
+                          FormBuilderDateTimePicker(
+                            enabled: _isEditing,
+                            validator: (valueBaby) {
+                              if (valueBaby == null && !_isPregnant) {
+                                return "Doğum tarihi boş bırakılamaz";
+                              }
+                              return null;
+                            },
+                            //firstDate: DateTime.now().subtract(const Duration(days: 365*3)), //Sistem 3 yaşından büyük çocukları desteklemiyor
+                            initialValue:
+                            _birthDateBaby ?? DateTime.now(),
+                            initialDate:
+                            _birthDateBaby ?? DateTime.now(),
+                            name: "birthDate",
+                            onChanged: (valueBaby) {
+                              _birthDateBaby = valueBaby;
+                            },
+                            inputType: InputType.date,
+                            decoration: const InputDecoration(
+                              label: Text("Bebeğinizin Doğum Tarihi"),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 15),
+                            ),
+                          ),
+                        ]),
                         const SizedBox(height: 20),
                         //TODO: Bebeğin Cinsiyeti
                         FormBuilderDropdown(
@@ -355,10 +475,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             ),
                           ],
                           dropdownColor: CustomStyles.fillColor,
-                          initialValue: user.gender ?? "Belirsiz",
+                          initialValue: _gender,
                           iconEnabledColor: CustomStyles.titleColor,
                           onChanged: (value) {
-                            gender = value!;
+                            _gender = value!;
                           },
                           iconDisabledColor: CustomStyles.titleColor,
                           style: TextStyle(
@@ -379,10 +499,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.red),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
                                   ),
                                   onPressed: () {
+                                    showSnackBar(context, "Değişiklikler iptal edildi.");
                                     //TODO: Buna basıldığında tüm _formKey ile eski haline getirilmeli ya da pop yapıp yeniden bu sayfa açılabilir??? Şimdilik ikinciyi yapıyor
                                     setState(() {
                                       _isSaved = true;
@@ -394,15 +515,37 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.green),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.green),
                                   ),
                                   onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      //TODO: Kaydetme işlemleri burada yapılacak eğer kaydet butonuna basılmadan sayfadan çıkılmak istenirse hata vermeli!
-                                      setState(() {
-                                        _isSaved = true;
-                                      });
+                                    if(_connectionStatus != ConnectivityResult.none){
+                                      try{
+                                        if (_formKey.currentState!.validate()) {
+                                          ref.read(authControllerProvider.notifier).setProfileInfos(
+                                              _usernameController.text,
+                                              _birthDate!,
+                                              _gender!,
+                                              _isPregnant,
+                                              _profilePicFile,
+                                              _months,
+                                              _birthDateBaby,
+                                              context
+                                          );
+                                          setState(() {
+                                            _isSaved = true;
+                                          });
+                                          showSnackBar(context, "Başarılı");
+                                          Navigator.pop(context);
+                                        }else{
+                                          showSnackBar(context, "Bir şeyler ters giti");
+                                        }
+                                      }on Exception catch (_, ex){
+                                        print("RECO : $ex");
+                                      }
+                                    }
+                                    else{
+                                      showSnackBar(context, "İnternet bağlantısı yok.\nSayfadan çıkmak için değişiklikleri iptal edin.");
                                     }
                                   },
                                   child: const Text("Kaydet")),

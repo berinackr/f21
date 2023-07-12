@@ -3,12 +3,13 @@ class Assets {
   static const googleIconPath = "assets/images/google_icon.png";
   static const exampleForumBannerPath =
       "assets/images/forum_example_banner.jpg";
-  static const exampleMotherBannerPath = "assets/images/forum_mother.png";
-  static const examplePregnantBannerPath = "assets/images/forum_pregnant.png";
-  static const exampleBirthBannerPath = "assets/images/forum_birth.png";
+  static const exampleMotherBannerPath = "assets/images/categori_mom.png";
+  static const examplePregnantBannerPath = "assets/images/categoribir.png";
+  static const exampleBirthBannerPath = "assets/images/categoriki.png";
   static const exampleHealtyNutritionBannerPath =
-      "assets/images/forum_healtynutrition.png";
-  static const exampleHealthBannerPath = "assets/images/forum_health.png";
+      "assets/images/categori_nutrition.png";
+  static const exampleHealthBannerPath = "assets/images/categori_health.png";
   static const examplePsychologyBannerPath =
-      "assets/images/forum_psychology.png";
+      "assets/images/categori_development.png";
+  static const exampleCareBannerPath = "assets/images/categori_care.png";
 }

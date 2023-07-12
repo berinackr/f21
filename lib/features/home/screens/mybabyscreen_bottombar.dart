@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/controller/auth_controller.dart';
 import '../../../core/custom_styles.dart';
+import 'chatgpt_screen.dart';
 
 class MyBabyScreenBottombar extends ConsumerStatefulWidget {
   const MyBabyScreenBottombar({super.key});
@@ -91,39 +92,39 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
 
 
   var iconList =[
-    Icon(Icons.calendar_month, color: Colors.orangeAccent, size: 32,),
-    Icon(Icons.diamond, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.pregnant_woman, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.celebration, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.local_florist, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.local_restaurant_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.shopping_basket_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.music_note_rounded, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.favorite, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.cake, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.face_2, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.child_friendly, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.spa_sharp, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.face, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.grade, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.stream_sharp, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.light_mode_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.hotel_class, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.filter_vintage, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.looks, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.eco, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.cake, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.bedtime, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.yard_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.water_sharp, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.emoji_nature_sharp, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.all_inclusive, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.interests_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.child_care, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.insights, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.filter_vintage_outlined, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.grade, color: Colors.orangeAccent, size: 36,),
-    Icon(Icons.filter_2, color: Colors.orangeAccent, size: 36,),
+    Icon(Icons.calendar_month, color: Color.fromARGB(255, 255, 0, 0), size: 32,),
+    Icon(Icons.diamond, color: Color.fromARGB(255, 255, 59, 0), size: 36,),
+    Icon(Icons.pregnant_woman, color: Color.fromARGB(255, 255, 85, 0), size: 36,),
+    Icon(Icons.celebration, color: Color.fromARGB(255, 255, 115, 0), size: 36,),
+    Icon(Icons.local_florist, color: Color.fromARGB(255, 255, 166, 0), size: 36,),
+    Icon(Icons.local_restaurant_outlined, color: Color.fromARGB(255, 255, 209, 0), size: 36,),
+    Icon(Icons.shopping_basket_outlined, color: Color.fromARGB(255, 237, 255, 0), size: 36,),
+    Icon(Icons.music_note_rounded, color: Color.fromARGB(255, 207, 255, 0), size: 36,),
+    Icon(Icons.favorite, color: Color.fromARGB(255, 172, 255, 0), size: 36,),
+    Icon(Icons.cake, color: Color.fromARGB(255, 138, 255, 0), size: 36,),
+    Icon(Icons.face, color: Color.fromARGB(255, 69, 255, 0), size: 36,),
+    Icon(Icons.child_friendly, color: Color.fromARGB(255, 0, 255, 16), size: 36,),
+    Icon(Icons.spa_sharp, color: Color.fromARGB(255, 0, 255, 106), size: 36,),
+    Icon(Icons.face, color: Color.fromARGB(255, 0, 255, 166), size: 36,),
+    Icon(Icons.grade, color: Color.fromARGB(255, 0, 255, 231), size: 36,),
+    Icon(Icons.stream_sharp, color: Color.fromARGB(255, 0, 237, 255), size: 36,),
+    Icon(Icons.light_mode_outlined, color: Color.fromARGB(255, 0, 202, 255), size: 36,),
+    Icon(Icons.hotel_class, color: Color.fromARGB(255, 0, 151, 255), size: 36,),
+    Icon(Icons.filter_vintage, color: Color.fromARGB(255, 0, 117, 255), size: 36,),
+    Icon(Icons.looks, color: Color.fromARGB(255, 0, 87, 255), size: 36,),
+    Icon(Icons.eco, color: Color.fromARGB(255, 0, 48, 255), size: 36,),
+    Icon(Icons.cake, color: Color.fromARGB(255, 21, 0, 255), size: 36,),
+    Icon(Icons.bedtime, color: Color.fromARGB(255, 89, 0, 255), size: 36,),
+    Icon(Icons.yard_outlined, color: Color.fromARGB(255, 115, 0, 255), size: 36,),
+    Icon(Icons.water_sharp, color: Color.fromARGB(255, 136, 0, 255), size: 36,),
+    Icon(Icons.emoji_nature_sharp, color: Color.fromARGB(255, 171, 0, 255), size: 36,),
+    Icon(Icons.all_inclusive, color: Color.fromARGB(255, 209, 0, 255), size: 36,),
+    Icon(Icons.interests_outlined, color: Color.fromARGB(255, 243, 0, 255), size: 36,),
+    Icon(Icons.child_care, color: Color.fromARGB(255, 255, 0, 219), size: 36,),
+    Icon(Icons.insights, color: Color.fromARGB(255, 255, 0, 177), size: 36,),
+    Icon(Icons.filter_vintage_outlined, color: Color.fromARGB(255, 255, 0, 121), size: 36,),
+    Icon(Icons.grade, color: Color.fromARGB(255, 255, 0, 82), size: 36,),
+    Icon(Icons.filter_2, color: Color.fromARGB(255, 255, 0, 27), size: 36,),
   ];
 
   @override
@@ -139,8 +140,8 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
             BaslangicWidget(ref: ref),
             SizedBox(height: 8),
             Container(
-              width: 600,
-              height: 200,
+              width: 900,
+              height: 450,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
@@ -203,12 +204,11 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                   }),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.all(20.0),
               child: SoruMetni(),
             ),
-            SoruWidgeti(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(7.0),
               child: SorButonu(),
             ),
           ],
@@ -274,7 +274,7 @@ class _BaslangicWidgetState extends State<BaslangicWidget> {
             fontSize: 22,
             fontFamily: "YsabeauInfant",
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 155, 48, 255),
+            color: Color.fromARGB(255, 31, 4, 99),
           ),
         ),
       ),
@@ -289,48 +289,48 @@ class SoruMetni extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        "Bebeğin Hakkında Merak Ettiklerini Sor ",
+        "Bebeğin Hakkında Merak Ettiklerini Biberon Yapay Zekaya Hemen Sor ",
         style: TextStyle(
           fontSize: 22,
           fontFamily: "YsabeauInfant",
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 155, 48, 255),
+          color: Color.fromARGB(255, 31, 4, 99),
         ),
       ),
     );
   }
 }
 
-class SoruWidgeti extends StatefulWidget {
-  SoruWidgeti({super.key});
-  final TextEditingController controller = TextEditingController();
-
-  @override
-  State<SoruWidgeti> createState() => _SoruWidgetiState();
-}
-
-class _SoruWidgetiState extends State<SoruWidgeti> {
-  TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        controller: _textEditingController,
-        keyboardType: TextInputType.multiline,
-        maxLines: 3,
-        decoration: InputDecoration(
-          hintText: "Sorunuzu yazınız...",
-          border: OutlineInputBorder(),
-        ),
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.black,
-        ),
-      ),
-    );
-  }
-}
+// class SoruWidgeti extends StatefulWidget {
+//   SoruWidgeti({super.key});
+//   final TextEditingController controller = TextEditingController();
+//
+//   @override
+//   State<SoruWidgeti> createState() => _SoruWidgetiState();
+// }
+//
+// class _SoruWidgetiState extends State<SoruWidgeti> {
+//   TextEditingController _textEditingController = TextEditingController();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: TextField(
+//         controller: _textEditingController,
+//         keyboardType: TextInputType.multiline,
+//         maxLines: 3,
+//         decoration: InputDecoration(
+//           hintText: "Sorunuzu yazınız...",
+//           border: OutlineInputBorder(),
+//         ),
+//         style: TextStyle(
+//           fontSize: 14,
+//           color: Colors.black,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class SorButonu extends StatelessWidget {
   const SorButonu({super.key});
@@ -340,11 +340,16 @@ class SorButonu extends StatelessWidget {
     return Container(
         child: ElevatedButton(
           onPressed: (){
-            print("object");
+            Navigator.push(
+                context,
+              MaterialPageRoute(builder: (context) => ChatgptScreen()),
+            );
           },
-          child: const Text("SOR", style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 155, 48, 255)),),
+          child: const Text("SOR", style: TextStyle(fontSize: 18, color: Colors.black),),
           style: ElevatedButton.styleFrom(
-            primary: Colors.orangeAccent,
+            shape: CircleBorder(),
+            fixedSize: Size(120,60),
+            primary: Color.fromARGB(255, 155, 174, 209),
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           ),
         )

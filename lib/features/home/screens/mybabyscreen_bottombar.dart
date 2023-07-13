@@ -282,6 +282,8 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
     int? babyAge;
     if (user!.babyBirthDate != null) {
       babyAge = dateOfNow.month - user.babyBirthDate!.month;
+    } else {
+      babyAge = -10;
     }
     double? monthController = user!.months;
 
@@ -307,7 +309,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                     Color ResponsiveColor() {
                       if (isPregnant! && monthController == index + 1) {
                         return Colors.grey;
-                      } else if (babyAge! + 8 == index) {
+                      } else if (isPregnant == false && babyAge! + 8 == index) {
                         return Colors.grey;
                       } else {
                         return Colors.white;

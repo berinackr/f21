@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,7 +17,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = "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";
+      String apiKey = dotenv.get("API_KEY");
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {
@@ -27,7 +28,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
       Map<String, dynamic> body = {
         "model": 'text-davinci-003',
         "prompt":
-            "$search ? NOT : Biraz önce sorduğum soru eğer Anneler, Bebekler, Gebelik, Hamilelik, Sağlık, Bebek Bakımı, Beslenme ve benzeri konu başlıklarından çok uzaksa 'Biberon Yapay Zeka Modeli olarak anneler ve bebekleri hakkında konulara cevap verebilirim.' hata mesajını ver. Ayrıca tüm cevaplarının sonuna ‘Benim verdiğim tüm bilgiler öneri ve genel doğrulardır. Lütfen spesifik veya ciddi bir sorunuz varsa doktorunuza başvurunuz.’ bilgilendirme metnini ekle.",
+            "'${search} ?' NOT : Biraz önce sorduğum soru eğer Anneler, Bebekler, Gebelik, Hamilelik, Sağlık, Bebek Bakımı, Beslenme ve benzeri konu başlıklarından çok uzaksa 'Biberon Yapay Zeka Modeli olarak anneler ve bebekleri hakkında konulara cevap verebilirim.' hata mesajını ver. Ayrıca tüm cevaplarının sonuna ‘Benim verdiğim tüm bilgiler öneri ve genel doğrulardır. Lütfen spesifik veya ciddi bir sorunuz varsa doktorunuza başvurunuz.’ bilgilendirme metnini ekle.",
         "max_tokens": 2000,
       };
       //hata yakalama ve response'u set etme

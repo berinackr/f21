@@ -1,49 +1,121 @@
 import 'package:flutter/material.dart';
-class ChatgptScreen extends StatefulWidget {
-  const ChatgptScreen({super.key});
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class ChatGPTScreen extends StatefulWidget {
+  const ChatGPTScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChatgptScreen> createState() => _ChatgptScreenState();
+  State<ChatGPTScreen> createState() => _ChatGPTScreenState();
 }
 
-class _ChatgptScreenState extends State<ChatgptScreen> {
+class _ChatGPTScreenState extends State<ChatGPTScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String _response = "";
+  bool _isLoading = false;
+
+  Future<String> getResponseFromAPI(String search) async {
+    try {
+      String apiKey = "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";
+      var url = Uri.https("api.openai.com", "/v1/completions");
+
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $apiKey',
+      };
+
+      Map<String, dynamic> body = {
+        "model": 'text-davinci-003',
+        "prompt":
+            "$search ? NOT : Biraz önce sorduğum soru eğer Anneler, Bebekler, Gebelik, Hamilelik, Sağlık, Bebek Bakımı, Beslenme ve benzeri konu başlıklarından çok uzaksa 'Biberon Yapay Zeka Modeli olarak anneler ve bebekleri hakkında konulara cevap verebilirim.' hata mesajını ver. Ayrıca tüm cevaplarının sonuna ‘Benim verdiğim tüm bilgiler öneri ve genel doğrulardır. Lütfen spesifik veya ciddi bir sorunuz varsa doktorunuza başvurunuz.’ bilgilendirme metnini ekle.",
+        "max_tokens": 2000,
+      };
+      //hata yakalama ve response'u set etme
+      var response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
+      if (response.statusCode == 200) {
+        var responseJson = jsonDecode(utf8.decode(response.bodyBytes));
+        return responseJson["choices"][0]["text"];
+      } else {
+        throw Exception("Failed to get response from API");
+      }
+    } catch (e) {
+      print("Caught exception: $e");
+      return "";
+    }
+  }
+
+  void _getResponse() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      String response = await getResponseFromAPI(
+          Uri.encodeComponent(_searchController.text.toString()));
+      setState(() {
+        _response = response;
+      });
+    } catch (e) {
+      _response = e.toString();
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      child: Center(child: Text("Haaaaaay")),
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Biberon - Yapay Zeka"),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(screenHeight / 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _searchController,
+                decoration: const InputDecoration(
+                  hintText: 'Sorunuzu Buraya Giriniz',
+                ),
+                keyboardType: TextInputType.text,
+              ),
+              SizedBox(height: screenHeight / 30),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: _getResponse,
+                      child: const Text("Cevabı Oluştur"),
+                    ),
+              SizedBox(height: screenHeight / 30),
+              Card(
+                child: _response.isNotEmpty
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          top: 0,
+                          left: screenHeight / 50,
+                          right: screenHeight / 50,
+                          bottom: screenHeight / 20,
+                        ),
+                        child: Text(_response),
+                      )
+                    : Container(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
-
-// class SoruWidgeti extends StatefulWidget {
-//   SoruWidgeti({super.key});
-//   final TextEditingController controller = TextEditingController();
-//
-//   @override
-//   State<SoruWidgeti> createState() => _SoruWidgetiState();
-// }
-//
-// class _SoruWidgetiState extends State<SoruWidgeti> {
-//   TextEditingController _textEditingController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: TextField(
-//         controller: _textEditingController,
-//         keyboardType: TextInputType.multiline,
-//         maxLines: 3,
-//         decoration: InputDecoration(
-//           hintText: "Sorunuzu yazınız...",
-//           border: OutlineInputBorder(),
-//         ),
-//         style: TextStyle(
-//           fontSize: 14,
-//           color: Colors.black,
-//         ),
-//       ),
-//     );
-//   }
-// }
-

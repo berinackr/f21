@@ -85,7 +85,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       "Email",
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: CustomStyles.primaryColor,
+                                        color: Color.fromARGB(255, 236, 242, 255),
                                       ),
                                     )),
                               ),
@@ -118,7 +118,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     "Şifre",
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: CustomStyles.primaryColor,
+                                      color: Color.fromARGB(255, 236, 242, 255),
                                     ),
                                   ),
                                 ),

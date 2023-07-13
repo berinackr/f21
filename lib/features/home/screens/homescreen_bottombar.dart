@@ -66,7 +66,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               const SizedBox(width: 10),
                               const Text(
                                 "Haftanın Doktor Önerisi",
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                               ),
                               const SizedBox(width: 10),
                               Icon(
@@ -94,7 +94,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               trimMode: TrimMode.Line,
                               trimCollapsedText: "Devamını Oku",
                               trimExpandedText: "Küçült",
-                              style: const TextStyle(fontSize: 18, color: Colors.white),
+                              style: const TextStyle(fontSize: 18, color: Colors.black),
                               lessStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
                               moreStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
                             ),
@@ -129,7 +129,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -138,7 +138,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
-                              style: TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(fontSize: 18, color: Colors.black),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -188,7 +188,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               'Meditasyon',
                               style: TextStyle(
                                 fontSize: 20,
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -198,7 +198,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
-                              style: TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(fontSize: 18, color: Colors.black),
                               textAlign: TextAlign.center,
                             ),
                           ),

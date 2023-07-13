@@ -19,19 +19,19 @@ class Categories {
         name: 'Gebelik',
         id: 1,
         description:
-            "Gebelik dönemiyle ilgili sorularınızı paylaşabilir, deneyimlerinizi paylaşabilir ve gebelikle ilgili bilgileri edinebilirsiniz.",
+            "Gebelik dönemiyle ilgili sorularınızı, deneyimlerinizi paylaşabilir ve gebelikle ilgili bilgileri edinebilirsiniz.",
         photoPath: Assets.examplePregnantBannerPath),
     Category(
         name: "Doğum",
         id: 2,
         description:
-            "Doğum deneyimlerinizi paylaşabilir, doğum öncesi hazırlıklar hakkında bilgi alabilir ve diğer annelerle doğum konusunda destek alışverişi yapabilirsiniz.",
+            "Doğum deneyimlerinizi paylaşabilir, diğer annelerle doğum öncesi hazırlıklar hakkında ve doğum konusunda bilgi alışverişi yapabilirsiniz.",
         photoPath: Assets.exampleBirthBannerPath),
     Category(
         name: 'Annelik',
         id: 3,
         description:
-            "Anneler arasında dayanışma, deneyim paylaşımı ve anne-bebek ilişkisi hakkında konuşma platformu.",
+            "Anne-bebek ilişkisi hakkında bilgi edinebilir, deneyimli annelerin tecrübesinden faydalanabilir ve anneler arası dayanışmaya katılabilirsiniz.",
         photoPath: Assets.exampleMotherBannerPath),
     Category(
         name: 'Beslenme',
@@ -43,14 +43,20 @@ class Categories {
         name: 'Sağlık',
         id: 5,
         description:
-            "Anne ve bebek sağlığı, bakımı, hastalıklar, aşılar ve genel sağlık konuları hakkında bilgi paylaşımı ve destek alışverişi yapabilirsiniz.",
+            "Anne ve bebek sağlığı, hastalıklar, aşılar ve genel sağlık konuları hakkında bilgi paylaşabilir ve bu konularda daha donanımlı annelerin fikirlerini alabilirsiniz.",
         photoPath: Assets.exampleHealthBannerPath),
     Category(
-        name: 'Psikoloji',
+        name: 'Gelişim',
         id: 6,
         description:
-            "Anne psikolojisi, doğum sonrası duygusal değişimler, stres yönetimi, ebeveynlik zorlukları ve psikolojik destek konularında tartışma ve paylaşım platformu",
+            "Bebeğinizin hangi aylarda nasıl gelişim gösterdiği, fiziksel ve zihinsel değişimi hakkında fikir alışverişi yapabilirsiniz. ",
         photoPath: Assets.examplePsychologyBannerPath),
+    Category(
+        name: 'Bakım',
+        id: 7,
+        description:
+        "Bebeğinizin akımı ve sizin bakımınız için neler gerekli, hangi bakımlar fayda sağlıyor ve benzeri bilgileri edinebilir, şahsi yorumlarınızı paylaşabilirsiniz.",
+        photoPath: Assets.exampleCareBannerPath),
   ];
 
   static final Map<int, Category> _categoriesById = {

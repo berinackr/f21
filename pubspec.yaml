@@ -62,6 +62,8 @@ dependencies:
   rxdart: ^0.27.7
   connectivity_plus: ^4.0.1
   game_levels_scrolling_map: ^0.0.7
+  firebase_remote_config: ^4.2.3
+  flutter_dotenv: ^5.1.0
 dependency_overrides:
     xml: ^6.1.0
 
@@ -94,6 +96,7 @@ flutter:
     - assets/animations/
     - assets/texts/
     - assets/audio/
+    - .env
 
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,7 +17,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = "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";
+      String apiKey = dotenv.get("API_KEY");
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {

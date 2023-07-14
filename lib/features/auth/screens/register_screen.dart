@@ -36,265 +36,265 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     bool isChecked = false;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         //toolbarHeight: 0,
-        backgroundColor: CustomStyles.primaryColor,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: CustomStyles.primaryColor),
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: CustomStyles.backgroundColor,
+          statusBarColor: Colors.transparent,
         ),
       ),
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            if (isLoading) return const Loader();
-            return SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: CustomStyles.backgroundColor,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/backgroundimg.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                constraints: BoxConstraints(
-                  minWidth: viewportConstraints.maxWidth,
-                  minHeight: viewportConstraints.maxHeight,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //Logo
-                      CircleAvatar(
-                        radius: screenWidth / 4,
-                        backgroundImage: const AssetImage(Assets.logoPath),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Email",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: CustomStyles.forumTextColor,
-                                    ),
-                                  )),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            //Email TextField
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  screenHeight / 30, 0, screenHeight / 30, 0),
-                              child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr")
-                                    .email()
-                                    .build(),
-                                controller: emailController,
-                                autofillHints: const [AutofillHints.email],
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  hintText: "johndoe@gmail.com",
-                                  filled: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 15),
-                                  fillColor: CustomStyles.fillColor,
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            //Password Label
-                            Padding(
-                              padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Şifre",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: CustomStyles.forumTextColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            //Password TextField
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  screenHeight / 30, 0, screenHeight / 30, 0),
-                              child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr")
-                                    .minLength(6)
-                                    .build(),
-                                obscureText: true,
-                                controller: passwordController,
-                                autofillHints: const [AutofillHints.password],
-                                autocorrect: false,
-                                decoration: InputDecoration(
-                                  hintText: "Çok gizli şifre",
-                                  filled: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 15),
-                                  fillColor: CustomStyles.fillColor,
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            //Password Label
-                            Padding(
-                              padding: EdgeInsets.only(left: screenHeight / 30),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Şifreyi Onayla",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: CustomStyles.forumTextColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  screenHeight / 30, 0, screenHeight / 30, 0),
-                              child: TextFormField(
-                                validator: ValidationBuilder(localeName: "tr")
-                                    .minLength(6)
-                                    .add((value) {
-                                  return value != passwordController.text
-                                      ? "şifreler uyuşmuyor"
-                                      : null;
-                                }).build(),
-                                obscureText: true,
-                                controller: passwordAgainController,
-                                autofillHints: const [AutofillHints.password],
-                                autocorrect: false,
-                                decoration: InputDecoration(
-                                  hintText: "Çok gizli şifre",
-                                  filled: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 15),
-                                  fillColor: CustomStyles.fillColor,
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.ads_click,
-                                  color: CustomStyles.forumTextColor,
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      //tiklayinca sozlesme ekranina gitmeli
-                                      //Navigator.of(context).pushNamed("/sozlesmeEkrani");
-                                      showContractPopup(context);
-                                    },
-                                    child: const Text(
-                                      "Sözleşmeyi Okudum, Onayladım.",
-                                      style: TextStyle(
-                                        color: Colors.blueAccent,
-                                      ),
-                                    )),
-                                StatefulBuilder(
-                                  builder: (context, setState) {
-                                    return Checkbox(
-                                      checkColor: Colors.black,
-                                      value: isChecked,
-                                      onChanged: (checked) {
-                                        setState(() {
-                                          isChecked = checked!;
-                                        });
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      //Email Label
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      /*const Spacer(
-                        flex: 1,
-                      ),*/
-
-                      //Kayıt Ol Butonu
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: CustomStyles.buttonColor),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              if (!isChecked) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                        content: Text(
-                                  "Lütfen öncelikle sözleşmeyi onaylayın!",
-                                  style: TextStyle(
-                                      color: CustomStyles.errorColor,
-                                      fontWeight: FontWeight.bold),
-                                )));
-                                return;
-                              }
-                              signUp(ref, emailController.text,
-                                  passwordController.text, context);
-                              passwordController.clear();
-                              passwordAgainController.clear();
-                            }
-                          },
-                          child: Text(
-                            "Kayıt ol",
-                            style: TextStyle(color: Colors.grey.shade700),
-                          )),
-                      const Spacer(
-                        flex: 1,
-                      ),
-                    ],
-                  ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          if (isLoading) return const Loader();
+          return SingleChildScrollView(
+            child: Container(
+              decoration: BoxDecoration(
+                color: CustomStyles.backgroundColor,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/backgroundimg.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
-            );
-          },
-        ),
+              constraints: BoxConstraints(
+                minWidth: viewportConstraints.maxWidth,
+                minHeight: viewportConstraints.maxHeight,
+              ),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    //Logo
+                    CircleAvatar(
+                      radius: screenWidth / 4,
+                      backgroundImage: const AssetImage(Assets.logoPath),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: screenHeight / 30),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Email",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: CustomStyles.forumTextColor,
+                                  ),
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          //Email TextField
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                screenHeight / 30, 0, screenHeight / 30, 0),
+                            child: TextFormField(
+                              validator: ValidationBuilder(localeName: "tr")
+                                  .email()
+                                  .build(),
+                              controller: emailController,
+                              autofillHints: const [AutofillHints.email],
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText: "johndoe@gmail.com",
+                                filled: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
+                                fillColor: CustomStyles.fillColor,
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          //Password Label
+                          Padding(
+                            padding: EdgeInsets.only(left: screenHeight / 30),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Şifre",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: CustomStyles.forumTextColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          //Password TextField
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                screenHeight / 30, 0, screenHeight / 30, 0),
+                            child: TextFormField(
+                              validator: ValidationBuilder(localeName: "tr")
+                                  .minLength(6)
+                                  .build(),
+                              obscureText: true,
+                              controller: passwordController,
+                              autofillHints: const [AutofillHints.password],
+                              autocorrect: false,
+                              decoration: InputDecoration(
+                                hintText: "Çok gizli şifre",
+                                filled: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
+                                fillColor: CustomStyles.fillColor,
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          //Password Label
+                          Padding(
+                            padding: EdgeInsets.only(left: screenHeight / 30),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Şifreyi Onayla",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: CustomStyles.forumTextColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                screenHeight / 30, 0, screenHeight / 30, 0),
+                            child: TextFormField(
+                              validator: ValidationBuilder(localeName: "tr")
+                                  .minLength(6)
+                                  .add((value) {
+                                return value != passwordController.text
+                                    ? "şifreler uyuşmuyor"
+                                    : null;
+                              }).build(),
+                              obscureText: true,
+                              controller: passwordAgainController,
+                              autofillHints: const [AutofillHints.password],
+                              autocorrect: false,
+                              decoration: InputDecoration(
+                                hintText: "Çok gizli şifre",
+                                filled: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
+                                fillColor: CustomStyles.fillColor,
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.ads_click,
+                                color: CustomStyles.forumTextColor,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    //tiklayinca sozlesme ekranina gitmeli
+                                    //Navigator.of(context).pushNamed("/sozlesmeEkrani");
+                                    showContractPopup(context);
+                                  },
+                                  child: const Text(
+                                    "Sözleşmeyi Okudum, Onayladım.",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                    ),
+                                  )),
+                              StatefulBuilder(
+                                builder: (context, setState) {
+                                  return Checkbox(
+                                    checkColor: Colors.black,
+                                    value: isChecked,
+                                    onChanged: (checked) {
+                                      setState(() {
+                                        isChecked = checked!;
+                                      });
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Email Label
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    /*const Spacer(
+                      flex: 1,
+                    ),*/
+
+                    //Kayıt Ol Butonu
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: CustomStyles.buttonColor),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (!isChecked) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      content: Text(
+                                "Lütfen öncelikle sözleşmeyi onaylayın!",
+                                style: TextStyle(
+                                    color: CustomStyles.errorColor,
+                                    fontWeight: FontWeight.bold),
+                              )));
+                              return;
+                            }
+                            signUp(ref, emailController.text,
+                                passwordController.text, context);
+                            passwordController.clear();
+                            passwordAgainController.clear();
+                          }
+                        },
+                        child: Text(
+                          "Kayıt ol",
+                          style: TextStyle(color: Colors.grey.shade700),
+                        )),
+                    const Spacer(
+                      flex: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

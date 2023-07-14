@@ -23,7 +23,6 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
   final _passwordController2 = TextEditingController();
   final _passwordControllerOld = TextEditingController();
 
-
   //For Show/Hide Password Button
   bool isShowPassword = true;
 
@@ -164,29 +163,45 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                                   });
                                   if (_formKey.currentState!.validate()) {
                                     var newPassword = _passwordController2.text;
-                                    var oldPassword = _passwordControllerOld.text;
+                                    var oldPassword =
+                                        _passwordControllerOld.text;
 
-                                    final credential = EmailAuthProvider.credential(
-                                        email: user.email!, password: oldPassword);
+                                    final credential =
+                                        EmailAuthProvider.credential(
+                                            email: user.email!,
+                                            password: oldPassword);
 
                                     Future<bool> isLoading;
 
-                                    await user.reauthenticateWithCredential(credential).then((value) async {
-                                      await user.updatePassword(newPassword).then((_) {
+                                    await user
+                                        .reauthenticateWithCredential(
+                                            credential)
+                                        .then((value) async {
+                                      await user
+                                          .updatePassword(newPassword)
+                                          .then((_) {
                                         //Değiştirme işlemi başarılı
-                                        showSnackBar(context, "Şifre başarıyla değiştirildi.");
+                                        showSnackBar(context,
+                                            "Şifre başarıyla değiştirildi.");
                                         context.pop();
                                       }).catchError((error) {
-                                        showSnackBar(context, findAuthExceptionErrorMessage(error)!);
+                                        showSnackBar(
+                                            context,
+                                            findAuthExceptionErrorMessage(
+                                                error)!);
                                       });
                                     }).catchError((error) {
-                                      showSnackBar(context, findAuthExceptionErrorMessage(error)!);
-                                    }).then((value) {
+                                      showSnackBar(
+                                          context,
+                                          findAuthExceptionErrorMessage(
+                                              error)!);
+                                    }).then(
+                                      (value) {
                                         setState(() {
                                           _isLoading = false;
                                         });
-                                    },);
-
+                                      },
+                                    );
                                   }
                                 },
                                 child: const Text("Şifremi Değiştir"),
@@ -203,4 +218,3 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
     );
   }
 }
-

@@ -11,6 +11,7 @@ import 'package:f21_demo/features/home/screens/homescreen_bottombar.dart';
 import 'package:f21_demo/features/home/screens/mybabyscreen_bottombar.dart';
 import 'package:f21_demo/features/profile/widgets/profile_screen_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/providers/settings_repository.dart';
@@ -59,6 +60,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   appBar: AppBar(
                     iconTheme: const IconThemeData(color: Color(0xffFAF0E4)),
                     backgroundColor: Color(0xffFF8551),
+                    systemOverlayStyle:
+                        SystemUiOverlayStyle(statusBarColor: Color(0xffFF8551)),
                     actions: [
                       IconButton(
                         onPressed: () {
@@ -277,54 +280,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         child: Text('Bize Ulaşın'),
                                       ),
                                     ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: SizedBox(
-                                        height: 50,
-                                        width: 120,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: CustomStyles
-                                                  .fillColor, // Beyaz çizgi rengi
-                                              width: 2, // Beyaz çizgi kalınlığı
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                                8), // Kenar yuvarlatma
-                                          ),
-                                          child: ElevatedButton.icon(
-                                            style: ElevatedButton.styleFrom(
-                                              foregroundColor: Colors.white,
-                                              backgroundColor: Colors.red[900],
-                                              shadowColor: Colors.black,
-                                              elevation: 4,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              logOut(ref);
-                                              Navigator.pop(context);
-                                            },
-                                            icon: const Icon(
-                                              Icons.exit_to_app,
-                                              color: Colors.white,
-                                            ),
-                                            label: const Text(
-                                              'Çıkış',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                   ),
                                 ],
                               ),

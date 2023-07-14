@@ -11,7 +11,8 @@ class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
@@ -34,7 +35,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         backgroundColor: CustomStyles.primaryColor,
         //toolbarHeight: 0,
         elevation: 2,
-        systemOverlayStyle: const SystemUiOverlayStyle(
+        systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: CustomStyles.backgroundColor,
         ),
       ),
@@ -44,7 +45,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: CustomStyles.backgroundColor,
                   image: DecorationImage(
                     image: AssetImage('assets/images/backgroundimg.png'),
@@ -76,7 +77,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         "ŞİFREMİ SIFIRLA",
                         style: TextStyle(
                           fontSize: 20,
-                          color: CustomStyles.primaryColor,
+                          color: CustomStyles.forumTextColor,
                         ),
                       ),
                       const SizedBox(
@@ -88,7 +89,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
-                          color: CustomStyles.primaryColor,
+                          color: CustomStyles.forumTextColor,
                         ),
                       ),
                       const SizedBox(
@@ -103,14 +104,17 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                           key: _formKey,
                           child: TextFormField(
                             autofillHints: const [AutofillHints.email],
-                            validator: ValidationBuilder(localeName: "tr").email().build(),
+                            validator: ValidationBuilder(localeName: "tr")
+                                .email()
+                                .build(),
                             controller: emailController,
                             decoration: InputDecoration(
                               hintText: "johndoe@gmail.com",
                               filled: true,
                               fillColor: CustomStyles.fillColor,
                               border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                             ),
                           ),
@@ -120,7 +124,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                         height: 20,
                       ),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: CustomStyles.buttonColor),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: CustomStyles.buttonColor),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               resetPassword(ref, emailController.text, context);
@@ -128,7 +133,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                           },
                           child: Text(
                             "Mail Gönder",
-                            style: TextStyle(color: CustomStyles.primaryColor),
+                            style: TextStyle(color: Colors.grey.shade700),
                           )),
                       const SizedBox(
                         height: 40,

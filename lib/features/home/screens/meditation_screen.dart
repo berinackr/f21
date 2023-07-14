@@ -18,17 +18,19 @@ class _MeditationScreenState extends State<MeditationScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: CustomStyles.primaryColor,
-          image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
+          image: DecorationImage(
+            image: AssetImage('assets/images/intro-bg.png'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: CustomScrollView(
           slivers: [
             const SliverAppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Color(0xffFF8551),
               title: Text(
                 'Meditasyon Vakti',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xffFAF0E4),
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -36,12 +38,12 @@ class _MeditationScreenState extends State<MeditationScreen> {
             ),
             sliverList(
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 child: const Text(
                   'Unutmayın bebekler 17. haftadan itibaren sesleri duymaya başlar. Bu sakinleştirici seslerle beraber hem kendinizi hem bebeğinizi rahatlatın.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
                     fontSize: 15,
                     letterSpacing: 1.2,
                   ),
@@ -68,7 +70,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: CustomStyles.backgroundColor,
                             shape: BoxShape.circle,
                           ),
@@ -122,7 +124,10 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 InkWell(
                   onTap: () {
                     playListIndex().setPlayListIndex(0);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AudioPlayerScreen()));
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -130,7 +135,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: CustomStyles.primaryColor,
+                      color: CustomStyles.fillColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Column(
@@ -144,7 +149,8 @@ class _MeditationScreenState extends State<MeditationScreen> {
                               color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image: AssetImage('assets/images/night-card.png'),
+                                image:
+                                    AssetImage('assets/images/night-card.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -163,7 +169,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Uyku',
                                     style: TextStyle(
-                                      color: Color(0xffE6E7F2),
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -174,7 +179,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Hemen uykuya dal',
                                     style: TextStyle(
-                                      color: Color(0xff98A1BD),
                                       fontSize: 14,
                                     ),
                                   )
@@ -189,7 +193,10 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   onTap: () {
                     playListIndex().setPlayListIndex(1);
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AudioPlayerScreen()));
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -197,7 +204,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: CustomStyles.primaryColor,
+                      color: CustomStyles.fillColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Column(
@@ -208,10 +215,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
                           flex: 6,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: CustomStyles.primaryColor,
+                              color: CustomStyles.fillColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image: AssetImage('assets/images/night-card2.png'),
+                                image:
+                                    AssetImage('assets/images/night-card2.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -230,7 +238,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Sakinleş',
                                     style: TextStyle(
-                                      color: Color(0xffE6E7F2),
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -241,7 +248,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Sakinleştirici mekan sesleri',
                                     style: TextStyle(
-                                      color: Color(0xff98A1BD),
                                       fontSize: 14,
                                     ),
                                   )
@@ -255,13 +261,16 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: CustomStyles.primaryColor,
+                    color: CustomStyles.fillColor,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: InkWell(
                     onTap: () {
                       playListIndex().setPlayListIndex(2);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AudioPlayerScreen()));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -271,10 +280,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
                           flex: 6,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: CustomStyles.primaryColor,
+                              color: CustomStyles.fillColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image: AssetImage('assets/images/night-card2.png'),
+                                image:
+                                    AssetImage('assets/images/night-card2.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -293,7 +303,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Piyano',
                                     style: TextStyle(
-                                      color: Color(0xffE6E7F2),
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -304,7 +313,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Huzurlu Piyano Sesleri',
                                     style: TextStyle(
-                                      color: Color(0xff98A1BD),
                                       fontSize: 14,
                                     ),
                                   )
@@ -318,13 +326,16 @@ class _MeditationScreenState extends State<MeditationScreen> {
                 Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: CustomStyles.primaryColor,
+                    color: CustomStyles.fillColor,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: InkWell(
                     onTap: () {
                       playListIndex().setPlayListIndex(3);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AudioPlayerScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AudioPlayerScreen()));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -334,10 +345,11 @@ class _MeditationScreenState extends State<MeditationScreen> {
                           flex: 6,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: CustomStyles.primaryColor,
+                              color: CustomStyles.fillColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
-                                image: AssetImage('assets/images/night-card.png'),
+                                image:
+                                    AssetImage('assets/images/night-card.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -356,7 +368,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Neşelen',
                                     style: TextStyle(
-                                      color: Color(0xffE6E7F2),
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -367,7 +378,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Neşeli Müzikler',
                                     style: TextStyle(
-                                      color: Color(0xff98A1BD),
                                       fontSize: 14,
                                     ),
                                   )
@@ -418,7 +428,9 @@ class IconBoxUI extends StatelessWidget {
             width: 60,
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: isSelected ? CustomStyles.backgroundColor : const Color(0xff586894),
+              color: isSelected
+                  ? CustomStyles.backgroundColor
+                  : const Color(0xff586894),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(

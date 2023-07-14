@@ -51,20 +51,20 @@ class Splash extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 45),
-                    const Text(
+                    Text(
                       'BİBERON',
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.white,
+                        color: CustomStyles.forumTextColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       '"BAŞUCUNUZDAKİ ANNE DESTEĞİ"',
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: CustomStyles.forumTextColor,
                           fontStyle: FontStyle.italic),
                     ),
                     Container(

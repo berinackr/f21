@@ -13,7 +13,8 @@ class GuestHomeScreen extends ConsumerStatefulWidget {
   const GuestHomeScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _GuestHomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _GuestHomeScreenState();
 }
 
 class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
@@ -36,7 +37,8 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
     final bottomBarList = [const GuestHomeScreenBottombar()];
     final settings = ref.watch(settingsProvider);
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints viewportConstraints) => Scaffold(
+      builder: (BuildContext context, BoxConstraints viewportConstraints) =>
+          Scaffold(
         body: bottomBarList[0],
         appBar: AppBar(
           backgroundColor: CustomStyles.primaryColor,
@@ -69,10 +71,12 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
                               children: [
                                 UserAccountsDrawerHeader(
                                   onDetailsPressed: () {
-                                    showProfilePopUp(context, viewportConstraints, ref);
+                                    showProfilePopUp(
+                                        context, viewportConstraints, ref);
                                   },
                                   arrowColor: Colors.transparent,
-                                  decoration: BoxDecoration(color: CustomStyles.primaryColor),
+                                  decoration: BoxDecoration(
+                                      color: CustomStyles.primaryColor),
                                   accountName: const Text(
                                     "Misafir Kullanıcı",
                                     style: TextStyle(
@@ -92,7 +96,8 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 10, 10, 0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -185,10 +190,12 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: CustomStyles.fillColor, // Beyaz çizgi rengi
+                                    color: CustomStyles
+                                        .fillColor, // Beyaz çizgi rengi
                                     width: 2, // Beyaz çizgi kalınlığı
                                   ),
-                                  borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma
+                                  borderRadius: BorderRadius.circular(
+                                      8), // Kenar yuvarlatma
                                 ),
                                 child: ElevatedButton.icon(
                                   style: ElevatedButton.styleFrom(

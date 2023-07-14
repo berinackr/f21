@@ -14,6 +14,7 @@ class SettingsScreen extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: CustomStyles.primaryColor,
         title: const Text("Ayarlar"),
       ),
       body: LayoutBuilder(

@@ -68,20 +68,19 @@ class _ExampleProfileDataState extends ConsumerState<ExampleProfileData> {
     CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Profil Bilgileri",
             style: TextStyle(color: CustomStyles.backgroundColor),
           ),
           centerTitle: true,
           backgroundColor: CustomStyles.titleColor,
-          systemOverlayStyle: const SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: CustomStyles.backgroundColor,
           ),
           actions: [
             IconButton(
               onPressed: () => logOut(ref),
-              icon:
-                  const Icon(Icons.logout, color: CustomStyles.backgroundColor),
+              icon: Icon(Icons.logout, color: CustomStyles.backgroundColor),
             ),
           ],
         ),

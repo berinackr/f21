@@ -38,9 +38,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         //toolbarHeight: 0,
-        backgroundColor: CustomStyles.backgroundColor,
+        backgroundColor: CustomStyles.primaryColor,
         elevation: 0,
-        systemOverlayStyle: const SystemUiOverlayStyle(
+        systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: CustomStyles.backgroundColor,
         ),
       ),
@@ -50,7 +50,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             if (isLoading) return const Loader();
             return SingleChildScrollView(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: CustomStyles.backgroundColor,
                   image: DecorationImage(
                     image: AssetImage('assets/images/backgroundimg.png'),
@@ -88,7 +88,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                     "Email",
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: CustomStyles.primaryColor,
+                                      color: CustomStyles.forumTextColor,
                                     ),
                                   )),
                             ),
@@ -131,7 +131,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                   "Şifre",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: CustomStyles.primaryColor,
+                                    color: CustomStyles.forumTextColor,
                                   ),
                                 ),
                               ),
@@ -176,7 +176,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                                   "Şifreyi Onayla",
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: CustomStyles.primaryColor,
+                                    color: CustomStyles.forumTextColor,
                                   ),
                                 ),
                               ),
@@ -217,7 +217,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               children: [
                                 Icon(
                                   Icons.ads_click,
-                                  color: CustomStyles.primaryColor,
+                                  color: CustomStyles.forumTextColor,
                                 ),
                                 TextButton(
                                     onPressed: () {
@@ -283,7 +283,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           },
                           child: Text(
                             "Kayıt ol",
-                            style: TextStyle(color: CustomStyles.primaryColor),
+                            style: TextStyle(color: Colors.grey.shade700),
                           )),
                       const Spacer(
                         flex: 1,
@@ -313,7 +313,7 @@ void showContractPopup(BuildContext context) {
             child: Text('Kullanıcı Sözleşmesi ve Gizlilik Politikası')),
         titleTextStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            color: CustomStyles.primaryColor,
+            color: CustomStyles.titleColor,
             fontSize: 15),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -337,11 +337,11 @@ void showContractPopup(BuildContext context) {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                backgroundColor: CustomStyles.primaryColor, // Background color
+                backgroundColor: CustomStyles.buttonColor, // Background color
               ),
-              child: const Text(
+              child: Text(
                 'Kapat',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.grey.shade700),
               ),
               onPressed: () {
                 Navigator.of(context).pop();

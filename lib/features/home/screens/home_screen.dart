@@ -40,7 +40,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
-    final bottomBarList = [MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
+    final bottomBarList = [
+      MyBabyScreenBottombar(),
+      const HomeScreenBottombar(),
+      const ActivityScreenBottombar()
+    ];
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -48,10 +52,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : user.username == null
             ? const ExampleProfileData()
             : LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints viewportConstraints) => Scaffold(
+                builder: (BuildContext context,
+                        BoxConstraints viewportConstraints) =>
+                    Scaffold(
                   body: bottomBarList[bottomBarRouter.selectedIndex],
                   appBar: AppBar(
-                    backgroundColor: CustomStyles.primaryColor,
+                    iconTheme: const IconThemeData(color: Color(0xffFAF0E4)),
+                    backgroundColor: Color(0xffFF8551),
                     actions: [
                       IconButton(
                         onPressed: () {
@@ -62,7 +69,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       )
                     ],
-                    title: const Text('Anasayfa'),
+                    title: Text(
+                      'Anasayfa',
+                      style: TextStyle(color: Color(0xffFAF0E4)),
+                    ),
                   ),
                   drawer: SafeArea(
                     child: LayoutBuilder(
@@ -73,6 +83,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               // Add a ListView to the drawer. This ensures the user can scroll
                               // through the options in the drawer if there isn't enough vertical
                               // space to fit everything.
+
                               child: Stack(
                                 children: [
                                   ListView(
@@ -83,10 +94,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         children: [
                                           UserAccountsDrawerHeader(
                                             onDetailsPressed: () {
-                                              showProfilePopUp(context, viewportConstraints, ref);
+                                              showProfilePopUp(context,
+                                                  viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
-                                            decoration: BoxDecoration(color: CustomStyles.primaryColor),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    CustomStyles.primaryColor),
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -94,28 +108,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                             accountEmail: Text(
-                                              ref.read(authRepositoryProvider).getCurrentUser()!.email!.toString(),
+                                              ref
+                                                  .read(authRepositoryProvider)
+                                                  .getCurrentUser()!
+                                                  .email!
+                                                  .toString(),
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                             currentAccountPicture: CircleAvatar(
-                                              backgroundImage: NetworkImage(user.profilePic!),
+                                              backgroundImage: NetworkImage(
+                                                  user.profilePic!),
                                             ),
                                           ),
                                           Container(
-                                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 0),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
                                                 IconButton(
-                                                    icon: settings.isSilentMode()
+                                                    icon: settings
+                                                            .isSilentMode()
                                                         ? const Icon(
-                                                            Icons.notifications_off,
+                                                            Icons
+                                                                .notifications_off,
                                                             color: Colors.red,
                                                           )
                                                         : const Icon(
-                                                            Icons.notifications_active,
+                                                            Icons
+                                                                .notifications_active,
                                                             color: Colors.white,
                                                           ),
                                                     onPressed: () {
@@ -127,7 +151,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                     },
                                                     icon: Icon(
                                                       Icons.dark_mode,
-                                                      color: isDarkMode ? Colors.black : Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.black
+                                                          : Colors.white,
                                                     )),
                                               ],
                                             ),
@@ -202,9 +228,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       const Divider(),
                                       Container(
-                                        padding: const EdgeInsets.only(left: 20),
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
                                         child: const Align(
-                                          alignment: AlignmentDirectional.centerStart,
+                                          alignment:
+                                              AlignmentDirectional.centerStart,
                                           child: Text(
                                             "İletişim Bilgileri",
                                             //style: Theme.of(context).textTheme.caption,
@@ -229,7 +257,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       ListTile(
                                         leading: const Icon(Icons.privacy_tip),
-                                        title: const Text("Gizlilik Politikası"),
+                                        title:
+                                            const Text("Gizlilik Politikası"),
                                         onTap: () {
                                           showContractPopup(context);
                                         },
@@ -242,7 +271,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           Icons.local_play,
                                         ),
                                         applicationName: 'Biberon App',
-                                        aboutBoxChildren: [Text("biberonapp@gmail.com")],
+                                        aboutBoxChildren: [
+                                          Text("biberonapp@gmail.com")
+                                        ],
                                         child: Text('Bize Ulaşın'),
                                       ),
                                     ],
@@ -257,10 +288,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: CustomStyles.fillColor, // Beyaz çizgi rengi
+                                              color: CustomStyles
+                                                  .fillColor, // Beyaz çizgi rengi
                                               width: 2, // Beyaz çizgi kalınlığı
                                             ),
-                                            borderRadius: BorderRadius.circular(8), // Kenar yuvarlatma
+                                            borderRadius: BorderRadius.circular(
+                                                8), // Kenar yuvarlatma
                                           ),
                                           child: ElevatedButton.icon(
                                             style: ElevatedButton.styleFrom(
@@ -269,7 +302,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               shadowColor: Colors.black,
                                               elevation: 4,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(6),
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
                                               ),
                                             ),
                                             onPressed: () {
@@ -301,15 +335,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                   bottomNavigationBar: ConvexAppBar(
-                    backgroundColor: CustomStyles.primaryColor,
+                    color: Colors.grey.shade700,
+                    activeColor: Color(0xffFF8551),
+                    backgroundColor: Colors.white,
                     initialActiveIndex: bottomBarRouter.selectedIndex,
-                    items: const [
+                    items: [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                      TabItem(
+                          icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
                     ],
                     onTap: (index) {
-                      ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);
+                      ref
+                          .read(bottomBarRoutingProvider.notifier)
+                          .changeIndex(index);
                     },
                   ),
                 ),
@@ -320,3 +359,4 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
 /*
 */
+

@@ -45,12 +45,15 @@ class _MyAppState extends ConsumerState<MyApp> {
             themeMode: ref.watch(settingsProvider).isDarkMode()
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            darkTheme: ThemeData.dark(),
+            darkTheme: ThemeData(
+                primarySwatch: Colors.blue,
+                colorScheme: const ColorScheme.dark(
+                    primary: Color(0xffFF8551), secondary: Color(0xff9BCDD2))),
             theme: ThemeData(
               primarySwatch: Colors.blue,
               colorScheme: const ColorScheme.light(
-                primary: Color.fromARGB(255, 31, 4, 99),
-                secondary: Color.fromARGB(255, 155, 174, 209),
+                primary: Color(0xffFF8551),
+                secondary: Color(0xff9BCDD2),
               ),
               datePickerTheme: const DatePickerThemeData(
                 backgroundColor: Color.fromARGB(255, 236, 236, 236),

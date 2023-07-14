@@ -300,7 +300,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
-                    color: Colors.deepPurple,
+                    color: Color(0xff46949B),
                     width: 1,
                   )),
               child: ListView.builder(
@@ -308,11 +308,11 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                   itemBuilder: (context, index) {
                     Color ResponsiveColor() {
                       if (isPregnant! && monthController == index + 1) {
-                        return Colors.grey;
+                        return Color(0xff98CDD2);
                       } else if (isPregnant == false && babyAge! + 8 == index) {
-                        return Colors.grey;
+                        return Color(0xff98CDD2);
                       } else {
-                        return Colors.white;
+                        return CustomStyles.fillColor;
                       }
                     }
 
@@ -343,7 +343,6 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                                       fontSize: 19,
                                       fontFamily: "YsabeauInfant",
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
                                     ),
                                   ),
                                   SizedBox(
@@ -359,7 +358,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                                         fontSize: 18,
                                         fontFamily: "YsabeauInfant",
                                         fontWeight: FontWeight.normal,
-                                        color: Color.fromARGB(255, 64, 64, 64),
+                                        color: CustomStyles.forumTextColor,
                                       ),
                                     ),
                                   ),
@@ -447,7 +446,7 @@ class _BaslangicWidgetState extends State<BaslangicWidget> {
             fontSize: 20,
             fontFamily: "YsabeauInfant",
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 31, 4, 99),
+            color: CustomStyles.forumTextColor,
           ),
         ),
       ),
@@ -460,14 +459,14 @@ class SoruMetni extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
         "Merak Ettiklerini Biberon Yapay Zekaya Sor ",
         style: TextStyle(
           fontSize: 17,
           fontFamily: "YsabeauInfant",
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 31, 4, 99),
+          color: CustomStyles.forumTextColor,
         ),
       ),
     );
@@ -525,7 +524,7 @@ class SorButonu extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
         fixedSize: Size(120, 60),
-        primary: Color.fromARGB(255, 155, 174, 209),
+        primary: Color(0xffFFDEDE),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       ),
     ));

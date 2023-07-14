@@ -8,7 +8,8 @@ class PasswordResetInfoScreen extends StatefulWidget {
   const PasswordResetInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<PasswordResetInfoScreen> createState() => _PasswordResetInfoScreenState();
+  State<PasswordResetInfoScreen> createState() =>
+      _PasswordResetInfoScreenState();
 }
 
 class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
@@ -24,7 +25,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
         backgroundColor: CustomStyles.backgroundColor,
         //toolbarHeight: 0,
         elevation: 0,
-        systemOverlayStyle: const SystemUiOverlayStyle(
+        systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: CustomStyles.backgroundColor,
         ),
       ),
@@ -33,7 +34,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: CustomStyles.backgroundColor,
                   image: DecorationImage(
                     image: AssetImage('assets/images/backgroundimg.png'),

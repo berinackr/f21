@@ -35,44 +35,45 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
       builder: (context, constraints) {
         return SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(
-              color: CustomStyles.primaryColor,
-              image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
-            ),
+            decoration: BoxDecoration(),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: CustomStyles.backgroundColor,
-                      //borderRadius: BorderRadius.circular(40),
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: CustomStyles.fillColor
+                        //borderRadius: BorderRadius.circular(40),
+                        ),
 
                     //anasayfadaki doktor önerisi kısmı
                     child: Column(
                       children: [
+                        WaveContainer(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Row(
                             children: [
                               const SizedBox(width: 25),
                               Image.asset(
                                 "assets/images/doctor.png",
                                 width: 40,
-                                color: CustomStyles.primaryColor,
+                                color: CustomStyles.forumTextColor,
                               ),
                               const SizedBox(width: 10),
                               const Text(
                                 "Haftanın Doktor Önerisi",
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               Icon(
                                 Icons.favorite,
                                 size: 40,
-                                color: CustomStyles.primaryColor,
+                                color: CustomStyles.forumTextColor,
                               ),
                             ],
                           ),
@@ -94,9 +95,15 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               trimMode: TrimMode.Line,
                               trimCollapsedText: "Devamını Oku",
                               trimExpandedText: "Küçült",
-                              style: const TextStyle(fontSize: 18, color: Colors.black),
-                              lessStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
-                              moreStyle: TextStyle(color: CustomStyles.primaryColor, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              lessStyle: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                              moreStyle: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -116,57 +123,71 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                   //anasayfadan forum kısmına geçiş
 
                   Container(
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomStyles.backgroundColor),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Forum',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: CustomStyles.fillColor),
+                    child: Column(
+                      children: [
+                        WaveContainer(),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              children: [
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Forum',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ForumScreen()));
+                                  },
+                                  child: Container(
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: CustomStyles.fillColor,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 10,
+                                          spreadRadius: 1,
+                                        )
+                                      ],
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/forum_icon.png',
+                                      width: 80,
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                              " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
-                              style: TextStyle(fontSize: 18, color: Colors.black),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ForumScreen()));
-                            },
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: CustomStyles.backgroundColor,
-                                boxShadow: const [
-                                  BoxShadow(
-                                    blurRadius: 10,
-                                    spreadRadius: 1,
-                                  )
-                                ],
-                              ),
-                              child: Image.asset(
-                                'assets/images/forum_icon.png',
-                                width: 80,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   //anasayfadan meditasyon kısmına geçiş
@@ -175,59 +196,69 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
 
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: CustomStyles.backgroundColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Meditasyon',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: CustomStyles.fillColor),
+                    child: Column(
+                      children: [
+                        WaveContainer(),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              children: [
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Meditasyon',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MeditationScreen()));
+                                  },
+                                  child: Container(
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: CustomStyles.fillColor,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 10,
+                                          spreadRadius: 1,
+                                        )
+                                      ],
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/meditation_woman.png',
+                                      width: 80,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
-                              " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
-                              style: TextStyle(fontSize: 18, color: Colors.black),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
-                            },
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: CustomStyles.backgroundColor,
-                                boxShadow: const [
-                                  BoxShadow(
-                                    blurRadius: 10,
-                                    spreadRadius: 1,
-                                  )
-                                ],
-                              ),
-                              child: Image.asset(
-                                'assets/images/meditation_woman.png',
-                                width: 80,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
 
@@ -236,7 +267,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                                 padding: const EdgeInsets.all(20),
                                 margin: const EdgeInsets.only(top: 30),
                                 decoration: const BoxDecoration(
-                                  color: CustomStyles.backgroundColor,
+                                  color: CustomStyles.fillColor
                                   //borderRadius: BorderRadius.circular(40),
                                   boxShadow: [
                                     BoxShadow(
@@ -255,4 +286,53 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
       },
     );
   }
+}
+
+class WaveContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ClipPath(
+      clipper: WaveClipper(), // Dalgalı şekli oluşturan custom clipper
+      child: Container(
+        color: Color.fromARGB(255, 255, 191, 169), // İlk renk
+        height: 120,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Container(
+                color: Color(0xff9BCDD2),
+                height: 80,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0, size.height * 0.6);
+
+    final firstControlPoint = Offset(size.width * 0.25, size.height);
+    final firstEndPoint = Offset(size.width * 0.5, size.height * 0.8);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
+        firstEndPoint.dx, firstEndPoint.dy);
+
+    final secondControlPoint = Offset(size.width * 0.75, size.height * 0.6);
+    final secondEndPoint = Offset(size.width, size.height * 0.8);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
+        secondEndPoint.dx, secondEndPoint.dy);
+
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(WaveClipper oldClipper) => false;
 }

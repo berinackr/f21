@@ -12,12 +12,15 @@ class ForumScreen extends StatelessWidget {
     CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: CustomStyles.primaryColor,
         title: const Text('Forum - Kategoriler'),
       ),
-      body: SafeArea(child: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
+      body: SafeArea(child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
         return SingleChildScrollView(
           child: Container(
-            constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+            constraints:
+                BoxConstraints(minHeight: viewportConstraints.maxHeight),
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
             child: Column(
                 children: Categories.all
@@ -67,7 +70,8 @@ class ForumScreen extends StatelessWidget {
                                         ),
                                         child: Text(
                                           "KEŞFET",
-                                          style: TextStyle(color: CustomStyles.titleColor),
+                                          style: TextStyle(
+                                              color: CustomStyles.titleColor),
                                         ),
                                         onPressed: () {
                                           context.push('/forum/${e.id}');
@@ -79,7 +83,8 @@ class ForumScreen extends StatelessWidget {
                                         ),
                                         child: Text(
                                           "SORU SOR",
-                                          style: TextStyle(color: CustomStyles.titleColor),
+                                          style: TextStyle(
+                                              color: CustomStyles.titleColor),
                                         ),
                                         onPressed: () {
                                           context.push('/forum/${e.id}/share');

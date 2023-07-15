@@ -25,7 +25,7 @@ class ForumScreen extends StatelessWidget {
             child: Column(
                 children: Categories.all
                     .map(
-                      (e) => Card(
+                      (e) => Card( //TODO kategori bilgileri buradan geliyor
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -82,7 +82,7 @@ class ForumScreen extends StatelessWidget {
                                           foregroundColor: Colors.transparent,
                                         ),
                                         child: Text(
-                                          "SORU SOR",
+                                          "SORU SOR", //TODO BUrada da eğer etkinlik ise soru sor kısmı olmayacak yeni konu açılmasın diye
                                           style: TextStyle(
                                               color: CustomStyles.titleColor),
                                         ),

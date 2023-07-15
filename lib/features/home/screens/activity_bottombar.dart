@@ -1,18 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:game_levels_scrolling_map/game_levels_scrolling_map.dart';
 import 'package:game_levels_scrolling_map/model/point_model.dart';
 
 import '../../../core/custom_styles.dart';
+import '../../../models/user_model.dart';
+import '../../auth/controller/auth_controller.dart';
 
-class ActivityScreenBottombar extends StatefulWidget {
+class ActivityScreenBottombar extends ConsumerStatefulWidget {
   const ActivityScreenBottombar({super.key});
 
   @override
-  State<ActivityScreenBottombar> createState() =>
-      _ActivityScreenBottombarState();
+  ConsumerState createState() => _ActivityScreenBottombarState();
 }
 
-class _ActivityScreenBottombarState extends State<ActivityScreenBottombar> {
+class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottombar> {
+
+  //bebek 24 aylıktan büyük mü kontrolü
+  bool _isBabyBiggerThan24Months = false;
 
   var etkinlik_list = [
     "Gebelik yolculuğunuzun ilk ayında, bebeğinizle bağınızı güçlendirmek için ona bir mektup yazın! Ona anne karnındaki maceraları ve hislerinizi anlatın, gelecekte birlikte yapmak istediğiniz şaşırtıcı planları paylaşın. Yazılan her harf, büyülü bir bağın başlangıcı olacak. Bebeğinize eğlenceli bir selam gönderin!",
@@ -54,30 +60,79 @@ class _ActivityScreenBottombarState extends State<ActivityScreenBottombar> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: Container(
-          child: GameLevelsScrollingMap.scrollable(
+    return LayoutBuilder(
+      builder: (context,viewportConstraints) {
+        return Scaffold(
+          bottomSheet: _isBabyBiggerThan24Months ? BottomSheet(
+            backgroundColor: isDarkMode ? Colors.transparent : CustomStyles.primaryColor,
+            //shadowColor: Colors.transparent,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            constraints: BoxConstraints(
+              maxWidth: viewportConstraints.maxWidth
+            ),
+            builder: (context) {
+              return Container(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                            child: Text(
+                              style: TextStyle(
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                                "Etkinliklerimiz yalnızca gebelik dönemindeki anneler ve 24 aydan küçük bebekler için tasarlanmıştır. Yeni etkinlikler için takipte kalın!"),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+            onClosing: () {  },
+          ) : const SizedBox(height: 0, width: 0,),
+          extendBodyBehindAppBar: true,
+          body: GameLevelsScrollingMap.scrollable(
             direction: Axis.horizontal,
             width: double.maxFinite,
             imageWidth: 3000,
             imageUrl: "assets/images/map_horizontal.png",
             svgUrl: "assets/images/map_horizontal.svg",
             points: points,
-          )), // This trailing comma makes auto-formatting nicer for build methods.
+          ), // This trailing comma makes auto-formatting nicer for build methods.
+        );
+      }
     );
   }
 
   @override
   void initState() {
-    //super.initState();
+    super.initState();
     fillTestData();
   }
 
   List<PointModel> points = [];
-  int current = 11;
 
+  int current  = 0;
   void fillTestData() {
+    UserModel? user = ref.read(userProvider);
+    int babyMonths = calculateBabyMonth(user!.babyBirthDate!);
+    if(user.isPregnant!){
+      current = user.months!.toInt();
+    }else{
+      if(babyMonths < 24){ //bebek 24 aylıktan büyükse
+        current = babyMonths;
+      }else{
+        setState(() {
+          _isBabyBiggerThan24Months = true;
+          current = 34;
+        });
+      }
+    }
     int flag = 0;
     for (int i = 1; i < 34; i++) {
       if(i > 9){
@@ -379,5 +434,10 @@ class _ActivityScreenBottombarState extends State<ActivityScreenBottombar> {
         );
       },
     );
+  }
+
+  int calculateBabyMonth(DateTime babyBirthDate){
+    Duration diff = DateTime.now().difference(babyBirthDate);
+    return (diff.inDays / 30).ceil(); //yaklaşık olarak her ayı 30 gün aldım
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = dotenv.get("API_KEY");
+      String apiKey = FirebaseRemoteConfig.instance.getString("api_key");
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {
@@ -32,8 +33,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
         "max_tokens": 2000,
       };
       //hata yakalama ve response'u set etme
-      var response =
-          await http.post(url, headers: headers, body: jsonEncode(body));
+      var response = await http.post(url, headers: headers, body: jsonEncode(body));
       if (response.statusCode == 200) {
         var responseJson = jsonDecode(utf8.decode(response.bodyBytes));
         return responseJson["choices"][0]["text"];
@@ -52,8 +52,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     });
 
     try {
-      String response = await getResponseFromAPI(
-          Uri.encodeComponent(_searchController.text.toString()));
+      String response = await getResponseFromAPI(Uri.encodeComponent(_searchController.text.toString()));
       setState(() {
         _response = response;
       });

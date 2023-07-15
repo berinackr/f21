@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:game_levels_scrolling_map/game_levels_scrolling_map.dart';
 import 'package:game_levels_scrolling_map/model/point_model.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/custom_styles.dart';
 import '../../../models/user_model.dart';
@@ -18,6 +19,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
 
   //bebek 24 aylıktan büyük mü kontrolü
   bool _isBabyBiggerThan24Months = false;
+  late final bool isPregnant;
 
   var etkinlik_list = [
     "Gebelik yolculuğunuzun ilk ayında, bebeğinizle bağınızı güçlendirmek için ona bir mektup yazın! Ona anne karnındaki maceraları ve hislerinizi anlatın, gelecekte birlikte yapmak istediğiniz şaşırtıcı planları paylaşın. Yazılan her harf, büyülü bir bağın başlangıcı olacak. Bebeğinize eğlenceli bir selam gönderin!",
@@ -115,56 +117,93 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
   }
 
   List<PointModel> points = [];
-
   int current  = 0;
   void fillTestData() {
     UserModel? user = ref.read(userProvider);
     int babyMonths = calculateBabyMonth(user!.babyBirthDate!);
-    if(user.isPregnant!){
+    isPregnant = user.isPregnant!;
+    print("RECOX : babyMont $babyMonths");
+    print("RECOX : isPregantn ${user.isPregnant!}");
+    if(isPregnant){
       current = user.months!.toInt();
+      //hamile olduğu durumda
+      for(int i = 1; i < 10; i++){
+        if(i < current){
+          points.add(PointModel(100, pastActivity(i, true))); //TODO tamamlanan
+        }
+        else if(current == i){
+          points.add(PointModel(100, currentActivity(i, true))); //TODO şuanki aktivite
+        }
+        else{
+          points.add(PointModel(100, lockedActivity(i, true))); //TODO kiilitli aktivite
+        }
+      }
+      for(int i = 1; i< 25; i++){
+        points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
+      }
     }else{
-      if(babyMonths < 24){ //bebek 24 aylıktan büyükse
-        current = babyMonths;
+      if(babyMonths <= 24){ //bebek 24 aylıktan küçük
+        current = babyMonths; //Şuan bu değer 1
       }else{
         setState(() {
           _isBabyBiggerThan24Months = true;
           current = 34;
         });
       }
+      //hamile olmadığı durumda
+      for(int i = 1; i < 10; i++){
+        points.add(PointModel(100, pastActivity(i, true))); //TODO tamamlanan
+      }
+      for(int i = 1; i < 25; i++){
+        if(i < current){
+          points.add(PointModel(100, pastActivity(i, false))); //TODO tamamlanan
+        }
+        else if(current == i){
+          points.add(PointModel(100, currentActivity(i, false))); //TODO şuanki aktivite
+        }
+        else{
+          points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
+        }
+      }
     }
 
-    for (int i = 1; i < 34; i++) {
-      if(i > 9){
+
+
+
+
+    /*for (int i = 1; i < 34; i++) {
+      if(i > 9){ //TODO sanırım burası doğumdan sonrası
         if(i < current){
-          points.add(PointModel(100, testWidgetPass(i-9, 1)));
+          points.add(PointModel(100, testWidgetPass(i-9, 1))); //TODO (order, flag) order kaçıncı ay olduğunu hesaplamada kullanılıyor
         }
-        if(current == i){
+        if(current == i && !user.isPregnant!){
           points.add(PointModel(100, testWidgetCurrent(i-9, 1)));
         }
-        if(i > current){
+        else{
           points.add(PointModel(100, testWidget(i-9, 1)));
         }
       }
-      else{
+      else{ //TODO Burası da doğumdan öncesi i<9
         if(i < current){
-          points.add(PointModel(100, testWidgetPass(i, 0)));
+          points.add(PointModel(100, testWidgetPass(i, 0))); //TODO tamamlanan
         }
-        if(current == i){
-          points.add(PointModel(100, testWidgetCurrent(i, 0)));
+        else if(current == i){
+          points.add(PointModel(100, testWidgetCurrent(i, 0))); //TODO şuanki aktivite
         }
-        if(i > current){
-          points.add(PointModel(100, testWidget(i, 0)));
+        else{
+          points.add(PointModel(100, testWidget(i, 0))); //TODO kiilitli aktivite
         }
       }
-    }
+    }*/
+
   }
 
-  Widget testWidget(int order, int flag) {
-    String baslik = "Gebelik $order.Ay Etkinliği";
-    String btnYazisi = "\nGebelik\n $order.Ay";
-    if(flag == 1){
-      baslik = "Bebeğimin $order Aylık Etkinliği";
-      btnYazisi = "\nBebeğim\n$order.Ay";
+  Widget lockedActivity(int ay, bool isPregnant) { //TODO kilitli aktivite
+    String baslik = "Gebelik $ay.Ay Etkinliği";
+    String btnYazisi = "\nGebelik\n $ay.Ay";
+    if(!isPregnant){
+      baslik = "Bebeğimin $ay. Ay Etkinliği";
+      btnYazisi = "\nBebeğim\n$ay.Ay";
     }
     return InkWell(
       hoverColor: Colors.blue,
@@ -217,18 +256,8 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                   Row(
                     children: [
                       ElevatedButton(
-                        child: Text('Kapat'),
-
-                        onPressed: () {
-                          Navigator.pop(context); // Modal sayfasını kapat
-                          /*
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => GameFormPage(),
-                        ),
-                      ); */
-                        },
+                        child: const Text('Kapat'),
+                        onPressed: () {},
                       ),
                       const ElevatedButton(
                         onPressed: null,
@@ -245,14 +274,14 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
-  Widget testWidgetCurrent(int order, int flag) {
-    String baslik = "Gebelik $order. Ay Etkinliği";
-    String btnYazisi = "\nGebelik\n$order.Ay";
-    int index = order - 1;
-    if(flag == 1){
-      baslik = "Bebeğimin $order Aylık Etkinliği";
-      btnYazisi = "\nBebeğim\n$order.Ay";
-      index = order + 8;
+  Widget currentActivity(int ay, bool isPregnant) { //TODO kilitli gelecek aktivite
+    String baslik = "Gebelik $ay. Ay Etkinliği";
+    String btnYazisi = "\nGebelik\n$ay.Ay";
+    int index = ay - 1;
+    if(!isPregnant){
+      baslik = "Bebeğimin $ay Aylık Etkinliği";
+      btnYazisi = "\nBebeğim\n$ay.Ay";
+      index = ay + 8;
     }
     return InkWell(
       hoverColor: Colors.blue,
@@ -297,38 +326,28 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                   ListTile(
                     title: Text(
                       etkinlik_list[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
                   ),
                   const SizedBox(height: 80),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
                         child: const Text('Kapat'),
-
                         onPressed: () {
                           Navigator.pop(context); // Modal sayfasını kapat
-                          /*
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => GameFormPage(),
-                        ),
-                      ); */
                         },
                       ),
                       ElevatedButton(
-                        child: const Text('Etkinliğe Başla'),
-                        onPressed: () {
-                          /*
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => GameFormPage(),
+                        style : ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
                         ),
-                      ); */
+                        child: const Text('Etkinliğe Başla', style: TextStyle(color: Colors.black)),
+                        onPressed: () {
+                          context.push("/home/$index/${getActivityType(index)}/$isPregnant"); //TODO index 0'dan başlıyor
                         },
                       ),
                     ],
@@ -343,14 +362,14 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
-  Widget testWidgetPass(int order, int flag) {
-    String baslik = "Gebelik $order. Ay Etkinliği";
-    String btnYazisi = "\nGebelik\n$order.Ay";
-    int index = order-1;
-    if(flag == 1){
-      baslik = "Bebeğimin $order Aylık Etkinliği";
-      btnYazisi = "\nBebeğim\n$order.Ay";
-      index = order + 8;
+  Widget pastActivity(int ay, bool isPregnant) { //TODO şuanki aktivite
+    String baslik = "Gebelik $ay. Ay Etkinliği";
+    String btnYazisi = "\nGebelik\n$ay.Ay";
+    int index = ay - 1;
+    if(!isPregnant){
+      baslik = "Bebeğimin $ay Aylık Etkinliği";
+      btnYazisi = "\nBebeğim\n$ay.Ay";
+      index = ay + 8;
     }
     return InkWell(
       hoverColor: Colors.blue,
@@ -379,7 +398,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
             return Container(
               //color: Colors.white,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   ListTile(
@@ -392,11 +411,11 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ListTile(
                     title: Text(
                       etkinlik_list[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         //color: Colors.white,
                       ),
@@ -404,9 +423,11 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                   ),
                   const SizedBox(height: 80),
                   Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        child: Text('Kapat'),
+                        child: const Text('Kapat'),
 
                         onPressed: () {
                           Navigator.pop(context); // Modal sayfasını kapat
@@ -436,5 +457,13 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
   int calculateBabyMonth(DateTime babyBirthDate){
     Duration diff = DateTime.now().difference(babyBirthDate);
     return (diff.inDays / 30).ceil(); //yaklaşık olarak her ayı 30 gün aldım
+  }
+
+  String getActivityType(int index){
+    if(index == 0 || index == 9){ //TODO bana index olarak almamış gibi geldi sanki +1 koymuş o neenle böyle yaptım hatalı gelirse 0'a 8 ver
+      return 'text_activity';
+    }else{
+      return 'photo_activity';
+    }
   }
 }

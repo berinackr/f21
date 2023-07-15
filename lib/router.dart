@@ -34,8 +34,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: "/", builder: (context, state) => const LoadingScreen()),
       GoRoute(path: "/home", builder: (context, state) => const HomeScreen(), routes: [
         GoRoute(
-          path: ':activity_type/:activity_id',
-          builder: (context, state) => ActivityScreen(activityId: state.pathParameters["activity_id"], activityType: state.pathParameters["activity_type"],),
+          path: ':activity_id/:activity_type/:pregnancy',
+          builder: (context, state) => ActivityScreen(activityId: state.pathParameters["activity_id"], activityType: state.pathParameters["activity_type"], isPregnant: state.pathParameters["pregnancy"]),
         ),
       ]),
       GoRoute(

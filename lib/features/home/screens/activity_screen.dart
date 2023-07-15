@@ -15,9 +15,10 @@ final List<String> imgList = [
   ];
 
 class ActivityScreen extends ConsumerStatefulWidget {
-  final String? activityId;
-  final String? activityType;
-  const ActivityScreen({Key? key, required this.activityType, required this.activityId}) : super(key: key);
+  final String? _activityId;
+  final String? _activityType;
+  final String? _isPregnant;
+  const ActivityScreen({Key? key, required String? activityId, required String? activityType, required String? isPregnant}) : _isPregnant = isPregnant, _activityType = activityType, _activityId = activityId, super(key: key);
 
 
   @override
@@ -35,18 +36,6 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
         postFile = File(res.files.first.path!);
       });
     }
-  }
-
-  bool visibilityfotos = false;
-  bool _isButtonDisabled = false;
-  int flag = 0;
-
-  void _changed(bool visibility, String field) {
-    setState(() {
-      if (field == "tag"){
-        visibilityfotos = visibility;
-      }
-    });
   }
 
   final List<Widget> imageSliders = imgList
@@ -84,73 +73,57 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
       .toList();
   @override
   Widget build(BuildContext context) {
+    final int index = int.parse(widget._activityId!);
+    late final int ay;
+    late final bool isPregnant = bool.parse(widget._isPregnant!);
+    if(isPregnant){
+      ay = int.parse(widget._activityId!) + 1;
+    }else{
+      ay = int.parse(widget._activityId!) - 8;
+    }
+
+    print("RECOX : Gelen id : ${widget._activityId}, gelen activity type : ${widget._activityType}, ay : $ay, index: $index"); //TODO dikkat 5. aya tıklayınca id 4 geliyor yani index şeklinde
     return Scaffold(
       appBar: AppBar(
-        title: const Text("2. Ay Gebelik - Etkinlik"), //TODO bu kısım buraya yönlendirirken gelecek push edilirken context.push()'a parametre olarak verilecek örneklerine router altında hangi sayfada kullanıldıysa o ayfayı açarak görebilirsin
+        title: Text("$ay. Ay ${isPregnant ? "Gebelik" : "Bebeğim" } Etkinliği"), //TODO bu kısım buraya yönlendirirken gelecek push edilirken context.push()'a parametre olarak verilecek örneklerine router altında hangi sayfada kullanıldıysa o ayfayı açarak görebilirsin
         //backgroundColor: Colors.redAccent,
       ),
-      body: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 25),
-            GestureDetector(
-              onTap: !visibilityfotos ? selectPostImage : null,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: CustomStyles.fillColor,
-                  border: Border.all(color: CustomStyles.titleColor, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: postFile != null
-                    ? ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(
-                    postFile!,
-                    fit: BoxFit.cover,
+      body: LayoutBuilder(
+        builder: (context, viewportConstraints) =>  Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const SizedBox(height: 25),
+              GestureDetector(
+                onTap: selectPostImage,
+                child: Container(
+                  height: viewportConstraints.maxHeight / 2,
+                  width: 600,
+                  //width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: CustomStyles.fillColor,
+                    border: Border.all(color: CustomStyles.titleColor, width: 1),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                )
-                    : Icon(
-                  Icons.add_a_photo,
-                  size: 50,
-                  color: CustomStyles.titleColor,
+                  child: postFile != null
+                      ? ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      postFile!,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                      : Icon(
+                    Icons.add_a_photo,
+                    size: 50,
+                    color: CustomStyles.titleColor,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            !visibilityfotos ? ElevatedButton(
-              onPressed: () {
-                if(_isButtonDisabled = true){
-                  visibilityfotos ? null : _changed(true, "tag");
-                }
-                else{
-                  //visibilityfotos ? null : _changed(true, "tag");
-                  //_isButtonDisabled = true;
-                }
-              },
-              child: const Text("Kaydet"),
-            ): Container(),
-            const SizedBox(height: 16),
-            visibilityfotos ? const Text(
-              "Diğer kullanıcıların fotoğraflarına göz at.",
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-              ),
-            ): Container(),
-            const SizedBox(height: 16),
-            visibilityfotos ?  CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
-              ),
-              items: imageSliders,
-            ): Container(),
-          ],
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );

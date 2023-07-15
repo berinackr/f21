@@ -57,6 +57,12 @@ class Categories {
         description:
         "Bebeğinizin akımı ve sizin bakımınız için neler gerekli, hangi bakımlar fayda sağlıyor ve benzeri bilgileri edinebilir, şahsi yorumlarınızı paylaşabilirsiniz.",
         photoPath: Assets.exampleCareBannerPath),
+    Category(
+        name: 'Etkinlik',
+        id: 8,
+        description:
+        "Diğer annelerin bebekleriyle gerçekleştirdiği etkinlikleri görebilir, siz de bebeğinizle gerçekleştirdiğiniz etkinlikleri burada paylaşabilirsiniz.",
+        photoPath: Assets.exampleActivitiesBannerPath),
   ];
 
   static final Map<int, Category> _categoriesById = {

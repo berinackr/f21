@@ -12,4 +12,5 @@ class Assets {
   static const examplePsychologyBannerPath =
       "assets/images/categori_development.png";
   static const exampleCareBannerPath = "assets/images/categori_care.png";
+  static const exampleActivitiesBannerPath = "assets/images/categori_acitivity.png";
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:f21_demo/core/utils.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/custom_styles.dart';
 
@@ -98,8 +97,8 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
               GestureDetector(
                 onTap: selectPostImage,
                 child: Container(
-                  height: viewportConstraints.maxHeight / 2,
-                  width: 600,
+                  height: viewportConstraints.maxWidth,
+                  width: viewportConstraints.maxWidth,
                   //width: double.infinity,
                   decoration: BoxDecoration(
                     color: CustomStyles.fillColor,

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:game_levels_scrolling_map/game_levels_scrolling_map.dart';
@@ -133,7 +132,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
         });
       }
     }
-    int flag = 0;
+
     for (int i = 1; i < 34; i++) {
       if(i > 9){
         if(i < current){
@@ -157,8 +156,6 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
           points.add(PointModel(100, testWidget(i, 0)));
         }
       }
-
-      //points.add(PointModel(100, testWidget(i)));
     }
   }
 

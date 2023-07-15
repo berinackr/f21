@@ -5,6 +5,7 @@ import 'package:f21_demo/features/auth/screens/register_screen.dart';
 import 'package:f21_demo/features/home/screens/guest_home_bottom_screen.dart';
 import 'package:f21_demo/features/profile/widgets/profile_screen_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/providers/settings_repository.dart';
@@ -42,6 +43,9 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
         body: bottomBarList[0],
         appBar: AppBar(
           backgroundColor: CustomStyles.primaryColor,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color(0xffFF8551),
+          ),
           actions: [
             IconButton(
               onPressed: () {

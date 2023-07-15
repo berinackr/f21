@@ -77,7 +77,7 @@ class ForumScreen extends StatelessWidget {
                                           context.push('/forum/${e.id}');
                                         },
                                       ),
-                                      TextButton(
+                                      e.id != 8 ? TextButton(
                                         style: TextButton.styleFrom(
                                           foregroundColor: Colors.transparent,
                                         ),
@@ -89,7 +89,7 @@ class ForumScreen extends StatelessWidget {
                                         onPressed: () {
                                           context.push('/forum/${e.id}/share');
                                         },
-                                      ),
+                                      ) : Container(),
                                     ],
                                   ),
                                 ],

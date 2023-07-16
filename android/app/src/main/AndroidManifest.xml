@@ -2,7 +2,7 @@
     package="com.example.f21demo.f21_demo">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="f21_demo"
+        android:label="Biberon App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

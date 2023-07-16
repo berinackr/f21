@@ -52,7 +52,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   timeago: ^3.4.0
   readmore: ^2.2.0
-  shared_preferences: ^2.1.2
+  shared_preferences: ^2.2.0
   flutter_markdown: ^0.6.15
   google_mobile_ads: ^3.0.0
   cached_network_image: ^3.2.3
@@ -64,6 +64,10 @@ dependencies:
   game_levels_scrolling_map: ^0.0.7
   firebase_remote_config: ^4.2.4
   flutter_dotenv: ^5.1.0
+  google_fonts: ^5.1.0
+  image_picker: ^1.0.1
+  screenshot: ^2.1.0
+  image_gallery_saver: ^2.0.3
 dependency_overrides:
     xml: ^6.1.0
 

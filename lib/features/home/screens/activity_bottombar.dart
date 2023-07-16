@@ -23,38 +23,38 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
 
   var etkinlik_list = [
     "Gebelik yolculuğunuzun ilk ayında, bebeğinizle bağınızı güçlendirmek için ona bir mektup yazın! Ona anne karnındaki maceraları ve hislerinizi anlatın, gelecekte birlikte yapmak istediğiniz şaşırtıcı planları paylaşın. Yazılan her harf, büyülü bir bağın başlangıcı olacak. Bebeğinize eğlenceli bir selam gönderin!",
-    "2ccccccc",
-    "3<<<<<<<<<",
-    "4qqqqqqqqqqq",
-    "5ccccccc",
-    "6<<<<<<<<<",
-    "7qqqqqqqqqqq",
-    "8ccccccc",
-    "9<<<<<<<<<",
-    "1qqqqqqqqqqq",
-    "2ccccccc",
-    "3<<<<<<<<<",
-    "4qqqqqqqqqqq",
-    "5ccccccc",
-    "6<<<<<<<<<",
-    "7qqqqqqqqqqq",
-    "8ccccccc",
-    "9<<<<<<<<<",
-    "10qqqqqqqqqqq",
-    "11ccccccc",
-    "12<<<<<<<<<",
-    "13qqqqqqqqqqq",
-    "14ccccccc",
-    "15<<<<<<<<<",
-    "16qqqqqqqqqqq",
-    "17ccccccc",
-    "18<<<<<<<<<",
-    "19qqqqqqqqqqq",
-    "20ccccccc",
-    "21<<<<<<<<<",
-    "22qqqqqqqqqqq",
-    "23ccccccc",
-    "24<<<<<<<<<",
+    "Bebeğiniz ve sizin için sakin, huzurlu bir gebelik dönemi en güzelidir. Sizi sakinleştirecek bir etkinlik planı: Bir bitki yetiştirmeye başlayabilirsiniz. Bu hem fiziksel hem de ruhsal sağlığınızı olumlu yönde etkileyecktir. Evinizin balkonunda veya bahçenizde dilediğiniz sayıda ve çeşitte bitki alarak işe koyulun. Bu bitkileri ekerken bir kare paylaşmanızı rica ediyoruz. Bebeğinizin ve bitkinin büyümeye beraber başlaması bu dönemi keyifli hale getirecektir.",
+    "Bebeğinize kavuşmanızı daha 7 ay var. Peki bebekler hakkında neler biliyorsunuz? Kendinize bebek gelişimi ve bakımı hakkında güzel bir kitap almanın tam sırası! Bebeğinize daha iyi yardımcı olabilmek, şimdiki ve ilerleyen dönemlerde sizi neler beklediğini öğrenmek ve bilinçli bir anne adayı olmak için harika bir etkinlik! Sana bu konularda yardımcı olacak başucu kitabını seç ve bizimle keyifli bir okuma anını paylaş.",
+    "Yeni bir ay, yeni bir etkinlik! Bu kez farklı olacak sanırım. Bu ay bebeğinizin cinsiyetini öğreneceksiniz ve heyecanlısınız. Göbeğinize bebeğiniz kız olacaksa sevimli ve güzel bir çiçek, erkek olacaksa yakışıklı ve tatlı bir araba çizerek bizimle paylaş. Bebeğiniz bu ay cinsiyetini göstermemekte ısrarcıysa kocaman bir soru işaretine ne dersiniz?",
+    "Gebelikte en güzel aktivitelerden birisi ile tanışmaya hazır mısınız? Belki de tanışmışsınızdır. Yoga hareketleriyle kan dolaşımınızı arttırarak bebeğinizin daha iyi beslenmesini ve gelişmesini sağlayabilirsiniz.  Dilerseniz evde küçük bir ekipman edinerek, dilerseniz bir yoga kursuna giderek işe koyulabilirsiniz.(Evde yoga yapacaksanız, asgari haftada iki gün öneririz.) Yoga sonrası keyifli  bir anını bizimle paylaş! Sağlıklı bir ay olsun!",
+    "Bu ay en sevdiğimiz şeylerden birini yapıyoruz. Ne mi? Bebeğinizin odasını dekore etmeliyiz! Dilediğiniz şekilde, renkte ister bol oyuncaklı, ister yalın ve hoş bir dekorasyon yapmak size kalmış! Bebeğinize en yakışanı seçeceğinizden eminiz.Odayı dekore etmeye başla, bizimle keyifli bir anını paylaş.Şimdiden kolay gelsin!",
+    "Bu ay hamileliğiniz daha da ilerledi. Sizi rahat ve güzel bir doğum yapmak için yürüyüşe davet ediyoruz. İyi hissettiğiniz bir günde ,sakin ve keyifli bir yürüyüş ile güzel vakit geçireceksiniz! Gebelikteki şişlikler düzenli egzersiz ve yürüyüşler  ile azalacaktır. Bizimle yürüyüş rotanın ve senin olduğun bir anını  paylaş! Yürüyüşe piknik ile noktalamak keyifli olacaktır, bizden tavsiye!",
+    "Bebeğiniz ve siz umarız iyisinizdir,  daha yorucu bir dönemden geçmektesiniz. Biraz daha dinlenebileceğiniz ve size huzur verecek aktiviteler yapacağınız bir ay dileriz. Bu ay yapacağımız etkinliğe bayılacaksınız! Bebeğinizin o minik ayakları sıcak kalsın diye minik bir patik örmeye ne dersiniz? Dilediğiniz renkte bir ip alarak işe koyulun. Bebeğinizin tenine zarar vermeyecek bir ip olması çok önemli!  Elinizin emeği tatlı bir patik harika olacak! Bizimle patiği ördüğün keyifli bir anını paylaşmayı unutma",
+    "Doğuma az kaldı diyebiliriz. Çok heyecanlı bir ay! Umarız siz ve bebeğiniz sağlıklı ve iyi bir doğum süreci yaşarsınız. Bu ay son gebelik döneminiz. Bu yolculuğun sonuna yaklaştınız! Bizimle şık, kendini güzel bulduğun ve dilediğin yerde çekildiğin bu aya ait bir fotoğrafını paylaş. Bu son ayı da yine güzel kare ile bitir! Bu arada, her son bir başlangıçtır! Belki biraz daha yorucu fakat çok çok eğlenceli ve keyifli günler gelecek!",
+    "Dokuz aylık beraberlikten sonra işte karşınızda bebeğiniz! Umarız sağlıklı bir doğum geçirmişsinizdir ve bebeğiniz çok iyidir. Bebeğiniz şimdi de kucağınızda büyümeye devam edecek. Onun her güzel anına tanıklık etmek isteyeceksiniz. Sizlerden bu yeni hayatınızda bebeğiniz hakkında duygularınızı ve düşüncelerinizi belirttiğiniz anlamlı bir kaç paragraf yazmanızı istiyoruz. Güzel bir ay olsun!",
+    "Bu ay bebeğiniz için temalı bir fotoğraf çekimi yapmalıyız, çok heyecanlı! Bebeğinizi düz ve rahatsız olmayacağı bir yere yatırın ve havuç renginde yani turuncu renkte bir örtü ile kundaklayın. Kundaklarken tıpkı havuca benzer şekilde ayak kısmından örtüyü biraz daha uzatıp sarabilirsiniz. Bebeğinizi çok sıkmadığınızdan emin olun. Kafasına minik berelerinden yeşil olanını takıp başının üstüne de havucun üst kısmındaki yaprakları andıracak yapraklar ekleyin. İpucu verelim:  Maydanoz veya dereotu iyi olurdu. Şimdi minik bebeğiniz tatlı minik bir havuca benzemeli. Yanına dilediğiniz yeşil renkte bir nesne ile “2” rakamı yazarak fotoğraf çekin ve bizimle paylaşın. Nasıl göründüğünü şimiden merak ediyoruz. Keyifli bir ay olsun!",
+    "Temalı fotoğraf serimizin üçüncüsü geliyor! Bebeğiniz üç aylık oldu bile! Bebeğinizi düz bir alan yatırmalısınız ve rahat olmalı. Bu ay ki temamız biraz farklı, öncelikle mavi renkte herhangi bir nesne bulup, bebeğinizin yanına bunun ile “3” rakamı yazmalısınız. Şimdi son bir iş kaldı bebeğinizin diğer yanına geçerek minicik eline bir şemsiye tutuşturun, dilerseniz bebeğinizin cinsiyetine göre pembe veya mavi şemsiye kullanabilirsiniz. Tam fotoğraflık bir kare oldu! Bu güzel fotoğrafı bizlerle paylaşın. Eğlenceli ve bol bol bebeğinizi keşfedeceğiniz bir ay olsun!",
+    "Merhabalar! Umarız bebeğiniz ve siz gayet iyi ve sağlıklısınızdır. Bebeğiniz bu ay daha bilgili olacak! Bu ay ki etkinliğimiz bilge bir minik yaratmak. Bebeğinizi rahat edebileceği güvenli düz bir zemine yatırın. Evinizde bulunan bir kaç kitabı alarak bebeğinizin yanına götürün. Bebeğinizi dilerseniz kitabı açıp ortasına yatırabilir, dilerseniz kitapları yastık gibi kullanarak konumlandırabilirsiniz. Her nasıl olursa olsun bebeğiniz kafasının acımaması için bir minik yastık kullanmanızı tavsiye ediyoruz. Bir de okuma gözlüğü taktığınızda minik bilge hazır olacak. Bu etkinliği o uyurken sakince yapmanız sizin işinizi kolaylaştıracaktır. Bu karenin yanına kalemlere “4” rakamı çizmeyi unutmayın! Bu tatlı kareyi bizimle paylaşın.Güzel bir ay olsun!",
+    "Selamlar! Yeni bir ay başlıyor ve heyecan dolu anlar bizi bekliyor! Bu ay serimize güzel bir tema daha ekleniyor: Balonlar! Bebeğinize düz bir alana güvende olacak şekilde yatırın ve yan tarafına bebeğinizin renkli giysileri ile “5” rakamını yazın. Daha sonra öteki yanına geçerek eline beş farklı renkte balon tutuşturun. Bebeğiniz balonlar ile tanışacağı için biraz heyecanlı ve sabit durmak istemeyebilir! Bu zor görev için şimdiden başarılar.Dilerseniz beyaz renkli herhangi bir örtü benzeri eşya kullanarak bulut ekleyebilirsiniz. Fotoğrafınızı paylaşmayı lütfen unutmayın!",
+    "Bebeğiniz gün geçtikçe büyüyor. Sanırım bu ay sizlere yemek masasında eşlik edebilir çünkü ek gıdaya başlayabilir. Bunu bir etkinlik ile kutlamalıyız! Bu ayın etkinliği için gerekenler; bebeğinizin sığacağı ve rahatsız olmayacağı bir sepet ile bir kaç mevsime uygun meyve-sebze. Sepeti düz bir zemine bıraktıktan sonra içine bebeğinizi rahat edebileceği bir pozisyonda yerleştirin. Sepet ile bebeğiniz arasına yumuşak bir örtü koymanızı öneririz. Sepetin kenarlarına ve bebeğinizin üstüne elinizdeki meyve-sebzeleri yerleştirin. İşte sizin için en harika sepet! Şimdi bebeğinizi biraz neşelendirip güzel bir kare yakalama zamanı! Eğlenceli fotoğraflarınızı bekliyoruz. Tadımların getireceği yüz ifadeleri de eğlenceli olacaktır.Öyleyse bol tadımlar!",
+    "Bu tema en güzellerinden biri! Bebeğinizi temiz minik bir kovanın daha iyisi saksıya benzer bir kovanın içine oturtun, başına bandana gibi takılabilecek, bebeğinizin kafasını sıkmayacak ve çiçeğin yapraklarını andıracak renkli bir nesne yerleştirin. Biraz geri çekilip baktığınızda bebeğiniz saksıda bir çiçeğe mi benziyor? Tam isabet! Dilerseniz yine konsepte uygun bir nesne ile “7” rakamını kullanabilirsiniz. Biraz da çiçeğinizi güldürebilirseniz harika bir kare olacak! Muhteşem konsept fotoğraflarınızı bekliyoruz. Heyecan verici bir etkinlik olsun. Mutlu bir ay dileriz.",
+    "Sekizinci aya geldik bile! Bebeğinize ve size şimiden sağlıklı ve mutlu bir ay dileriz. Bu ay bebeğiniz için harika bir etkinliğimiz var! Bebeğinizi düz ve güvenli bir zemine oturtun. Bebeğinizi dilediğiniz sevimli bir hayvan dönüştürün! Panda, kurbağa,civciv, tavşan, kedi, kuş, aslan aklınıza ne geliyorsa… En tatlı anını fotoğraflayarak bizimle paylaşın. Dilerseniz diğer minik sevimli hayvan oyuncakları da temaya eşlik edebilir.",
+    "Temalı fotoğraf serimize devam ediyoruz. Bu hem eğlenceli hem de bebeğiniz ve sizin iletişiminizi-bağınızı güçlendiren etkinliklerde şimdi sıra sizde. Bu ay ki konsept ne mi? Siz karar vereceksiniz. Dilediğiniz konseptte bir an yalayıp bizimle paylaşın. Bir anne olarak yaratıcılığınızı konuşturma zamanı!",
+    "Bir önceki ayda harika iş çıkardınız, herkese tebrikler! Bu ay bebeğiniz biraz daha büyüdü ve artık yürümek için çabalıyor. Güzel bir heyecan yaşayabilirsiniz! Bu ay kızınızı/oğlunuzu prenses/prens ilan ediyoruz! Düz ve tek renk bir zemine bebeğinizi oturtun. Kızınız varsa tütü giydirip başına bir taç takabilirsiniz. Oğlunuz varsa bir papyon takabilir ve sarı kartondan basit bir kral tacı çizerek kesip başına bir taç takabilirsiniz. İşte prenses ve prensler hazır! En güzel/En yakışıklı fotoğraflarınızı bekliyoruz. Güzel bir ay olsun!",
+    "Yeniden merhaba. Bebeğiniz büyümeye devam ediyor haliyle oyuncak sayısında da epey artış vardır. Bu ay ki etkinlikte düz ve tek renk bir zeminde bebeğinizi oturtun ve etrafına oyuncaklarını yerleştirin. Oyuncakları ister dağınık ister “11” rakamını oluşturacak şekilde yerleştirin. Dilerseniz bebeğinizin bir oyuncağını incelerken ki o meraklı bakışlarını veya en sevdiği oyuncağı ile bağını yakalayabilirsiniz. Bu eğlenceli anı bizimle paylaşın. Sağlıklı ve güzel bir ay dileriz.",
+    "Selamlar! Bu ay ki etkinliği tahmin edebileceğinizi düşünüyoruz. Bebeğiniz bu ay ilk yaşına basıyor. Onun ilk yaşını kutlamak çok eğlenceli ve keyifli olacak. Ne çabuk büyüdü değil mi? Bebeğinizin doğum gününü kutladığınız en mutlu anlarınızdan birisini bizimle paylaşın. Bizlerde tatlı bebeğinizin doğum gününü kutluyor, sağlıklı ve mutlu bir gelecek diliyoruz. Happy Birthday to your baby!",
+    "Umarız bebeğiniz ve siz iyisinizdir. Bu ay ki etkinliğimiz çekirdek ailenizi kapsıyor. Bebeğiniz, siz, baba varsa kardeşler ellerinizi boyamaya ne dersiniz? Bu etkinlikte isteyen istediği renk ile avuç içini ve parmaklarının iç tarafını boyuyor, daha sonra resim kağıdına elini kurumadan bastırıyor. Ailede kimler var, hangi renkler en sevilenler görelim mi? Yaptığınız bu resim ile dilerseniz ailenizle birlikte fotoğraf çekilerek paylaşın. Çok güzel aile fotoğrafları olacak!",
+    "Merhabalar! Bu ayın aileniz için güzel geçmesini dileriz. Etkinliklerimize şimdi yine anne ve bebeği katarak  devam edeceğiz. Bu ay anne ördek ve civcivi olmak ister misiniz? Bu ayın etkinliği dilediğiniz bir hayvanı seçip bebeğinizi ve kendinizi o sevimli hayvana benzetmeye çalışmak olacak. Tam vakvaklarken fotoğrafınızı çekmeyi ve eğlenmeyi unutmayın, yoksa miyavlarken mi demeliydim? Basit bit bıyık ile kedigillerden bile olabilirsiniz, fikirler size kalmış! Bol eğlenceler o zaman!",
+    "Selamlar! Bu ay bebeğiniz ile bir keşif oyunu oynayacağız! Tabi dilerseniz siz de eşlik edebilirsiniz. Bebeğinizi düz ve yakın durabileceği sabit bir aynanın karşısına oturtunuz. Arkasını desteyebilir veya aynanın ona zarar vermeyeceğinden emin olmalısınız. Bebeğiniz kendini aynada keşfetmeye başlayacaktır. Onun o heyecanlı ve şaşkın bir anını fotoğraflayarak bizimle paylaşın! Şimdiden Bol keşifler!",
+    "Herkese merhaba! Bu ayın çok güzel geçmesini ve sağlıklı ve heyecanlı bir ay olmasını dileriz. bu ay bebeğiniz ve sizi birak ıslatmaya karar verdik. Mevsime göre havuz, şişme havuz, küvet hangisi sizin için uygunsa suyu doldurmaya başlayın! Bebeğinizin dikkatini çekebilecek ve suda batmayacak renkli birkaç oyuncak veya nesne suya atın. Şimdi bebeğiniz bu nesneleri yakalamaya çalışacak ve el-göz kordinasyonu sağlaması gerekecek. Onun bu mutlu ve gelişen anını bizimle fotoğraf çekerek paylaşın!",
+    "Bu ay ki etkinliğimizde çok keyifli vakitler geçireceksiniz! Bebeğinize ait bir sanat eserine ne dersiniz? Bu ay yenebilir-yıkanabilir bebek boya kalemleri ve bir resim defteri ile şapkaya ihtiyacımız var! Bebeğinizi düz bi zemine oturtun veya destekli yatırın, önüne resim defterini açın ve kalemleri bırakın. Bakalım neler olacak! Belki biraz ona sanat eserinde ve çizmekte yardımcı olabilirsiniz. Bebeğinizin eğlendiği ve başında sanatçıların taktığı yan duran bir şapka ile fotoğrafını çekin ve bizimle paylaşın. Mutlu bir ay olsun!",
+    "Selamlar! Etkinliğimiz biraz bebeğinizi zorlayabilir, ee hazine avcısı olmak kolay değil! Bu ay bebeğinizin sevdiği ve biraz iri oyuncaklarını bebeğinizi ucunu, köşesini ufak bir yerini görebileceği şekilde bir odaya gizliyoruz. Ve şimdi hazine avı başlasın! Bebeğiniz oyuncakları bulmaya çalışacak, belki ilki için ona yardımcı olabilirsiniz. Ganimetlerini topladıktan sonra, bebeğinize bir korsan göz bandı takarak mutlu olduğu bir anın fotoğrafını çekin ve bizimle paylaşın!",
+    "Herkese mutlu bir ay dileriz! Bu ay ki etkinliğimiz biraz da yetişkinlerle ilgili desek? Bu ay bebek ya da büyük herkesin hoşuna giden o yastık ve battaniyelerle ev yapma etkinliği var! Gerekli battaniye, minder ve yastıkları toplayın ve çadır benzeri bebeğinizin ve sizin içine girebileceğiniz eğlenceli bir ortam hazırlayın. Bu çok eğlenceli kareyi fotoğraflayarak bizlerle paylaşmayı unutmayın! İyi eğlenceler!",
+    "Güzel geçen etkinliklerimize bir yenisi daha ekleniyor! Bu ay siz annelerle biraz üreteceğiz. Bebeğiniz büyüdü ve meraklı, kaşif bir miniğe dönüştü. Bebeğinize minik birkaç tane parmak kuklası yaparak onun merakını azaltmaya ve dikkat çekmeye ne dersiniz? Bebeğinize kağıttan veya bezden 5 tane istediğiniz şekilde parmak kuklası hazırlayın. Bu kuklaları bir elinizin parmaklarınıza geçirin ve fotoğraflayın. Dilerseniz bebeğinize elinizi gösterdiğinizdeki ilginç tepkisi ile de bir kare paylaşabilirsiniz. En iyi kuklaları anneler yapar!",
+    "Kuklalar harikaydı anneler! Hepsini çok beğendik! Şimdi sırada yine kesme yine renkler var. Bu ay küçükken öğrendiğimiz ve uçak yapımı olarak bilinen uçaklardan yapacağız. Renkli kağıtlar kullanarak veya dilediğiniz renklere kağıtları boyayarak küçüklü büyüklü 5-10 tane basit uçak yapın. Havanın fena olmadığı ve rüzgarında bulunduğu bir günde dışarı çıkın ve bebeğinizle bu uçurtmaları tepe sayılabilecek bir yerden aşağı doğru uçurun. Bu etkinlik için eşiniz veya arkadaşlarınızdan destek alabilirsiniz. Hem bebeğiniz ile ilgilenmek hem uçurtma uçurtmak hem de fotoğraflamak biraz zor olabilir.  Bu eğlenceli anı bizimle paylaşın. Keyifli uçuşlar!",
+    "Selamlar! Bu etkinliğimizde sizleri yormama kararı aldık! Birkaç etkinliktir anneler çok girişken şimdi sıra bebeklerinizde! Bu ayn sabunlu su ile yapılan şu basit baloncuk yapan oyuncaktan bir iki tane alınız. Ve birinden de destek alarak iki kişi bebeğinizin üstüne bu baloncukları üfleyin! Bebeğiniz çok eğlenecek! Bu anı fotoğraflayarak bizlerle paylaşın. Tüm ay eğlenceli geçer umarız!",
+    "Bebeğiniz ve sizler için tasarladığımız bu etkinlik serüvenimiz ne yazık ki bitmek üzere. Bu ay bebeğinize bir oyuncak yapmaya ne dersiniz? Bebeğinize ister kartondan ister bezden isterseniz başka bir materyalden yaratıcı bir oyuncak yapın! Onu geliştirecek, renki bir el yapımı oyuncak harika olacak! Bebeğinizin bu oyuncak ile oynarken fotoğrafını çekin ve bizimle paylaşın. Yaratıcılık işi siz annelerde! Şimdiden kolay gelsin!",
+    "Bu ay bebeğiniz 2 yaşına basıyor. Bu süreçte bir çok eğlenceli vakit geçirdik! Sizlere çok teşekkür ederiz. Güzel bir doğum günü karesi ile vedalaşma vakti geldi. Umarız bebeğinizin sağlıklı, mutlu ve başarılı bir yaşamı olur. Doğum gününü kutlarız ve güzel bir ay dileriz. Hoşça kalın!",
   ];
 
   @override
@@ -166,36 +166,6 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
         }
       }
     }
-
-
-
-
-
-    /*for (int i = 1; i < 34; i++) {
-      if(i > 9){ //TODO sanırım burası doğumdan sonrası
-        if(i < current){
-          points.add(PointModel(100, testWidgetPass(i-9, 1))); //TODO (order, flag) order kaçıncı ay olduğunu hesaplamada kullanılıyor
-        }
-        if(current == i && !user.isPregnant!){
-          points.add(PointModel(100, testWidgetCurrent(i-9, 1)));
-        }
-        else{
-          points.add(PointModel(100, testWidget(i-9, 1)));
-        }
-      }
-      else{ //TODO Burası da doğumdan öncesi i<9
-        if(i < current){
-          points.add(PointModel(100, testWidgetPass(i, 0))); //TODO tamamlanan
-        }
-        else if(current == i){
-          points.add(PointModel(100, testWidgetCurrent(i, 0))); //TODO şuanki aktivite
-        }
-        else{
-          points.add(PointModel(100, testWidget(i, 0))); //TODO kiilitli aktivite
-        }
-      }
-    }*/
-
   }
 
   Widget lockedActivity(int ay, bool isPregnant) { //TODO kilitli aktivite
@@ -222,7 +192,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       onTap: () {
         showModalBottomSheet(
           context: context,
-          shape: const RoundedRectangleBorder( // <-- SEE HERE
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(25.0),
             ),
@@ -253,19 +223,16 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                     ),
                   ),
                   const SizedBox(height: 100),
-                  Row(
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
-                        child: const Text('Kapat'),
-                        onPressed: () {},
-                      ),
-                      const ElevatedButton(
                         onPressed: null,
                         child: Text('Etkinliğe Başla'),
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                 ],
               ),
             );
@@ -274,7 +241,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
-  Widget currentActivity(int ay, bool isPregnant) { //TODO kilitli gelecek aktivite
+  Widget currentActivity(int ay, bool isPregnant) {
     String baslik = "Gebelik $ay. Ay Etkinliği";
     String btnYazisi = "\nGebelik\n$ay.Ay";
     int index = ay - 1;
@@ -300,7 +267,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       onTap: () {
         showModalBottomSheet(
           context: context,
-          shape: const RoundedRectangleBorder( // <-- SEE HERE
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(25.0),
             ),
@@ -347,12 +314,11 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
                         ),
                         child: const Text('Etkinliğe Başla', style: TextStyle(color: Colors.black)),
                         onPressed: () {
-                          context.push("/home/$index/${getActivityType(index)}/$isPregnant"); //TODO index 0'dan başlıyor
+                          context.push("/home/$index/${getActivityType(index)}/$isPregnant");
                         },
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 16),
                 ],
               ),
@@ -362,7 +328,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
-  Widget pastActivity(int ay, bool isPregnant) { //TODO şuanki aktivite
+  Widget pastActivity(int ay, bool isPregnant) {
     String baslik = "Gebelik $ay. Ay Etkinliği";
     String btnYazisi = "\nGebelik\n$ay.Ay";
     int index = ay - 1;
@@ -388,7 +354,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       onTap: () {
         showModalBottomSheet(
           context: context,
-          shape: const RoundedRectangleBorder( // <-- SEE HERE
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(25.0),
             ),
@@ -460,7 +426,7 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
   }
 
   String getActivityType(int index){
-    if(index == 0 || index == 9){ //TODO bana index olarak almamış gibi geldi sanki +1 koymuş o neenle böyle yaptım hatalı gelirse 0'a 8 ver
+    if(index == 0 || index == 9){
       return 'text_activity';
     }else{
       return 'photo_activity';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomStyles {
   static late Color backgroundColor;
-  static Color primaryColor = Color(0xffFF8551);
+  static const Color primaryColor = Color(0xffFF8551);
   static const Color buttonColor = Color(0xffFFDEDE);
   static late Color fillColor;
   static const Color errorColor = Colors.red;

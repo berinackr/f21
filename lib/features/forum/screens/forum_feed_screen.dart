@@ -34,7 +34,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    final categoryName = Categories.getCategoryNameById(int.parse(widget.id));
+    final categoryName = Categories.getCategoryNameById(int.parse(widget.id)); //TODO Burada name etkinilkler ise share butonu gözükemsin
     scrollController.addListener(() {
       double maxScroll = scrollController.position.maxScrollExtent;
       double currentScroll = scrollController.position.pixels;
@@ -67,7 +67,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
           ),
           IconButton(
             onPressed: () {
-              context.push('/forum/${widget.id}/share');
+              context.push('/forum/${widget.id}/share'); //TODO Önce forum bilgileirni ekle Bu da kategori etkinikler ise paylaşma false invisible
             },
             icon: const Icon(Icons.add_circle_outline_sharp),
           ),

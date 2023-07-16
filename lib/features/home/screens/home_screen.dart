@@ -186,18 +186,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       ),
                                       ListTile(
                                         leading: const Icon(
-                                          Icons.camera,
-                                        ),
-                                        title: const Text('Fotoğraflarım'),
-                                        onTap: () {
-                                          // Update the state of the app
-                                          // ...
-                                          // Then close the drawer
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(
                                           Icons.settings,
                                         ),
                                         title: const Text('Ayarlar'),
@@ -214,18 +202,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         title: const Text('Çıkış yap'),
                                         onTap: () {
                                           logOut(ref);
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      ListTile(
-                                        leading: const Icon(
-                                          Icons.delete,
-                                        ),
-                                        title: const Text('Hesabı sil'),
-                                        onTap: () {
-                                          // Update the state of the app
-                                          // ...
-                                          // Then close the drawer
                                           Navigator.pop(context);
                                         },
                                       ),

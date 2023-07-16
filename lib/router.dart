@@ -6,6 +6,7 @@ import 'package:f21_demo/features/forum/screens/forum_feed_screen.dart';
 import 'package:f21_demo/features/forum/screens/forum_screen.dart';
 import 'package:f21_demo/features/forum/screens/post_screen.dart';
 import 'package:f21_demo/features/forum/screens/share_post_screen.dart';
+import 'package:f21_demo/features/home/screens/activity_screen.dart';
 import 'package:f21_demo/features/home/screens/guest_home_screen.dart';
 import 'package:f21_demo/features/home/screens/home_screen.dart';
 import 'package:f21_demo/features/auth/screens/forgot_password_screen.dart';
@@ -31,7 +32,12 @@ final routerProvider = Provider<GoRouter>((ref) {
     debugLogDiagnostics: true,
     routes: [
       GoRoute(path: "/", builder: (context, state) => const LoadingScreen()),
-      GoRoute(path: "/home", builder: (context, state) => const HomeScreen()),
+      GoRoute(path: "/home", builder: (context, state) => const HomeScreen(), routes: [
+        GoRoute(
+          path: ':activity_id/:activity_type/:pregnancy',
+          builder: (context, state) => ActivityScreen(activityId: state.pathParameters["activity_id"], activityType: state.pathParameters["activity_type"], isPregnant: state.pathParameters["pregnancy"]),
+        ),
+      ]),
       GoRoute(
         path: '/home/profile',
         builder: (context, state) => const ProfileScreen(),

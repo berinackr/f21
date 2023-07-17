@@ -84,12 +84,12 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                             alignment: Alignment.center,
                             child: ReadMoreText(
                               //buradaki textleri başka bir classtan haftalık düzeni kontrol ederek çekeceğiz.
-                              'Çocukların sağlıklı gelişimi için düzenli beslenme, '
-                              'yeterli uyku ve oyunlaştırılmış öğrenme ortamları sağlamak önemlidir.'
-                              ' Ayrıca, çocukların sağlıklı gelişimini desteklemek için düzenli uyku alışkanlıkları '
-                              'oluşturulmalı ve yaşlarına uygun uyku süresi sağlanmalıdır. Bunun yanı sıra, çocuklara'
-                              ' oyunlaştırılmış öğrenme ortamları sunularak keşfetme, sosyal etkileşim ve yaratıcılık'
-                              ' becerileri geliştirilmelidir.',
+                              'Gebeler son aya kadar ayda bir kes, son ay ise 15 günde bir kez kontrol için doktoruna gitmelidir. '
+                              'Gebelik sürecinde 9 ila 11 kg arası kilo almak sağlıklı bir durumdur.'
+                              'Ve her annenin kesinlikle sütü vardır. Bebeği için en sağlıklı gıda anne sütüdür.'
+                              'Emzirme döneminde meme başı temizliğine önem verilmelidir.'
+                              'Bebek uygun pozisyonda tutularak emzirilmelidir.\n'
+                              'Dr. İbrahim BAYLAV',
                               trimLines: 5,
                               textAlign: TextAlign.center,
                               trimMode: TrimMode.Line,

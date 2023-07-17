@@ -18,7 +18,13 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = FirebaseRemoteConfig.instance.getString("api_key");
+      final remoteConfig = FirebaseRemoteConfig.instance;
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(hours: 1),
+      ));
+      String apiKey = remoteConfig.getString("api_key");
+      print(apiKey);
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {

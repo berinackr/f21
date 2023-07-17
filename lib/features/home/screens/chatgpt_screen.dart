@@ -25,8 +25,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
         fetchTimeout: const Duration(minutes: 1),
         minimumFetchInterval: const Duration(hours: 1),
       ));
-      String apiKey = remoteConfig.getString("api_key");
-      print(apiKey);
+      String apiKey = "sk-$x1$x2";
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {

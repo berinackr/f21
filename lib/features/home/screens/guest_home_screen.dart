@@ -43,7 +43,7 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
         body: bottomBarList[0],
         appBar: AppBar(
           backgroundColor: CustomStyles.primaryColor,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Color(0xffFF8551),
           ),
           actions: [
@@ -79,7 +79,7 @@ class _GuestHomeScreenState extends ConsumerState<GuestHomeScreen> {
                                         context, viewportConstraints, ref);
                                   },
                                   arrowColor: Colors.transparent,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: CustomStyles.primaryColor),
                                   accountName: const Text(
                                     "Misafir Kullanıcı",

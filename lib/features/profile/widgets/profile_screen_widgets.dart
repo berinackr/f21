@@ -44,7 +44,7 @@ void showProfilePopUp(
                           NetworkImage(currentUserInfo!.profilePic!),
                     )),
               ),
-              Text(currentUserInfo?.username ?? "Misafir Kullanici"),
+              Text(currentUserInfo.username ?? "Misafir Kullanici"),
               Text(currentUser!.email ?? "misafir@biberon.app"),
               ElevatedButton(
                   onPressed: () {

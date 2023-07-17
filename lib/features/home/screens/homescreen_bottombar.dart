@@ -35,7 +35,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
       builder: (context, constraints) {
         return SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
@@ -51,34 +51,37 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                         WaveContainer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Row(
-                            children: [
-                              const SizedBox(width: 25),
-                              Image.asset(
-                                "assets/images/doctor.png",
-                                width: 40,
-                                color: CustomStyles.forumTextColor,
-                              ),
-                              const SizedBox(width: 10),
-                              const Text(
-                                "Haftanın Doktor Önerisi",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Row(
+                              children: [
+                                const SizedBox(width: 25),
+                                Image.asset(
+                                  "assets/images/doctor.png",
+                                  width: 40,
+                                  color: CustomStyles.forumTextColor,
                                 ),
-                              ),
-                              const SizedBox(width: 10),
-                              Icon(
-                                Icons.favorite,
-                                size: 40,
-                                color: CustomStyles.forumTextColor,
-                              ),
-                            ],
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "Haftanın Doktor Önerisi",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Icon(
+                                  Icons.favorite,
+                                  size: 40,
+                                  color: CustomStyles.forumTextColor,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.all(10),
-                          child: Align(
+                          child: const Align(
                             alignment: Alignment.center,
                             child: ReadMoreText(
                               //buradaki textleri başka bir classtan haftalık düzeni kontrol ederek çekeceğiz.
@@ -93,7 +96,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               trimMode: TrimMode.Line,
                               trimCollapsedText: "Devamını Oku",
                               trimExpandedText: "Küçült",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                               ),
                               lessStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
@@ -121,59 +124,64 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                     child: Column(
                       children: [
                         WaveContainer(),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Forum',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Forum',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyin, soru sorun, cevap yazın ve iletişime geçin.",
+                                  style: TextStyle(
+                                    fontSize: 18,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => const ForumScreen()));
-                                  },
-                                  child: Container(
-                                    height: 80,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ForumScreen()));
+                                },
+                                child: Container(
+                                  height: 80,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ForumScreen()));
+                                },
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: CustomStyles.fillColor,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 10,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/forum_icon.png',
                                     width: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: CustomStyles.fillColor,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/forum_icon.png',
-                                      width: 80,
-                                      color: Colors.amber,
-                                    ),
+                                    color: Colors.amber,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -188,58 +196,65 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                     child: Column(
                       children: [
                         WaveContainer(),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Meditasyon',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Meditasyon',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlayabilirsiniz.",
+                                  style: TextStyle(
+                                    fontSize: 18,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
-                                  },
-                                  child: Container(
-                                    height: 80,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
+                                },
+                                child: Container(
+                                  height: 80,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
+                                },
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: CustomStyles.fillColor,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 10,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/meditation_woman.png',
                                     width: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: CustomStyles.fillColor,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/meditation_woman.png',
-                                      width: 80,
-                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -272,19 +287,20 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class WaveContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
       clipper: WaveClipper(), // Dalgalı şekli oluşturan custom clipper
       child: Container(
-        color: Color.fromARGB(255, 255, 191, 169), // İlk renk
+        color: const Color.fromARGB(255, 255, 191, 169), // İlk renk
         height: 120,
         child: Stack(
           children: [
             Positioned.fill(
               child: Container(
-                color: Color(0xff9BCDD2),
+                color: const Color(0xff9BCDD2),
                 height: 80,
               ),
             ),

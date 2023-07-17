@@ -100,7 +100,6 @@ flutter:
     - assets/animations/
     - assets/texts/
     - assets/audio/
-    - .env
 
 
 

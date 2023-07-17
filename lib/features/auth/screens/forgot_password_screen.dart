@@ -34,10 +34,10 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: CustomStyles.primaryColor),
+        iconTheme: const IconThemeData(color: CustomStyles.primaryColor),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
         ),
       ),
@@ -48,7 +48,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: CustomStyles.backgroundColor,
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
                   fit: BoxFit.none,
                 ),

@@ -82,7 +82,7 @@ class AuthController extends StateNotifier<bool> {
   }
 
   void logout() async {
-    _ref.invalidate(userProvider);
+    _ref.read(userProvider.notifier).update((state) => null);
     _authRepository.logOut();
   }
 

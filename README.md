@@ -197,9 +197,7 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 [Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
 
 ![Backlog 2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/OUA-F21.jpg) 
-![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
-
-![Backlog 3]()
+![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399
 
 - **Ürün Durumu**: Ekran görüntüleri:
  ![1](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/Screenshot_1688334754.png)
@@ -224,6 +222,51 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 ---
 
 # Sprint 3
-##Soon ...
 
+- **Sprint Notları**: User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında hikayelerin detayları okunabilir.
+
+- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
+
+- **Puan tamamlama mantığı**: Toplamda proje boyunca tamamlanması gereken 300 puanlık backlog bulunmaktadır. 3. sprintte ise 100 puan olmak üzere, ekleyeceğimiz özellikler de göz önünde bulundurularak 3 adet kullanıcı hikayesi öngörülmüştür.
+
+- **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. (Benzer bir mentalite kurmalıyız. Product owner ile birlikte user stories yazılmalı)
+
+Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+## **Daily Scrums**: 
+  - ![Daily Scrum Görüntüleri 1 ](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/daily_scrum_examples_1.png)
+  - ![Daily Scrum Görüntüleri 2 ](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/daily_scrum_examples_2.png)
+  - ![Daily Scrum Görüntüleri 3 ](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/discord_days.png)
+    
+  - 8 Temmuzda Yapılan Toplantı : İlk 9 ay gebelik etkinlikleri düzenlendi. Etkininlik şablonları ve çerçeveleri oluşturuldu. Etkinlik sayfaysının bağlamı hakkında kararlar aldık.
+  - 11 Temmuzda Yapılan Toplantı : ChatGPT bağlantısı yapıldı. Prompt'u kararlaştırdık. Tamamlanan forum sayfası uygulamaya eklendi ve testleri yapıldı. Özgür, gözden kaçan bug'ları ve asıl çözeceğimizden bahsetti. Bu bugları kendi aramaızda görev paylaşımı yaparak çözdük.
+  - 15 Temmuzda Yapılan Toplantı : Genel dizayn tasarım ayarlamalarında son karalar alındı. Etkinlik ekranının lokasyonu değiştirildi. Son görev dağılımlarımızı kontrol ettik. Etkinlik fikirleri geliştirildi. Tasarım hakkında geriye dönük notlarımızı gözden geçirdik. Eren ChatGPT API Key'ini firebase ile bağladı.
+  - 17 Temmuzda Yapılan Toplantı : Bu gün retro ve review yaptık. Readme yazıp, son kontrollerimizi gerçekleştirdik. Yakaladığımız bir kaç hataya bug fix attık. Doktor'dan alınan öneriler uygulamaya dahil edildi. Bugün merge edilecek.
+
+- **Sprint board update**: Sprint board screenshotları: 
+![Backlog 1](https://raw.githubusercontent.com/akademif21/f21/main/screenshots/spirnt-board-1.png)
+[Backlog 1 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=648277809207) 
+
+![Backlog 2](https://raw.githubusercontent.com/av-erencelik/f21/main/screenshots/sprint2/OUA-F21.jpg) 
+![Backlog 2 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
+
+![Backlog 3](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/sprint3_backlog.png) 
+![Backlog 3 Miro](https://miro.com/app/board/uXjVMBQLU5Y=/?share_link_id=152133633399)
+
+- **Ürün Durumu**: Ekran görüntüleri:
+ ![1](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/uygulama_screenshots_1.png)
+ ![2](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/uygulama_screenshots_2.png)
+ ![3](https://github.com/umutakpinar/f21/blob/ce0130da81b7a1a43b08d735de56159a72892f9b/screenshots/sprint3/uygulama_screenshots_3.png)
+
+- **Sprint Review**: 
+    * Alınan kararlar: Artık ChatGPT ekranı dönemsel bilgilendirme değil de ayrı bir sayfada yer alıyor. Etkinlik sonuçları forum ekranındaki Etkinlik kategorisinde diğer anneler ile paylaşılacak şekilde ayarlandı. Tasarım renkleri baştan sona yenilendi.
+
+- **Sprint Retrospective:**
+    - UI için daha modern bir tema tasarlayabilirdik.
+    - Bildirim özelliğini eklemek için daha fazla zaman ayırabillirdik, görev ölçeklendirmek için daha uzun süre düşünülmeli.
+    - Video için daha uzun bir zaman ayırabilirdik.
+
+-**Diğer Notlar**:
+- Daily Scrums başlığı altında yazanlar Discordda görüntülü olarak toplandığımız scrumlarda alınan kararların notlarıdır. Diğer günlerde toplantılar Whatsapp üzerinden gerçekleştirildi.
+- Uygulamada bir çok özelliği eklemiş olsak da gerek akademinin sınırlandırdığı çerçeveyi aşmamak, gerekse zaman sınırlaması ve gündelik hayattaki işlerimizin yoğunluğundan dolayı uygulamayı tam anlamıyla istediğimiz ölçekte geliştiremedik. Halen eklemeyi düşündüğümüz bir çok özellik var. Örneğin online doktor danışmanı, dil desteği, ikinci veya ikiz, üçüz hamilelik ekleme, hatırlatıcı bildirimleri gibi daha iyi bir hale getirebilir ve mevcut yaptıklarımızı geliştirebilirdik. Özellikle open-source kaynakların kullanılma zorunluluğundan dolayı bazı özellikler kabul kriterlerimizi karşılamamakta. Örnek vermek gerekirse istediğimiz GPT modelini kullanabilseydik, kullanıcılar daha verimli cevaplar alabileceklerdi. Zaman sınırlamasından ve akademinin önerisinden dolayı Firebase kullandığımız için bazı fonksiyonları çıkartmak zorunda kaldık. Yine de tüm ekip birlikte çalışarak bir iş ortaya koymayı başardık. Bu bootcamp bize yeni şeyler öğretmenin yanı sıra, çok güzel dostluklar da kattı. Umuyoruz ki birlikte daha nice çalışmalar gerçekleştireceğiz.
 ---

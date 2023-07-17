@@ -37,13 +37,11 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -170,8 +168,6 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                                         EmailAuthProvider.credential(
                                             email: user.email!,
                                             password: oldPassword);
-
-                                    Future<bool> isLoading;
 
                                     await user
                                         .reauthenticateWithCredential(

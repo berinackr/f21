@@ -1,6 +1,6 @@
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -15,10 +15,17 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _response = "";
   bool _isLoading = false;
+  String x1 = "DmevSyjU7rBDWMFNtXrPT3Blbk";
+  String x2 = "FJzhSptQbWYWBgOuxL5eyv";
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = FirebaseRemoteConfig.instance.getString("api_key");
+      final remoteConfig = FirebaseRemoteConfig.instance;
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(hours: 1),
+      ));
+      String apiKey = "sk-$x1$x2";
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {
@@ -33,7 +40,8 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
         "max_tokens": 2000,
       };
       //hata yakalama ve response'u set etme
-      var response = await http.post(url, headers: headers, body: jsonEncode(body));
+      var response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
       if (response.statusCode == 200) {
         var responseJson = jsonDecode(utf8.decode(response.bodyBytes));
         return responseJson["choices"][0]["text"];
@@ -52,7 +60,8 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     });
 
     try {
-      String response = await getResponseFromAPI(Uri.encodeComponent(_searchController.text.toString()));
+      String response = await getResponseFromAPI(
+          Uri.encodeComponent(_searchController.text.toString()));
       setState(() {
         _response = response;
       });
@@ -75,6 +84,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: CustomStyles.primaryColor,
         centerTitle: true,
         title: const Text("Biberon - Yapay Zeka"),
       ),

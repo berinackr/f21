@@ -41,11 +41,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
+
     final bottomBarList = [
       MyBabyScreenBottombar(),
       const HomeScreenBottombar(),
       const ActivityScreenBottombar()
     ];
+
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -72,7 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       )
                     ],
-                    title: Text(
+                    title: const Text(
                       'Anasayfa',
                       style: TextStyle(color: Color(0xffFAF0E4)),
                     ),
@@ -101,7 +103,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                   viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 color:
                                                     CustomStyles.primaryColor),
                                             accountName: Text(
@@ -202,7 +204,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         title: const Text('Çıkış yap'),
                                         onTap: () {
                                           logOut(ref);
-                                          Navigator.pop(context);
                                         },
                                       ),
                                       const Divider(),
@@ -267,14 +268,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   bottomNavigationBar: ConvexAppBar(
                     color: Colors.grey.shade700,
-                    activeColor: Color(0xffFF8551),
+                    activeColor: const Color(0xffFF8551),
                     backgroundColor: Colors.white,
                     initialActiveIndex: bottomBarRouter.selectedIndex,
-                    items: [
+                    items: const [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
-                      TabItem(
-                          icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+                      TabItem(icon: Icons.celebration, title: 'Etkinlik'),
                     ],
                     onTap: (index) {
                       ref

@@ -34,7 +34,8 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    final categoryName = Categories.getCategoryNameById(int.parse(widget.id)); //TODO Burada name etkinilkler ise share butonu gözükemsin
+    final categoryName = Categories.getCategoryNameById(int.parse(
+        widget.id)); //TODO Burada name etkinilkler ise share butonu gözükemsin
     scrollController.addListener(() {
       double maxScroll = scrollController.position.maxScrollExtent;
       double currentScroll = scrollController.position.pixels;
@@ -67,7 +68,8 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
           ),
           IconButton(
             onPressed: () {
-              context.push('/forum/${widget.id}/share'); //TODO Önce forum bilgileirni ekle Bu da kategori etkinikler ise paylaşma false invisible
+              context.push(
+                  '/forum/${widget.id}/share'); //TODO Önce forum bilgileirni ekle Bu da kategori etkinikler ise paylaşma false invisible
             },
             icon: const Icon(Icons.add_circle_outline_sharp),
           ),
@@ -176,7 +178,7 @@ class Post extends ConsumerWidget {
   final bool isMostLiked;
 
   void upvotePost(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -187,7 +189,7 @@ class Post extends ConsumerWidget {
   }
 
   void downvotePost(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -198,7 +200,7 @@ class Post extends ConsumerWidget {
   }
 
   void bookmarkPost(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -210,7 +212,7 @@ class Post extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     final liked = user != null ? post.upvotes.contains(user.uid) : false;
     final downvoted = user != null ? post.downvotes.contains(user.uid) : false;
     final bookmarked =

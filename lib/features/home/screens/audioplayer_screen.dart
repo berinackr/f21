@@ -19,6 +19,7 @@ class PositionData {
 
 /*sayfa initilize edilirken playlistIndex ile playlist atanır ve sayfa buna göre 
 oluşturulur, bu sayede 1 sayfada birden çok playlist kullanılabilir.*/
+// ignore: camel_case_types
 class playListIndex {
   static late int playlistIndex;
   setPlayListIndex(int index) {
@@ -37,20 +38,22 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   late AudioPlayer _audioPlayer;
   static int currentSongIndex = 0;
 
-  Stream<PositionData> get _positionDataStream => Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-      _audioPlayer.positionStream,
-      _audioPlayer.bufferedPositionStream,
-      _audioPlayer.durationStream,
-      (position, bufferedPosition, duration) => PositionData(
-            position,
-            bufferedPosition,
-            duration ?? Duration.zero,
-          ));
+  Stream<PositionData> get _positionDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+          _audioPlayer.positionStream,
+          _audioPlayer.bufferedPositionStream,
+          _audioPlayer.durationStream,
+          (position, bufferedPosition, duration) => PositionData(
+                position,
+                bufferedPosition,
+                duration ?? Duration.zero,
+              ));
 
   @override
   void initState() {
     super.initState();
-    _audioPlayer = AudioPlayer()..setAsset(Playlist.playlists[playListIndex.playlistIndex].songs[0].url);
+    _audioPlayer = AudioPlayer()
+      ..setAsset(Playlist.playlists[playListIndex.playlistIndex].songs[0].url);
     _AudioPlayerScreenState.currentSongIndex = 0;
   }
 
@@ -72,9 +75,11 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: CustomStyles.primaryColor,
-            image: const DecorationImage(image: AssetImage('assets/images/home-bg.png'), fit: BoxFit.cover),
+            image: DecorationImage(
+                image: AssetImage('assets/images/home-bg.png'),
+                fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +94,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                       Text(
                         //üstteki playlist title'ı
                         playlist.title,
-                        style: const TextStyle(fontSize: 25, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       const SizedBox(height: 15),
                       Image(
@@ -111,7 +117,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                         progress: positionData?.position ?? Duration.zero,
-                        buffered: positionData?.bufferedPosition ?? Duration.zero,
+                        buffered:
+                            positionData?.bufferedPosition ?? Duration.zero,
                         total: positionData?.duration ?? Duration.zero,
                         onSeek: _audioPlayer.seek,
                       ),
@@ -167,17 +174,16 @@ class _PlaylistSongsState extends State<_PlaylistSongs> {
                 setState(() {
                   _AudioPlayerScreenState.currentSongIndex = index;
                   widget.audioPlayer.setAsset(
-                    widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                    widget.playlist
+                        .songs[_AudioPlayerScreenState.currentSongIndex].url,
                   );
                 });
               },
               child: ListTile(
                 leading: Text(
                   '${index + 1}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 title: Text(
                   widget.playlist.songs[index].title,
@@ -210,6 +216,7 @@ class Controls extends StatefulWidget {
   final Playlist playlist;
 
   @override
+  // ignore: library_private_types_in_public_api
   _ControlsState createState() => _ControlsState();
 }
 
@@ -231,10 +238,12 @@ class _ControlsState extends State<Controls> {
           //loop butonu aktif değil ise şarkılar playlist sırasınca devam eder
           widget.audioPlayer.setLoopMode(LoopMode.off);
           if (processingState == ProcessingState.completed) {
-            if (_AudioPlayerScreenState.currentSongIndex < widget.playlist.songs.length - 1) {
+            if (_AudioPlayerScreenState.currentSongIndex <
+                widget.playlist.songs.length - 1) {
               _AudioPlayerScreenState.currentSongIndex += 1;
               widget.audioPlayer.setAsset(
-                widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex]
+                    .url,
               );
             }
           }
@@ -248,7 +257,8 @@ class _ControlsState extends State<Controls> {
                 children: [
                   Text(
                       "${_AudioPlayerScreenState.currentSongIndex + 1}} ${widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].title}",
-                      style: const TextStyle(fontSize: 20, color: Colors.white)),
+                      style:
+                          const TextStyle(fontSize: 20, color: Colors.white)),
                 ],
               ),
               const SizedBox(height: 10),
@@ -261,7 +271,10 @@ class _ControlsState extends State<Controls> {
                         if (_AudioPlayerScreenState.currentSongIndex > 0) {
                           _AudioPlayerScreenState.currentSongIndex -= 1;
                           widget.audioPlayer.setAsset(
-                            widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                            widget
+                                .playlist
+                                .songs[_AudioPlayerScreenState.currentSongIndex]
+                                .url,
                           );
                         }
                       });
@@ -280,10 +293,14 @@ class _ControlsState extends State<Controls> {
                     onPressed: () {
                       setState(() {
                         //algoritma ile taşma sorununu kontrol edip, butonlara basıldığında arttırma azaltma işlemlerini yapar
-                        if (_AudioPlayerScreenState.currentSongIndex < widget.playlist.songs.length - 1) {
+                        if (_AudioPlayerScreenState.currentSongIndex <
+                            widget.playlist.songs.length - 1) {
                           _AudioPlayerScreenState.currentSongIndex += 1;
                           widget.audioPlayer.setAsset(
-                            widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                            widget
+                                .playlist
+                                .songs[_AudioPlayerScreenState.currentSongIndex]
+                                .url,
                           );
                         }
                       });
@@ -312,7 +329,10 @@ class _ControlsState extends State<Controls> {
                     onPressed: () {
                       setState(() {
                         widget.audioPlayer.setAsset(
-                          widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                          widget
+                              .playlist
+                              .songs[_AudioPlayerScreenState.currentSongIndex]
+                              .url,
                         );
                       });
                     },
@@ -332,7 +352,8 @@ class _ControlsState extends State<Controls> {
                 children: [
                   Text(
                       "${_AudioPlayerScreenState.currentSongIndex + 1}} ${widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].title}",
-                      style: const TextStyle(fontSize: 20, color: Colors.white)),
+                      style:
+                          const TextStyle(fontSize: 20, color: Colors.white)),
                 ],
               ),
               const SizedBox(height: 10),
@@ -345,7 +366,10 @@ class _ControlsState extends State<Controls> {
                         if (_AudioPlayerScreenState.currentSongIndex > 0) {
                           _AudioPlayerScreenState.currentSongIndex -= 1;
                           widget.audioPlayer.setAsset(
-                            widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                            widget
+                                .playlist
+                                .songs[_AudioPlayerScreenState.currentSongIndex]
+                                .url,
                           );
                         }
                       });
@@ -363,10 +387,14 @@ class _ControlsState extends State<Controls> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        if (_AudioPlayerScreenState.currentSongIndex < widget.playlist.songs.length - 1) {
+                        if (_AudioPlayerScreenState.currentSongIndex <
+                            widget.playlist.songs.length - 1) {
                           _AudioPlayerScreenState.currentSongIndex += 1;
                           widget.audioPlayer.setAsset(
-                            widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                            widget
+                                .playlist
+                                .songs[_AudioPlayerScreenState.currentSongIndex]
+                                .url,
                           );
                         }
                       });
@@ -394,7 +422,10 @@ class _ControlsState extends State<Controls> {
                     onPressed: () {
                       setState(() {
                         widget.audioPlayer.setAsset(
-                          widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                          widget
+                              .playlist
+                              .songs[_AudioPlayerScreenState.currentSongIndex]
+                              .url,
                         );
                       });
                     },
@@ -428,7 +459,10 @@ class _ControlsState extends State<Controls> {
                       if (_AudioPlayerScreenState.currentSongIndex > 0) {
                         _AudioPlayerScreenState.currentSongIndex -= 1;
                         widget.audioPlayer.setAsset(
-                          widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                          widget
+                              .playlist
+                              .songs[_AudioPlayerScreenState.currentSongIndex]
+                              .url,
                         );
                       }
                     });
@@ -446,10 +480,14 @@ class _ControlsState extends State<Controls> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      if (_AudioPlayerScreenState.currentSongIndex < widget.playlist.songs.length - 1) {
+                      if (_AudioPlayerScreenState.currentSongIndex <
+                          widget.playlist.songs.length - 1) {
                         _AudioPlayerScreenState.currentSongIndex += 1;
                         widget.audioPlayer.setAsset(
-                          widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                          widget
+                              .playlist
+                              .songs[_AudioPlayerScreenState.currentSongIndex]
+                              .url,
                         );
                       }
                     });
@@ -477,7 +515,10 @@ class _ControlsState extends State<Controls> {
                   onPressed: () {
                     setState(() {
                       widget.audioPlayer.setAsset(
-                        widget.playlist.songs[_AudioPlayerScreenState.currentSongIndex].url,
+                        widget
+                            .playlist
+                            .songs[_AudioPlayerScreenState.currentSongIndex]
+                            .url,
                       );
                     });
                   },

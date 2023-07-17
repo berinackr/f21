@@ -153,7 +153,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               autofillHints: const [AutofillHints.password],
                               autocorrect: false,
                               decoration: InputDecoration(
-                                hintText: "Çok gizli şifre",
+                                hintText: "Şifre",
                                 filled: true,
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 15),
@@ -201,7 +201,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               autofillHints: const [AutofillHints.password],
                               autocorrect: false,
                               decoration: InputDecoration(
-                                hintText: "Çok gizli şifre",
+                                hintText: "Şifre Tekrar",
                                 filled: true,
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 15),

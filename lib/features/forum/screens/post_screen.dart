@@ -584,6 +584,8 @@ class Comment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     final liked = user != null ? comment.upvotes.contains(user.uid) : false;
     final downvoted =
@@ -732,6 +734,8 @@ class OnGoingBottomWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return SliverToBoxAdapter(
         child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
@@ -762,6 +766,8 @@ class NoMoreItems extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final state = ref.watch(commentsProvider(id));
     return SliverToBoxAdapter(
       child: state.maybeWhen(

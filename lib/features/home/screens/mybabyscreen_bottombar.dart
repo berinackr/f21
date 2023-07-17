@@ -465,6 +465,8 @@ class SoruMetni extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Center(
       child: Text(
         "Merak Ettiklerini Biberon Yapay Zekaya Sor ",
@@ -515,6 +517,8 @@ class SorButonu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return ElevatedButton(
       onPressed: () {
         Navigator.push(

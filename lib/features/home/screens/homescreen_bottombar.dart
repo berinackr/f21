@@ -288,6 +288,8 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
 class WaveContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return ClipPath(
       clipper: WaveClipper(), // Dalgalı şekli oluşturan custom clipper
       child: Container(

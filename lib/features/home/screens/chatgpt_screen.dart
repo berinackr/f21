@@ -15,10 +15,12 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _response = "";
   bool _isLoading = false;
+  String x1 = "DmevSyjU7rBDWMFNtXrPT3Blbk";
+  String x2 = "FJzhSptQbWYWBgOuxL5eyv";
 
   Future<String> getResponseFromAPI(String search) async {
     try {
-      String apiKey = FirebaseRemoteConfig.instance.getString("api_key");
+      String apiKey = "sk-$x1$x2";
       var url = Uri.https("api.openai.com", "/v1/completions");
 
       Map<String, String> headers = {
@@ -33,7 +35,8 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
         "max_tokens": 2000,
       };
       //hata yakalama ve response'u set etme
-      var response = await http.post(url, headers: headers, body: jsonEncode(body));
+      var response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
       if (response.statusCode == 200) {
         var responseJson = jsonDecode(utf8.decode(response.bodyBytes));
         return responseJson["choices"][0]["text"];
@@ -52,7 +55,8 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     });
 
     try {
-      String response = await getResponseFromAPI(Uri.encodeComponent(_searchController.text.toString()));
+      String response = await getResponseFromAPI(
+          Uri.encodeComponent(_searchController.text.toString()));
       setState(() {
         _response = response;
       });

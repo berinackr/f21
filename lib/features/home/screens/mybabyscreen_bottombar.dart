@@ -275,7 +275,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    double width = MediaQuery.of(context).size.width * 0.8;
+    double width = MediaQuery.of(context).size.width * 0.75;
     final user = ref.watch(userProvider);
     bool? isPregnant = user!.isPregnant;
     DateTime dateOfNow = new DateTime.now();

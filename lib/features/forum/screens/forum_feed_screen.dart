@@ -66,7 +66,7 @@ class _ForumFeedScreenState extends ConsumerState<ForumFeedScreen> {
               icon: const Icon(Icons.sort),
             ),
           ),
-          IconButton(
+          categoryName == "Etkinlik" ? Container() : IconButton(
             onPressed: () {
               context.push(
                   '/forum/${widget.id}/share'); //TODO Önce forum bilgileirni ekle Bu da kategori etkinikler ise paylaşma false invisible

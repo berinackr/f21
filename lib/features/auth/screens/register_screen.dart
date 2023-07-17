@@ -38,7 +38,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        //toolbarHeight: 0,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: CustomStyles.primaryColor),
         elevation: 0,
@@ -69,7 +68,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    //Logo
+
                     CircleAvatar(
                       radius: screenWidth / 4,
                       backgroundImage: const AssetImage(Assets.logoPath),
@@ -96,7 +95,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           const SizedBox(
                             height: 5,
                           ),
-                          //Email TextField
+
                           Padding(
                             padding: EdgeInsets.fromLTRB(
                                 screenHeight / 30, 0, screenHeight / 30, 0),
@@ -123,7 +122,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          //Password Label
+
                           Padding(
                             padding: EdgeInsets.only(left: screenHeight / 30),
                             child: Align(
@@ -140,7 +139,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           const SizedBox(
                             height: 5,
                           ),
-                          //Password TextField
+
                           Padding(
                             padding: EdgeInsets.fromLTRB(
                                 screenHeight / 30, 0, screenHeight / 30, 0),
@@ -153,7 +152,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               autofillHints: const [AutofillHints.password],
                               autocorrect: false,
                               decoration: InputDecoration(
-                                hintText: "Çok gizli şifre",
+                                hintText: "Şifre",
                                 filled: true,
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 15),
@@ -168,7 +167,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          //Password Label
+
                           Padding(
                             padding: EdgeInsets.only(left: screenHeight / 30),
                             child: Align(
@@ -201,7 +200,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               autofillHints: const [AutofillHints.password],
                               autocorrect: false,
                               decoration: InputDecoration(
-                                hintText: "Çok gizli şifre",
+                                hintText: "Şifre Tekrar",
                                 filled: true,
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 15),
@@ -222,8 +221,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    //tiklayinca sozlesme ekranina gitmeli
-                                    //Navigator.of(context).pushNamed("/sozlesmeEkrani");
+
+
                                     showContractPopup(context);
                                   },
                                   child: const Text(
@@ -250,7 +249,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         ],
                       ),
                     ),
-                    //Email Label
+
 
                     const SizedBox(
                       height: 10,
@@ -259,7 +258,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       flex: 1,
                     ),*/
 
-                    //Kayıt Ol Butonu
+
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: CustomStyles.buttonColor),
@@ -306,9 +305,9 @@ void showContractPopup(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: CustomStyles.fillColor,
-        //iconColor: CustomStyles.primaryColor,
-        //shadowColor: CustomStyles.backgroundColor,
-        //surfaceTintColor: CustomStyles.primaryColor,
+
+
+
         title: const Center(
             child: Text('Kullanıcı Sözleşmesi ve Gizlilik Politikası')),
         titleTextStyle: TextStyle(
@@ -337,7 +336,7 @@ void showContractPopup(BuildContext context) {
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                backgroundColor: CustomStyles.buttonColor, // Background color
+                backgroundColor: CustomStyles.buttonColor,
               ),
               child: Text(
                 'Kapat',

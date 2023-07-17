@@ -128,6 +128,8 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final int index = int.parse(widget._activityId!);
     isTextActivity = widget._activityType! == "text_activity" ? true : false;
     if (isTextActivity) {
@@ -143,12 +145,12 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
       ay = int.parse(widget._activityId!) - 8;
     }
 
-    print(
-        "RECOX : Gelen id : ${widget._activityId}, gelen activity type : ${widget._activityType}, ay : $ay, index: $index"); //TODO dikkat 5. aya tıklayınca id 4 geliyor yani index şeklinde
     return WillPopScope(
       onWillPop: () async {
-        _saveText(index, controller.text);
-        showSnackBar(context, "Taslak kaydedildi.");
+        if(isTextActivity){
+          _saveText(index, controller.text);
+          showSnackBar(context, "Taslak kaydedildi.");
+        }
         return true;
       },
       child: Scaffold(

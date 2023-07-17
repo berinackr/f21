@@ -14,7 +14,7 @@ import 'package:f21_demo/core/custom_styles.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  await dotenv.load(fileName: ".env");
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

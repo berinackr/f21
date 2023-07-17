@@ -26,7 +26,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
         backgroundColor: Colors.transparent,
         //toolbarHeight: 0,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
         ),
       ),
@@ -36,7 +36,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: CustomStyles.backgroundColor,
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
                   fit: BoxFit.cover,
                 ),
@@ -79,7 +79,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                     ),
                     const Spacer(flex: 1),
                     //Info Label
-                    Text(
+                    const Text(
                       "Lütfen posta kutunuzu kontrol ediniz. Eğer bu mail adresi sistemimize kayıtlı ise yeni şifrenizi oluşturabileceğiniz linki içeren bir mail alacaksınız.",
                       textAlign: TextAlign.center,
                       style: TextStyle(

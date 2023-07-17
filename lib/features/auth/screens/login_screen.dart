@@ -43,7 +43,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
@@ -52,7 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: CustomStyles.backgroundColor,
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
                   fit: BoxFit.cover,
                 ),

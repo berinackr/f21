@@ -17,7 +17,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
     CustomStyles().responsiveTheme(isDarkMode);
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/intro-bg.png'),
             fit: BoxFit.cover,

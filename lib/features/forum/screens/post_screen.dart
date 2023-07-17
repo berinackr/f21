@@ -35,7 +35,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   }
 
   void upvotePost(BuildContext context, WidgetRef ref, PostModel post) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -46,7 +46,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   }
 
   void downvotePost(BuildContext context, WidgetRef ref, PostModel post) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -57,7 +57,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   }
 
   void bookmarkPost(BuildContext context, WidgetRef ref, PostModel post) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -68,7 +68,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   }
 
   void shareComment(BuildContext context, WidgetRef ref, String postId) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref.read(forumControllerProvider.notifier).shareComment(
             postId,
@@ -93,7 +93,7 @@ class _PostScreenState extends ConsumerState<PostScreen> {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     final isLoading = ref.watch(forumControllerProvider);
 
     return Scaffold(
@@ -561,7 +561,7 @@ class Comment extends ConsumerWidget {
   final int index;
 
   void upvoteComment(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -572,7 +572,7 @@ class Comment extends ConsumerWidget {
   }
 
   void downvoteComment(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     if (user != null) {
       ref
           .read(forumControllerProvider.notifier)
@@ -584,7 +584,7 @@ class Comment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider);
+    final user = ref.read(authControllerProvider.notifier).getCurrentUser();
     final liked = user != null ? comment.upvotes.contains(user.uid) : false;
     final downvoted =
         user != null ? comment.downvotes.contains(user.uid) : false;

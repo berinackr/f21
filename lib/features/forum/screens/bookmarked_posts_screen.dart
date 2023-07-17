@@ -175,6 +175,8 @@ class Post extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final user = ref.read(userProvider);
     final liked = user != null ? post.upvotes.contains(user.uid) : false;
     final downvoted = user != null ? post.downvotes.contains(user.uid) : false;
@@ -373,6 +375,8 @@ class OnGoingBottomWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return SliverToBoxAdapter(
         child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
@@ -403,6 +407,8 @@ class NoMoreItems extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final state = ref.watch(bookmarkedPostsProvider(id));
     return SliverToBoxAdapter(
       child: state.maybeWhen(
@@ -433,6 +439,8 @@ class ScrollToTopButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return AnimatedBuilder(
         animation: scrollController,
         builder: (context, child) {

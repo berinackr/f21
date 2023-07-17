@@ -308,9 +308,17 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                   itemBuilder: (context, index) {
                     Color responsiveColor() {
                       if (isPregnant! && monthController == index + 1) {
-                        return const Color(0xff98CDD2);
+                        if (isDarkMode) {
+                          return const Color.fromARGB(255, 66, 111, 115);
+                        } else {
+                          return const Color(0xff98CDD2);
+                        }
                       } else if (isPregnant == false && babyAge! + 8 == index) {
-                        return const Color(0xff98CDD2);
+                        if (isDarkMode) {
+                          return const Color.fromARGB(255, 66, 111, 115);
+                        } else {
+                          return const Color(0xff98CDD2);
+                        }
                       } else {
                         return CustomStyles.fillColor;
                       }
@@ -348,7 +356,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                                   const SizedBox(
                                     height: 1,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: width,
                                     child: Text(
                                       infoList[index],
@@ -457,6 +465,8 @@ class SoruMetni extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return Center(
       child: Text(
         "Merak Ettiklerini Biberon Yapay Zekaya Sor ",
@@ -507,6 +517,8 @@ class SorButonu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     return ElevatedButton(
       onPressed: () {
         Navigator.push(

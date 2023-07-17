@@ -26,7 +26,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
         child: CustomScrollView(
           slivers: [
             const SliverAppBar(
-              backgroundColor: Color(0xffFF8551),
+              backgroundColor: CustomStyles.primaryColor,
               title: Text(
                 'Meditasyon Vakti',
                 style: TextStyle(
@@ -146,7 +146,6 @@ class _MeditationScreenState extends State<MeditationScreen> {
                           flex: 6,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: CustomStyles.primaryColor,
                               borderRadius: BorderRadius.circular(15),
                               image: const DecorationImage(
                                 image:

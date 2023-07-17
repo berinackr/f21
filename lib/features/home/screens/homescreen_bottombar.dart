@@ -41,9 +41,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
               child: Column(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: CustomStyles.fillColor
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomStyles.fillColor
                         //borderRadius: BorderRadius.circular(40),
                         ),
 
@@ -98,12 +96,8 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                               style: const TextStyle(
                                 fontSize: 18,
                               ),
-                              lessStyle: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
-                              moreStyle: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
+                              lessStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                              moreStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -123,9 +117,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                   //anasayfadan forum kısmına geçiş
 
                   Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: CustomStyles.fillColor),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomStyles.fillColor),
                     child: Column(
                       children: [
                         WaveContainer(),
@@ -158,10 +150,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ForumScreen()));
+                                        context, MaterialPageRoute(builder: (context) => const ForumScreen()));
                                   },
                                   child: Container(
                                     height: 80,
@@ -195,9 +184,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                   const SizedBox(height: 20),
 
                   Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: CustomStyles.fillColor),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: CustomStyles.fillColor),
                     child: Column(
                       children: [
                         WaveContainer(),
@@ -230,10 +217,7 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MeditationScreen()));
+                                        context, MaterialPageRoute(builder: (context) => const MeditationScreen()));
                                   },
                                   child: Container(
                                     height: 80,
@@ -319,13 +303,11 @@ class WaveClipper extends CustomClipper<Path> {
 
     final firstControlPoint = Offset(size.width * 0.25, size.height);
     final firstEndPoint = Offset(size.width * 0.5, size.height * 0.8);
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
+    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy, firstEndPoint.dx, firstEndPoint.dy);
 
     final secondControlPoint = Offset(size.width * 0.75, size.height * 0.6);
     final secondEndPoint = Offset(size.width, size.height * 0.8);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
+    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy, secondEndPoint.dx, secondEndPoint.dy);
 
     path.lineTo(size.width, 0);
     path.close();

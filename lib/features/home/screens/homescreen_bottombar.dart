@@ -53,32 +53,29 @@ class _HomeScreenBottombarState extends State<HomeScreenBottombar> {
                         WaveContainer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width,
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 25),
-                                Image.asset(
-                                  "assets/images/doctor.png",
-                                  width: 40,
-                                  color: CustomStyles.forumTextColor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/doctor.png",
+                                width: 40,
+                                color: CustomStyles.forumTextColor,
+                              ),
+                              const SizedBox(width: 10),
+                              const Text(
+                                "Haftanın Doktor Önerisi",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(width: 10),
-                                const Text(
-                                  "Haftanın Doktor Önerisi",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Icon(
-                                  Icons.favorite,
-                                  size: 40,
-                                  color: CustomStyles.forumTextColor,
-                                ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 10),
+                              Icon(
+                                Icons.favorite,
+                                size: 40,
+                                color: CustomStyles.forumTextColor,
+                              ),
+                            ],
                           ),
                         ),
                         Container(

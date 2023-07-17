@@ -104,167 +104,167 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
   ];
 
   var iconList = [
-    Icon(
+    const Icon(
       Icons.calendar_month,
       color: Color.fromARGB(255, 255, 0, 0),
       size: 32,
     ),
-    Icon(
+    const Icon(
       Icons.diamond,
       color: Color.fromARGB(255, 255, 59, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.pregnant_woman,
       color: Color.fromARGB(255, 255, 85, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.celebration,
       color: Color.fromARGB(255, 255, 115, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.local_florist,
       color: Color.fromARGB(255, 255, 166, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.local_restaurant_outlined,
       color: Color.fromARGB(255, 255, 209, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.shopping_basket_outlined,
       color: Color.fromARGB(255, 237, 255, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.music_note_rounded,
       color: Color.fromARGB(255, 207, 255, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.favorite,
       color: Color.fromARGB(255, 172, 255, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.cake,
       color: Color.fromARGB(255, 138, 255, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.face,
       color: Color.fromARGB(255, 69, 255, 0),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.child_friendly,
       color: Color.fromARGB(255, 0, 255, 16),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.spa_sharp,
       color: Color.fromARGB(255, 0, 255, 106),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.face,
       color: Color.fromARGB(255, 0, 255, 166),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.grade,
       color: Color.fromARGB(255, 0, 255, 231),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.stream_sharp,
       color: Color.fromARGB(255, 0, 237, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.light_mode_outlined,
       color: Color.fromARGB(255, 0, 202, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.hotel_class,
       color: Color.fromARGB(255, 0, 151, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.filter_vintage,
       color: Color.fromARGB(255, 0, 117, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.looks,
       color: Color.fromARGB(255, 0, 87, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.eco,
       color: Color.fromARGB(255, 0, 48, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.cake,
       color: Color.fromARGB(255, 21, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.bedtime,
       color: Color.fromARGB(255, 89, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.yard_outlined,
       color: Color.fromARGB(255, 115, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.water_sharp,
       color: Color.fromARGB(255, 136, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.emoji_nature_sharp,
       color: Color.fromARGB(255, 171, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.all_inclusive,
       color: Color.fromARGB(255, 209, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.interests_outlined,
       color: Color.fromARGB(255, 243, 0, 255),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.child_care,
       color: Color.fromARGB(255, 255, 0, 219),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.insights,
       color: Color.fromARGB(255, 255, 0, 177),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.filter_vintage_outlined,
       color: Color.fromARGB(255, 255, 0, 121),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.grade,
       color: Color.fromARGB(255, 255, 0, 82),
       size: 36,
     ),
-    Icon(
+    const Icon(
       Icons.filter_2,
       color: Color.fromARGB(255, 255, 0, 27),
       size: 36,
@@ -280,12 +280,12 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
     bool? isPregnant = user!.isPregnant;
     DateTime dateOfNow = new DateTime.now();
     int? babyAge;
-    if (user!.babyBirthDate != null) {
+    if (user.babyBirthDate != null) {
       babyAge = dateOfNow.month - user.babyBirthDate!.month;
     } else {
       babyAge = -10;
     }
-    double? monthController = user!.months;
+    double? monthController = user.months;
 
     return Padding(
       padding: const EdgeInsets.all(14.0),
@@ -293,24 +293,24 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
         child: Column(
           children: [
             BaslangicWidget(ref: ref),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Container(
               width: MediaQuery.of(context).size.width * 0.95,
               height: MediaQuery.of(context).size.height * 0.50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
-                    color: Color(0xff46949B),
+                    color: const Color(0xff46949B),
                     width: 1,
                   )),
               child: ListView.builder(
                   itemCount: iconList.length,
                   itemBuilder: (context, index) {
-                    Color ResponsiveColor() {
+                    Color responsiveColor() {
                       if (isPregnant! && monthController == index + 1) {
-                        return Color(0xff98CDD2);
+                        return const Color(0xff98CDD2);
                       } else if (isPregnant == false && babyAge! + 8 == index) {
-                        return Color(0xff98CDD2);
+                        return const Color(0xff98CDD2);
                       } else {
                         return CustomStyles.fillColor;
                       }
@@ -321,7 +321,7 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                         showAlertDialog(context, infoList[index]);
                       },
                       child: Card(
-                        color: ResponsiveColor(),
+                        color: responsiveColor(),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -330,22 +330,22 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                               height: 10,
                               child: (iconList[index]),
                             ),
-                            Spacer(flex: 1),
+                            const Spacer(flex: 1),
                             Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     titleList[index],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 19,
                                       fontFamily: "YsabeauInfant",
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 1,
                                   ),
                                   Container(
@@ -371,12 +371,12 @@ class _MyBabyScreenBottombarState extends ConsumerState<MyBabyScreenBottombar> {
                     );
                   }),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: SoruMetni(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(7.0),
+            const Padding(
+              padding: EdgeInsets.all(7.0),
               child: SorButonu(),
             ),
           ],
@@ -391,7 +391,7 @@ showAlertDialog(BuildContext context, String info) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: CustomStyles.fillColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(33))),
         content: SizedBox(
@@ -412,7 +412,7 @@ showAlertDialog(BuildContext context, String info) {
                 Navigator.of(context).pop();
                 // Diğer işlemler...
               },
-              child: Icon(
+              child: const Icon(
                 Icons.check_circle_outline_sharp,
                 color: Colors.green,
                 size: 40,
@@ -438,16 +438,14 @@ class _BaslangicWidgetState extends State<BaslangicWidget> {
   Widget build(BuildContext context) {
     final user = widget.ref.watch(userProvider);
 
-    return Container(
-      child: Center(
-        child: Text(
-          "Merhaba ${user!.username.toString()}, bu ay bebeğin hakkında bilmen gerekenler var;",
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: "YsabeauInfant",
-            fontWeight: FontWeight.bold,
-            color: CustomStyles.forumTextColor,
-          ),
+    return Center(
+      child: Text(
+        "Merhaba ${user!.username.toString()}, bu ay bebeğin hakkında bilmen gerekenler var;",
+        style: TextStyle(
+          fontSize: 20,
+          fontFamily: "YsabeauInfant",
+          fontWeight: FontWeight.bold,
+          color: CustomStyles.forumTextColor,
         ),
       ),
     );
@@ -509,24 +507,23 @@ class SorButonu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ElevatedButton(
+    return ElevatedButton(
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatGPTScreen()),
+          MaterialPageRoute(builder: (context) => const ChatGPTScreen()),
         );
       },
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        backgroundColor: const Color(0xffFFDEDE),
+        fixedSize: const Size(120, 60),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      ),
       child: const Text(
         "SOR",
         style: TextStyle(fontSize: 18, color: Colors.black),
       ),
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
-        fixedSize: Size(120, 60),
-        primary: Color(0xffFFDEDE),
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-      ),
-    ));
+    );
   }
 }

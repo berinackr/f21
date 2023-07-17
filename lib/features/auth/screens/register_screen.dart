@@ -40,9 +40,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       appBar: AppBar(
         //toolbarHeight: 0,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: CustomStyles.primaryColor),
+        iconTheme: const IconThemeData(color: CustomStyles.primaryColor),
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
         ),
       ),
@@ -53,7 +53,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: CustomStyles.backgroundColor,
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
                   fit: BoxFit.cover,
                 ),

@@ -127,8 +127,6 @@ class _ActivityScreenBottombarState
     UserModel? user = ref.read(userProvider);
     int babyMonths = calculateBabyMonth(user!.babyBirthDate!);
     isPregnant = user.isPregnant!;
-    print("RECOX : babyMont $babyMonths");
-    print("RECOX : isPregantn ${user.isPregnant!}");
     if (isPregnant) {
       current = user.months!.toInt();
       //hamile olduğu durumda
@@ -207,42 +205,40 @@ class _ActivityScreenBottombarState
           ),
           backgroundColor: Colors.grey,
           builder: (BuildContext context) {
-            return Container(
-              //color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      baslik,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    baslik,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const ListTile(
-                    title: Align(
-                      alignment: Alignment.center,
-                      child: Icon(Icons.lock_outline, size: 80),
+                ),
+                const SizedBox(height: 16),
+                const ListTile(
+                  title: Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.lock_outline, size: 80),
+                  ),
+                ),
+                const SizedBox(height: 100),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: null,
+                      child: Text('Etkinliğe Başla'),
                     ),
-                  ),
-                  const SizedBox(height: 100),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: null,
-                        child: Text('Etkinliğe Başla'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+              ],
             );
           },
         );
@@ -283,58 +279,57 @@ class _ActivityScreenBottombarState
           ),
           backgroundColor: Colors.purpleAccent,
           builder: (BuildContext context) {
-            return Container(
-              //color: Colors.white,
-              child: Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        baslik,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+            return Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      baslik,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    ListTile(
-                      title: Text(
-                        etkinlik_list[index],
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      etkinlik_list[index],
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
                       ),
                     ),
-                    const SizedBox(height: 80),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Kapat'),
-                          onPressed: () {
-                            Navigator.pop(context); // Modal sayfasını kapat
-                          },
+                  ),
+                  const SizedBox(height: 80),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        child: const Text('Kapat'),
+                        onPressed: () {
+                          Navigator.pop(context); // Modal sayfasını kapat
+                        },
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.lightGreenAccent),
                         ),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.lightGreenAccent),
-                          ),
-                          child: const Text('Etkinliğe Başla',
-                              style: TextStyle(color: Colors.black)),
-                          onPressed: () {
-                            context.push(
-                                "/home/$index/${getActivityType(index)}/$isPregnant");
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
+                        child: const Text('Etkinliğe Başla',
+                            style: TextStyle(color: Colors.black)),
+                        onPressed: () {
+                          context.push(
+                              "/home/$index/${getActivityType(index)}/$isPregnant");
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                ],
               ),
             );
           },
@@ -376,58 +371,57 @@ class _ActivityScreenBottombarState
           ),
           backgroundColor: Colors.green[400],
           builder: (BuildContext context) {
-            return Container(
-              //color: Colors.white,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        baslik,
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      baslik,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ListTile(
+                    title: Text(
+                      etkinlik_list[index],
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        //color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 80),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        child: const Text('Kapat'),
+                        onPressed: () {
+                          Navigator.pop(context); // Modal sayfasını kapat
+                        },
+                      ),
+                      const Text(
+                        "   Etkinlik Tamamlandı",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    ListTile(
-                      title: Text(
-                        etkinlik_list[index],
-                        style: const TextStyle(
-                          fontSize: 15,
-                          //color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 80),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Kapat'),
-                          onPressed: () {
-                            Navigator.pop(context); // Modal sayfasını kapat
-                          },
-                        ),
-                        const Text(
-                          "   Etkinlik Tamamlandı",
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const Icon(Icons.check_circle_outline, size: 25)
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
+                      const Icon(Icons.check_circle_outline, size: 25)
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                ],
               ),
             );
           },

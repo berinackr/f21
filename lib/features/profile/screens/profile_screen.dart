@@ -148,7 +148,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     try {
       result = await _connectivity.checkConnectivity();
     } on PlatformException catch (e) {
-      showSnackBar(context, "Couldn\'t check connectivity status $e");
+      showSnackBar(context, "Couldn't check connectivity status $e");
       return;
     }
 

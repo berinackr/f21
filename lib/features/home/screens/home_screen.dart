@@ -41,7 +41,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
     final bottomBarRouter = ref.watch(bottomBarRoutingProvider);
+
     final bottomBarList = [MyBabyScreenBottombar(), const HomeScreenBottombar(), const ActivityScreenBottombar()];
+
     final user = ref.watch(userProvider);
     final settings = ref.watch(settingsProvider);
     return user == null
@@ -53,8 +55,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   body: bottomBarList[bottomBarRouter.selectedIndex],
                   appBar: AppBar(
                     iconTheme: const IconThemeData(color: Color(0xffFAF0E4)),
+
                     backgroundColor: Color(0xffFF8551),
                     systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Color(0xffFF8551)),
+
                     actions: [
                       IconButton(
                         onPressed: () {
@@ -65,7 +69,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       )
                     ],
-                    title: Text(
+                    title: const Text(
                       'Anasayfa',
                       style: TextStyle(color: Color(0xffFAF0E4)),
                     ),
@@ -93,7 +97,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               showProfilePopUp(context, viewportConstraints, ref);
                                             },
                                             arrowColor: Colors.transparent,
+
                                             decoration: BoxDecoration(color: CustomStyles.primaryColor),
+
                                             accountName: Text(
                                               user.username.toString(),
                                               style: const TextStyle(
@@ -239,13 +245,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   bottomNavigationBar: ConvexAppBar(
                     color: Colors.grey.shade700,
-                    activeColor: Color(0xffFF8551),
+                    activeColor: const Color(0xffFF8551),
                     backgroundColor: Colors.white,
                     initialActiveIndex: bottomBarRouter.selectedIndex,
-                    items: [
+                    items: const [
                       TabItem(icon: Icons.child_friendly, title: 'Bebeğim'),
                       TabItem(icon: Icons.home, title: 'Anasayfa'),
+
                       TabItem(icon: Icons.celebration, title: 'Etkinlik Yolculuğu'),
+
                     ],
                     onTap: (index) {
                       ref.read(bottomBarRoutingProvider.notifier).changeIndex(index);

@@ -36,7 +36,7 @@ class _GuestHomeScreenBottombarState extends State<GuestHomeScreenBottombar> {
       builder: (context, constraints) {
         return SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
@@ -81,13 +81,13 @@ class _GuestHomeScreenBottombarState extends State<GuestHomeScreenBottombar> {
                         ),
                         Container(
                           padding: const EdgeInsets.all(10),
-                          child: Align(
+                          child: const Align(
                             alignment: Alignment.center,
                             child: ReadMoreText(
                               //buradaki textleri başka bir classtan haftalık düzeni kontrol ederek çekeceğiz.
                               'Alanında uzman doktorlar tarafından paylaşılan bebeğiniz hakkında bilmeniz gereken önerileri görebilmek için önce giriş yapmalısınız',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                               ),
                               lessStyle: TextStyle(
@@ -121,61 +121,59 @@ class _GuestHomeScreenBottombarState extends State<GuestHomeScreenBottombar> {
                     child: Column(
                       children: [
                         WaveContainer(),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Forum',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Forum',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyebilirsin, ancak soru sormak ve cevap vermek için önce giriş yapmalısınız.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  " Diğer anneler tarafından açılmış popüler konuları ve konu başlıklarını görüntüleyebilirsin, ancak soru sormak ve cevap vermek için önce giriş yapmalısınız.",
+                                  style: TextStyle(
+                                    fontSize: 18,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ForumScreen()));
-                                  },
-                                  child: Container(
-                                    height: 80,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ForumScreen()));
+                                },
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: CustomStyles.backgroundColor,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 10,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/forum_icon.png',
                                     width: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: CustomStyles.backgroundColor,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/forum_icon.png',
-                                      width: 80,
-                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -193,58 +191,56 @@ class _GuestHomeScreenBottombarState extends State<GuestHomeScreenBottombar> {
                     child: Column(
                       children: [
                         WaveContainer(),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Meditasyon',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Meditasyon',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlamak için önce giriş yapmalısınız.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  " Sağlıklı bir hamilelik ve bebek sağlığı için en önemli şeylerden birisi huzurdur. Meditasyon arayüzümüzdeki sizin için özenle seçmiş olduğumuz ortam seslerini ve müziklerini kullanarak rahatlamak için önce giriş yapmalısınız.",
+                                  style: TextStyle(
+                                    fontSize: 18,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    showSnackBar(context,
-                                        "Meditasyon sayfasını görebilmek için önce üye olmalısınız.");
-                                  },
-                                  child: Container(
-                                    height: 80,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showSnackBar(context,
+                                      "Meditasyon sayfasını görebilmek için önce üye olmalısınız.");
+                                },
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: CustomStyles.backgroundColor,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 10,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/meditation_woman.png',
                                     width: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: CustomStyles.backgroundColor,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/meditation_woman.png',
-                                      width: 80,
-                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -283,13 +279,13 @@ class WaveContainer extends StatelessWidget {
     return ClipPath(
       clipper: WaveClipper(), // Dalgalı şekli oluşturan custom clipper
       child: Container(
-        color: Color.fromARGB(255, 255, 191, 169), // İlk renk
+        color: const Color.fromARGB(255, 255, 191, 169), // İlk renk
         height: 120,
         child: Stack(
           children: [
             Positioned.fill(
               child: Container(
-                color: Color(0xff9BCDD2),
+                color: const Color(0xff9BCDD2),
                 height: 80,
               ),
             ),

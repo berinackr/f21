@@ -1,6 +1,6 @@
+import 'package:f21_demo/core/custom_styles.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -84,6 +84,7 @@ class _ChatGPTScreenState extends State<ChatGPTScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: CustomStyles.primaryColor,
         centerTitle: true,
         title: const Text("Biberon - Yapay Zeka"),
       ),

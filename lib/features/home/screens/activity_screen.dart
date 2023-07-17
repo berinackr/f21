@@ -134,6 +134,7 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
       _getText(index, controller);
     }
     late final int ay;
+    // ignore: sdk_version_since
     late final bool isPregnant = bool.parse(widget._isPregnant!);
 
     if (isPregnant) {
@@ -149,7 +150,6 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
         _saveText(index, controller.text);
         showSnackBar(context, "Taslak kaydedildi.");
         return true;
-        ;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -217,126 +217,122 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
                         ),
                       )
                     else
-                      Container(
-                        //Fotoğraf Aktivitesi
-                        child: SingleChildScrollView(
-                          child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _selectedImage != null
-                                  ? Screenshot(
-                                      controller: screenshotController,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Transform.translate(
-                                            offset: Offset(_imageX, _imageY),
-                                            child: Transform.scale(
-                                              scale: _imageScale,
-                                              child: Image.file(
-                                                _selectedImage!,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                              ),
+                      SingleChildScrollView(
+                        child: Column(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _selectedImage != null
+                                ? Screenshot(
+                                    controller: screenshotController,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Transform.translate(
+                                          offset: Offset(_imageX, _imageY),
+                                          child: Transform.scale(
+                                            scale: _imageScale,
+                                            child: Image.file(
+                                              _selectedImage!,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                             ),
                                           ),
-                                          Image.asset(
-                                            'assets/images/activity_frame_$index.png', // Çerçeve asset'i
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : const Padding(
-                                      padding: EdgeInsets.all(20.0),
-                                      child: Text(
-                                          'Görsel seçin butonunu kullanarak bir görsel seçin. Ardından aşağıdaki hareket butonlarıyla görüntüyü çerçeveye yerleştirin.'),
+                                        ),
+                                        Image.asset(
+                                          'assets/images/activity_frame_$index.png', // Çerçeve asset'i
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                      ],
                                     ),
-                              SizedBox(height: 50),
-                              Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: viewportConstraints.maxWidth,
-                                ),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: _increaseScale,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Text('+'),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: _decreaseScale,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Text('-'),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: _moveLeft,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Icon(Icons.arrow_left),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: _moveRight,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Icon(Icons.arrow_right),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: _moveUp,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Icon(Icons.arrow_upward),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: _moveDown,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              CustomStyles.primaryColor,
-                                        ),
-                                        child: Icon(Icons.arrow_downward),
-                                      ),
-                                    ],
+                                  )
+                                : const Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Text(
+                                        'Görsel seçin butonunu kullanarak bir görsel seçin. Ardından aşağıdaki hareket butonlarıyla görüntüyü çerçeveye yerleştirin.'),
                                   ),
+                            const SizedBox(height: 50),
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth: viewportConstraints.maxWidth,
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: _increaseScale,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Text('+'),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      onPressed: _decreaseScale,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Text('-'),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      onPressed: _moveLeft,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Icon(Icons.arrow_left),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      onPressed: _moveRight,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Icon(Icons.arrow_right),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      onPressed: _moveUp,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Icon(Icons.arrow_upward),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      onPressed: _moveDown,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            CustomStyles.primaryColor,
+                                      ),
+                                      child: const Icon(Icons.arrow_downward),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              ElevatedButton(
-                                onPressed: _getImageFromGallery,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: CustomStyles.primaryColor,
-                                ),
-                                child: Text(_selectedImage == null
-                                    ? 'Galeriden Görsel Seç 📸'
-                                    : 'Yeni Görsel Seç 📷'),
+                            ),
+                            ElevatedButton(
+                              onPressed: _getImageFromGallery,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: CustomStyles.primaryColor,
                               ),
-                            ],
-                          ),
+                              child: Text(_selectedImage == null
+                                  ? 'Galeriden Görsel Seç 📸'
+                                  : 'Yeni Görsel Seç 📷'),
+                            ),
+                          ],
                         ),
                       ),
                     Row(

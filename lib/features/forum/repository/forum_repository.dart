@@ -15,11 +15,11 @@ final postRepositoryProvider = Provider((ref) {
 
 class ForumRepository {
   final FirebaseFirestore _firestore;
-  ForumRepository({required FirebaseFirestore firestore}) : _firestore = firestore;
+  ForumRepository({required FirebaseFirestore firestore})
+      : _firestore = firestore;
 
   CollectionReference get _posts => _firestore.collection("posts");
   CollectionReference get _comments => _firestore.collection("comments");
-  CollectionReference get _users => _firestore.collection("users");
 
   FutureVoid createPost(PostModel post) async {
     try {
@@ -31,7 +31,8 @@ class ForumRepository {
     }
   }
 
-  Future<List<PostModel>> fetchAllPostsByCategory(String categoryId, PostModel? lastPost) async {
+  Future<List<PostModel>> fetchAllPostsByCategory(
+      String categoryId, PostModel? lastPost) async {
     if (lastPost == null) {
       final documentSnapshot = await _posts
           .where("categoryId", isEqualTo: categoryId)
@@ -54,7 +55,8 @@ class ForumRepository {
     }
   }
 
-  Future<List<PostModel>> fetchAllMostLikedPostsByCategory(String categoryId, PostModel? lastPost) {
+  Future<List<PostModel>> fetchAllMostLikedPostsByCategory(
+      String categoryId, PostModel? lastPost) {
     if (lastPost == null) {
       return _posts
           .where("categoryId", isEqualTo: categoryId)
@@ -81,10 +83,14 @@ class ForumRepository {
     }
   }
 
-  Future<List<PostModel>> fetchAllPostsByUser(String userId, PostModel? lastPost) async {
+  Future<List<PostModel>> fetchAllPostsByUser(
+      String userId, PostModel? lastPost) async {
     if (lastPost == null) {
-      final documentSnapshot =
-          await _posts.where("userId", isEqualTo: userId).limit(20).orderBy("updatedAt", descending: true).get();
+      final documentSnapshot = await _posts
+          .where("userId", isEqualTo: userId)
+          .limit(20)
+          .orderBy("updatedAt", descending: true)
+          .get();
       return documentSnapshot.docs.map<PostModel>((data) {
         return PostModel.fromMap(data.data() as Map<String, dynamic>);
       }).toList();
@@ -101,10 +107,14 @@ class ForumRepository {
     }
   }
 
-  Future<List<CommentModel>> fetchAllCommentsByPost(String postId, CommentModel? lastComment) async {
+  Future<List<CommentModel>> fetchAllCommentsByPost(
+      String postId, CommentModel? lastComment) async {
     if (lastComment == null) {
-      final documentSnapshot =
-          await _comments.where("postId", isEqualTo: postId).limit(20).orderBy("createdAt", descending: true).get();
+      final documentSnapshot = await _comments
+          .where("postId", isEqualTo: postId)
+          .limit(20)
+          .orderBy("createdAt", descending: true)
+          .get();
       return documentSnapshot.docs.map<CommentModel>((data) {
         return CommentModel.fromMap(data.data() as Map<String, dynamic>);
       }).toList();
@@ -174,14 +184,17 @@ class ForumRepository {
 
   Future<CommentModel> fetchCommentById(String commentId) async {
     final documentSnapshot = await _comments.doc(commentId).get();
-    return CommentModel.fromMap(documentSnapshot.data() as Map<String, dynamic>);
+    return CommentModel.fromMap(
+        documentSnapshot.data() as Map<String, dynamic>);
   }
 
   Stream<PostModel> streamPostById(String postId) {
-    return _posts.doc(postId).snapshots().map((event) => PostModel.fromMap(event.data() as Map<String, dynamic>));
+    return _posts.doc(postId).snapshots().map(
+        (event) => PostModel.fromMap(event.data() as Map<String, dynamic>));
   }
 
-  Future<List<PostModel>> fetchBookmarkedPosts(String userId, PostModel? lastPost) async {
+  Future<List<PostModel>> fetchBookmarkedPosts(
+      String userId, PostModel? lastPost) async {
     if (lastPost == null) {
       final documentSnapshot = await _posts
           .where("bookmarkedBy", arrayContains: userId)

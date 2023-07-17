@@ -128,6 +128,8 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    CustomStyles().responsiveTheme(isDarkMode);
     final int index = int.parse(widget._activityId!);
     isTextActivity = widget._activityType! == "text_activity" ? true : false;
     if (isTextActivity) {

@@ -61,7 +61,8 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
 
   Future<void> _getImageFromGallery() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedImage != null) {
@@ -125,7 +126,6 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
 
   //TODO PHOTO ACTIVITY STATELERI ---------------------------------------------
 
-
   @override
   Widget build(BuildContext context) {
     final int index = int.parse(widget._activityId!);
@@ -149,7 +149,8 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
         _saveText(index, controller.text);
         showSnackBar(context, "Taslak kaydedildi.");
         return true;
-;      },
+        ;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -164,161 +165,180 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    if (isTextActivity) Container(
-                            //Text Aktivitesi
-                            width: viewportConstraints.maxWidth,
-                            child: Stack(
-                              children: [
-                                // Arkaplan görüntüsü
-                                Image.asset(
-                                  'assets/images/activity_frame_0.png', //TODO buraya {index} gelecek
-                                  fit: BoxFit.contain,
-                                ),
-                                Positioned(
-                                  top: 70,
-                                  left: 50,
-                                  right: 50,
-                                  bottom: 70,
-                                  child: SingleChildScrollView(
-                                    child: Container(
-                                      padding: const EdgeInsets.all(16),
-                                      child: TextFormField(
-                                        controller: controller,
-                                        maxLines: null,
-                                        keyboardType: TextInputType.multiline,
-                                        textInputAction: TextInputAction.newline,
-                                        style: GoogleFonts.dancingScript(
-                                          color: Colors.black,
-                                          fontSize: 24,
-                                        ),
-                                        decoration: InputDecoration.collapsed(
-                                          hintText:
-                                              'Sevgili yavrum, \nbu satırları ...',
-                                          hintStyle: GoogleFonts.dancingScript(
-                                              color: Colors.black),
-                                        ),
-                                        textAlignVertical: TextAlignVertical.top,
-                                        scrollPhysics:
-                                            const NeverScrollableScrollPhysics(),
-                                        cursorColor: CustomStyles.primaryColor,
-                                        cursorWidth: 2,
-                                        cursorHeight: 28,
-                                        textCapitalization:
-                                            TextCapitalization.sentences,
-                                        textAlign: TextAlign.left,
-                                        textDirection: TextDirection.ltr,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                    if (isTextActivity)
+                      Container(
+                        //Text Aktivitesi
+                        width: viewportConstraints.maxWidth,
+                        child: Stack(
+                          children: [
+                            // Arkaplan görüntüsü
+                            Image.asset(
+                              'assets/images/activity_frame_0.png', //TODO buraya {index} gelecek
+                              fit: BoxFit.contain,
                             ),
-                          ) else Container(
-                            //Fotoğraf Aktivitesi
-                            child: SingleChildScrollView(
-                              child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  _selectedImage != null
-                                      ? Screenshot(
-                                    controller: screenshotController,
-                                    child: Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Transform.translate(
-                                          offset: Offset(_imageX, _imageY),
-                                          child: Transform.scale(
-                                            scale: _imageScale,
-                                            child: Image.file(
-                                              _selectedImage!,
-                                              width: MediaQuery.of(context).size.width,
-                                              height: MediaQuery.of(context).size.width,
-                                            ),
-                                          ),
-                                        ),
-                                        Image.asset(
-                                          'assets/images/activity_frame_$index.png', // Çerçeve asset'i
-                                          width: MediaQuery.of(context).size.width,
-                                        ),
-                                      ],
+                            Positioned(
+                              top: 70,
+                              left: 50,
+                              right: 50,
+                              bottom: 70,
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  child: TextFormField(
+                                    controller: controller,
+                                    maxLines: null,
+                                    keyboardType: TextInputType.multiline,
+                                    textInputAction: TextInputAction.newline,
+                                    style: GoogleFonts.dancingScript(
+                                      color: Colors.black,
+                                      fontSize: 24,
                                     ),
-                                  )
-                                      : const Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Text('Görsel seçin butonunu kullanarak bir görsel seçin. Ardından aşağıdaki hareket butonlarıyla görüntüyü çerçeveye yerleştirin.'),
+                                    decoration: InputDecoration.collapsed(
+                                      hintText:
+                                          'Sevgili yavrum, \nbu satırları ...',
+                                      hintStyle: GoogleFonts.dancingScript(
+                                          color: Colors.black),
+                                    ),
+                                    textAlignVertical: TextAlignVertical.top,
+                                    scrollPhysics:
+                                        const NeverScrollableScrollPhysics(),
+                                    cursorColor: CustomStyles.primaryColor,
+                                    cursorWidth: 2,
+                                    cursorHeight: 28,
+                                    textCapitalization:
+                                        TextCapitalization.sentences,
+                                    textAlign: TextAlign.left,
+                                    textDirection: TextDirection.ltr,
                                   ),
-                                  SizedBox(height: 50),
-                                  Container(
-                                    constraints: BoxConstraints(
-                                      maxWidth: viewportConstraints.maxWidth,
-                                    ),
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    else
+                      Container(
+                        //Fotoğraf Aktivitesi
+                        child: SingleChildScrollView(
+                          child: Column(
+                            //mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _selectedImage != null
+                                  ? Screenshot(
+                                      controller: screenshotController,
+                                      child: Stack(
+                                        alignment: Alignment.center,
                                         children: [
-                                          ElevatedButton(
-                                            onPressed: _increaseScale,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
+                                          Transform.translate(
+                                            offset: Offset(_imageX, _imageY),
+                                            child: Transform.scale(
+                                              scale: _imageScale,
+                                              child: Image.file(
+                                                _selectedImage!,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                              ),
                                             ),
-                                            child: Text('+'),
                                           ),
-                                          SizedBox(width: 16),
-                                          ElevatedButton(
-                                            onPressed: _decreaseScale,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
-                                            ),
-                                            child: Text('-'),
-                                          ),
-                                          SizedBox(width: 16),
-                                          ElevatedButton(
-                                            onPressed: _moveLeft,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
-                                            ),
-                                            child: Icon(Icons.arrow_left),
-                                          ),
-                                          SizedBox(width: 16),
-                                          ElevatedButton(
-                                            onPressed: _moveRight,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
-                                            ),
-                                            child: Icon(Icons.arrow_right),
-                                          ),
-                                          SizedBox(width: 16),
-                                          ElevatedButton(
-                                            onPressed: _moveUp,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
-                                            ),
-                                            child: Icon(Icons.arrow_upward),
-                                          ),
-                                          SizedBox(width: 16),
-                                          ElevatedButton(
-                                            onPressed: _moveDown,
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: CustomStyles.primaryColor,
-                                            ),
-                                            child: Icon(Icons.arrow_downward),
+                                          Image.asset(
+                                            'assets/images/activity_frame_$index.png', // Çerçeve asset'i
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                           ),
                                         ],
                                       ),
+                                    )
+                                  : const Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Text(
+                                          'Görsel seçin butonunu kullanarak bir görsel seçin. Ardından aşağıdaki hareket butonlarıyla görüntüyü çerçeveye yerleştirin.'),
                                     ),
+                              SizedBox(height: 50),
+                              Container(
+                                constraints: BoxConstraints(
+                                  maxWidth: viewportConstraints.maxWidth,
+                                ),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: _increaseScale,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Text('+'),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: _decreaseScale,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Text('-'),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: _moveLeft,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Icon(Icons.arrow_left),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: _moveRight,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Icon(Icons.arrow_right),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: _moveUp,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Icon(Icons.arrow_upward),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: _moveDown,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              CustomStyles.primaryColor,
+                                        ),
+                                        child: Icon(Icons.arrow_downward),
+                                      ),
+                                    ],
                                   ),
-                                  ElevatedButton(
-                                    onPressed: _getImageFromGallery,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: CustomStyles.primaryColor,
-                                    ),
-                                    child: Text(_selectedImage == null ? 'Galeriden Görsel Seç 📸' : 'Yeni Görsel Seç 📷'),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                              ElevatedButton(
+                                onPressed: _getImageFromGallery,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: CustomStyles.primaryColor,
+                                ),
+                                child: Text(_selectedImage == null
+                                    ? 'Galeriden Görsel Seç 📸'
+                                    : 'Yeni Görsel Seç 📷'),
+                              ),
+                            ],
                           ),
+                        ),
+                      ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -327,14 +347,16 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
                               if (isTextActivity) {
                                 //TODO Burada sharedPreferences ile text'i kaydet text_activity adlı bir değişkende tut
                                 _saveText(index, controller.text);
-                                showSnackBar(context, "Yazınızı kaydettik! Daha sonra kaldığınız yerden devam edebilirisiniz. 🤓");
-                              }
-                              else {
-                                if(_selectedImage != null){
+                                showSnackBar(context,
+                                    "Yazınızı kaydettik! Daha sonra kaldığınız yerden devam edebilirisiniz. 🤓");
+                              } else {
+                                if (_selectedImage != null) {
                                   _saveToGallery();
-                                  showSnackBar(context, "Harika! Görüntü galerinize kaydedildi! 🎉🥳");
-                                }else{
-                                  showSnackBar(context, "Lütfen önce galerinizden bir resim seçin. 🙌");
+                                  showSnackBar(context,
+                                      "Harika! Görüntü galerinize kaydedildi! 🎉🥳");
+                                } else {
+                                  showSnackBar(context,
+                                      "Lütfen önce galerinizden bir resim seçin. 🙌");
                                 }
                               }
                             },
@@ -344,10 +366,12 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
                               //TODO burada text_activity ise text'i paylaş değilse, fotoğrafı paylaş ilgili forum sayfasına yönlendir
                               if (isTextActivity) {
                                 //TODO Burada sharedPreferences ile text'i kaydet text_activity adlı bir değişkende tut
-                                showSnackBar(context, "Yazdığınız şaheseri kopyalayıp, Forum sayfasındaki Etkinlikler kısmında ilgili etkinliğin altında paylaşabilirsiniz. 🥳🤩");
+                                showSnackBar(context,
+                                    "Yazdığınız şaheseri kopyalayıp, Forum sayfasındaki Etkinlikler kısmında ilgili etkinliğin altında paylaşabilirsiniz. 🥳🤩");
                               } else {
                                 //TODO burada resmi galeriye kaydetme işlemleri olacak screenshot library'si ile
-                                showSnackBar(context, "Yaptığınız etkinlik görselini galerinize kaydettikten sonra, Forum sayfasındaki Etkinlikler kısmında ilgili etkinliğin altında paylaşabilirsiniz.🥳🤩");
+                                showSnackBar(context,
+                                    "Yaptığınız etkinlik görselini galerinize kaydettikten sonra, Forum sayfasındaki Etkinlikler kısmında ilgili etkinliğin altında paylaşabilirsiniz.🥳🤩");
                               }
                             },
                             child: const Text("Paylaş")),

@@ -15,8 +15,8 @@ class ActivityScreenBottombar extends ConsumerStatefulWidget {
   ConsumerState createState() => _ActivityScreenBottombarState();
 }
 
-class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottombar> {
-
+class _ActivityScreenBottombarState
+    extends ConsumerState<ActivityScreenBottombar> {
   //bebek 24 aylıktan büyük mü kontrolü
   bool _isBabyBiggerThan24Months = false;
   late final bool isPregnant;
@@ -61,53 +61,58 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     CustomStyles().responsiveTheme(isDarkMode);
-    return LayoutBuilder(
-      builder: (context,viewportConstraints) {
-        return Scaffold(
-          bottomSheet: _isBabyBiggerThan24Months ? BottomSheet(
-            backgroundColor: isDarkMode ? Colors.transparent : CustomStyles.primaryColor,
-            //shadowColor: Colors.transparent,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-            ),
-            constraints: BoxConstraints(
-              maxWidth: viewportConstraints.maxWidth
-            ),
-            builder: (context) {
-              return Container(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                            child: Text(
-                              style: TextStyle(
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                                "Etkinliklerimiz yalnızca gebelik dönemindeki anneler ve 24 aydan küçük bebekler için tasarlanmıştır. Yeni etkinlikler için takipte kalın!"),
-                        ),
-                      ],
-                    )
-                  ],
+    return LayoutBuilder(builder: (context, viewportConstraints) {
+      return Scaffold(
+        bottomSheet: _isBabyBiggerThan24Months
+            ? BottomSheet(
+                backgroundColor:
+                    isDarkMode ? Colors.transparent : CustomStyles.primaryColor,
+                //shadowColor: Colors.transparent,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
-              );
-            },
-            onClosing: () {  },
-          ) : const SizedBox(height: 0, width: 0,),
-          extendBodyBehindAppBar: true,
-          body: GameLevelsScrollingMap.scrollable(
-            direction: Axis.horizontal,
-            width: double.maxFinite,
-            imageWidth: 3000,
-            imageUrl: "assets/images/map_horizontal.png",
-            svgUrl: "assets/images/map_horizontal.svg",
-            points: points,
-          ), // This trailing comma makes auto-formatting nicer for build methods.
-        );
-      }
-    );
+                constraints:
+                    BoxConstraints(maxWidth: viewportConstraints.maxWidth),
+                builder: (context) {
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                  style: TextStyle(
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                  "Etkinliklerimiz yalnızca gebelik dönemindeki anneler ve 24 aydan küçük bebekler için tasarlanmıştır. Yeni etkinlikler için takipte kalın!"),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+                onClosing: () {},
+              )
+            : const SizedBox(
+                height: 0,
+                width: 0,
+              ),
+        extendBodyBehindAppBar: true,
+        body: GameLevelsScrollingMap.scrollable(
+          direction: Axis.horizontal,
+          width: double.maxFinite,
+          imageWidth: 3000,
+          imageUrl: "assets/images/map_horizontal.png",
+          svgUrl: "assets/images/map_horizontal.svg",
+          points: points,
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      );
+    });
   }
 
   @override
@@ -117,61 +122,64 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
   }
 
   List<PointModel> points = [];
-  int current  = 0;
+  int current = 0;
   void fillTestData() {
     UserModel? user = ref.read(userProvider);
     int babyMonths = calculateBabyMonth(user!.babyBirthDate!);
     isPregnant = user.isPregnant!;
     print("RECOX : babyMont $babyMonths");
     print("RECOX : isPregantn ${user.isPregnant!}");
-    if(isPregnant){
+    if (isPregnant) {
       current = user.months!.toInt();
       //hamile olduğu durumda
-      for(int i = 1; i < 10; i++){
-        if(i < current){
+      for (int i = 1; i < 10; i++) {
+        if (i < current) {
           points.add(PointModel(100, pastActivity(i, true))); //TODO tamamlanan
-        }
-        else if(current == i){
-          points.add(PointModel(100, currentActivity(i, true))); //TODO şuanki aktivite
-        }
-        else{
-          points.add(PointModel(100, lockedActivity(i, true))); //TODO kiilitli aktivite
+        } else if (current == i) {
+          points.add(
+              PointModel(100, currentActivity(i, true))); //TODO şuanki aktivite
+        } else {
+          points.add(PointModel(
+              100, lockedActivity(i, true))); //TODO kiilitli aktivite
         }
       }
-      for(int i = 1; i< 25; i++){
-        points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
+      for (int i = 1; i < 25; i++) {
+        points.add(
+            PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
       }
-    }else{
-      if(babyMonths <= 24){ //bebek 24 aylıktan küçük
+    } else {
+      if (babyMonths <= 24) {
+        //bebek 24 aylıktan küçük
         current = babyMonths; //Şuan bu değer 1
-      }else{
+      } else {
         setState(() {
           _isBabyBiggerThan24Months = true;
           current = 34;
         });
       }
       //hamile olmadığı durumda
-      for(int i = 1; i < 10; i++){
+      for (int i = 1; i < 10; i++) {
         points.add(PointModel(100, pastActivity(i, true))); //TODO tamamlanan
       }
-      for(int i = 1; i < 25; i++){
-        if(i < current){
+      for (int i = 1; i < 25; i++) {
+        if (i < current) {
           points.add(PointModel(100, pastActivity(i, false))); //TODO tamamlanan
-        }
-        else if(current == i){
-          points.add(PointModel(100, currentActivity(i, false))); //TODO şuanki aktivite
-        }
-        else{
-          points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
+        } else if (current == i) {
+          points.add(PointModel(
+              100, currentActivity(i, false))); //TODO şuanki aktivite
+        } else {
+          points.add(PointModel(
+              100, lockedActivity(i, false))); //TODO kiilitli aktivite
         }
       }
     }
   }
 
-  Widget lockedActivity(int ay, bool isPregnant) { //TODO kilitli aktivite
+  Widget lockedActivity(int ay, bool isPregnant) {
+    //TODO kilitli aktivite
     String baslik = "Gebelik $ay.Ay Etkinliği";
     String btnYazisi = "\nGebelik\n $ay.Ay";
-    if(!isPregnant){
+    if (!isPregnant) {
       baslik = "Bebeğimin $ay. Ay Etkinliği";
       btnYazisi = "\nBebeğim\n$ay.Ay";
     }
@@ -241,11 +249,12 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
+
   Widget currentActivity(int ay, bool isPregnant) {
     String baslik = "Gebelik $ay. Ay Etkinliği";
     String btnYazisi = "\nGebelik\n$ay.Ay";
     int index = ay - 1;
-    if(!isPregnant){
+    if (!isPregnant) {
       baslik = "Bebeğimin $ay Aylık Etkinliği";
       btnYazisi = "\nBebeğim\n$ay.Ay";
       index = ay + 8;
@@ -276,51 +285,56 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
           builder: (BuildContext context) {
             return Container(
               //color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      baslik,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      etkinlik_list[index],
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 80),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('Kapat'),
-                        onPressed: () {
-                          Navigator.pop(context); // Modal sayfasını kapat
-                        },
-                      ),
-                      ElevatedButton(
-                        style : ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
+              child: Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        baslik,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: const Text('Etkinliğe Başla', style: TextStyle(color: Colors.black)),
-                        onPressed: () {
-                          context.push("/home/$index/${getActivityType(index)}/$isPregnant");
-                        },
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                ],
+                    ),
+                    ListTile(
+                      title: Text(
+                        etkinlik_list[index],
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 80),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('Kapat'),
+                          onPressed: () {
+                            Navigator.pop(context); // Modal sayfasını kapat
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.lightGreenAccent),
+                          ),
+                          child: const Text('Etkinliğe Başla',
+                              style: TextStyle(color: Colors.black)),
+                          onPressed: () {
+                            context.push(
+                                "/home/$index/${getActivityType(index)}/$isPregnant");
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
             );
           },
@@ -328,11 +342,12 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
       },
     );
   }
+
   Widget pastActivity(int ay, bool isPregnant) {
     String baslik = "Gebelik $ay. Ay Etkinliği";
     String btnYazisi = "\nGebelik\n$ay.Ay";
     int index = ay - 1;
-    if(!isPregnant){
+    if (!isPregnant) {
       baslik = "Bebeğimin $ay Aylık Etkinliği";
       btnYazisi = "\nBebeğim\n$ay.Ay";
       index = ay + 8;
@@ -363,55 +378,56 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
           builder: (BuildContext context) {
             return Container(
               //color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      baslik,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  ListTile(
-                    title: Text(
-                      etkinlik_list[index],
-                      style: const TextStyle(
-                        fontSize: 15,
-                        //color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 80),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('Kapat'),
-
-                        onPressed: () {
-                          Navigator.pop(context); // Modal sayfasını kapat
-                        },
-                      ),
-                      const Text(
-                        "   Etkinlik Tamamlandı",
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        baslik,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        textAlign: TextAlign.center,),
-                      const Icon(Icons.check_circle_outline, size: 25)
-                    ],
-                  ),
-
-                  const SizedBox(height: 16),
-                ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ListTile(
+                      title: Text(
+                        etkinlik_list[index],
+                        style: const TextStyle(
+                          fontSize: 15,
+                          //color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 80),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('Kapat'),
+                          onPressed: () {
+                            Navigator.pop(context); // Modal sayfasını kapat
+                          },
+                        ),
+                        const Text(
+                          "   Etkinlik Tamamlandı",
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const Icon(Icons.check_circle_outline, size: 25)
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
             );
           },
@@ -420,15 +436,15 @@ class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottomba
     );
   }
 
-  int calculateBabyMonth(DateTime babyBirthDate){
+  int calculateBabyMonth(DateTime babyBirthDate) {
     Duration diff = DateTime.now().difference(babyBirthDate);
     return (diff.inDays / 30).ceil(); //yaklaşık olarak her ayı 30 gün aldım
   }
 
-  String getActivityType(int index){
-    if(index == 0 || index == 9){
+  String getActivityType(int index) {
+    if (index == 0 || index == 9) {
       return 'text_activity';
-    }else{
+    } else {
       return 'photo_activity';
     }
   }

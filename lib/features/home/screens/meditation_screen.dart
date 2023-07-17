@@ -179,7 +179,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Hemen uykuya dal',
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
                                   )
                                 ],
@@ -248,7 +248,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Sakinleştirici mekan sesleri',
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
                                   )
                                 ],
@@ -313,7 +313,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Huzurlu Piyano Sesleri',
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
                                   )
                                 ],
@@ -378,7 +378,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                                   Text(
                                     'Neşeli Müzikler',
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
                                   )
                                 ],

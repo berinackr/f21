@@ -15,8 +15,7 @@ class ActivityScreenBottombar extends ConsumerStatefulWidget {
   ConsumerState createState() => _ActivityScreenBottombarState();
 }
 
-class _ActivityScreenBottombarState
-    extends ConsumerState<ActivityScreenBottombar> {
+class _ActivityScreenBottombarState extends ConsumerState<ActivityScreenBottombar> {
   //bebek 24 aylıktan büyük mü kontrolü
   bool _isBabyBiggerThan24Months = false;
   late final bool isPregnant;
@@ -65,14 +64,12 @@ class _ActivityScreenBottombarState
       return Scaffold(
         bottomSheet: _isBabyBiggerThan24Months
             ? BottomSheet(
-                backgroundColor:
-                    isDarkMode ? Colors.transparent : CustomStyles.primaryColor,
+                backgroundColor: isDarkMode ? Colors.transparent : CustomStyles.primaryColor,
                 //shadowColor: Colors.transparent,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
-                constraints:
-                    BoxConstraints(maxWidth: viewportConstraints.maxWidth),
+                constraints: BoxConstraints(maxWidth: viewportConstraints.maxWidth),
                 builder: (context) {
                   return Container(
                     padding: const EdgeInsets.all(16),
@@ -84,9 +81,7 @@ class _ActivityScreenBottombarState
                             Flexible(
                               child: Text(
                                   style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color: isDarkMode ? Colors.white : Colors.black,
                                   ),
                                   "Etkinliklerimiz yalnızca gebelik dönemindeki anneler ve 24 aydan küçük bebekler için tasarlanmıştır. Yeni etkinlikler için takipte kalın!"),
                             ),
@@ -125,7 +120,7 @@ class _ActivityScreenBottombarState
   int current = 0;
   void fillTestData() {
     UserModel? user = ref.read(userProvider);
-    int babyMonths = calculateBabyMonth(user!.babyBirthDate!);
+    int? babyMonths = user!.isPregnant! == false ? calculateBabyMonth(user.babyBirthDate!) : null;
     isPregnant = user.isPregnant!;
     if (isPregnant) {
       current = user.months!.toInt();
@@ -134,19 +129,16 @@ class _ActivityScreenBottombarState
         if (i < current) {
           points.add(PointModel(100, pastActivity(i, true))); //TODO tamamlanan
         } else if (current == i) {
-          points.add(
-              PointModel(100, currentActivity(i, true))); //TODO şuanki aktivite
+          points.add(PointModel(100, currentActivity(i, true))); //TODO şuanki aktivite
         } else {
-          points.add(PointModel(
-              100, lockedActivity(i, true))); //TODO kiilitli aktivite
+          points.add(PointModel(100, lockedActivity(i, true))); //TODO kiilitli aktivite
         }
       }
       for (int i = 1; i < 25; i++) {
-        points.add(
-            PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
+        points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
       }
     } else {
-      if (babyMonths <= 24) {
+      if (babyMonths! <= 24) {
         //bebek 24 aylıktan küçük
         current = babyMonths; //Şuan bu değer 1
       } else {
@@ -163,11 +155,9 @@ class _ActivityScreenBottombarState
         if (i < current) {
           points.add(PointModel(100, pastActivity(i, false))); //TODO tamamlanan
         } else if (current == i) {
-          points.add(PointModel(
-              100, currentActivity(i, false))); //TODO şuanki aktivite
+          points.add(PointModel(100, currentActivity(i, false))); //TODO şuanki aktivite
         } else {
-          points.add(PointModel(
-              100, lockedActivity(i, false))); //TODO kiilitli aktivite
+          points.add(PointModel(100, lockedActivity(i, false))); //TODO kiilitli aktivite
         }
       }
     }
@@ -191,8 +181,7 @@ class _ActivityScreenBottombarState
             fit: BoxFit.fitWidth,
             width: 100,
           ),
-          Text(btnYazisi,
-              style: const TextStyle(color: Colors.black, fontSize: 20))
+          Text(btnYazisi, style: const TextStyle(color: Colors.black, fontSize: 20))
         ],
       ),
       onTap: () {
@@ -265,8 +254,7 @@ class _ActivityScreenBottombarState
             fit: BoxFit.fitWidth,
             width: 100,
           ),
-          Text(btnYazisi,
-              style: const TextStyle(color: Colors.black, fontSize: 20))
+          Text(btnYazisi, style: const TextStyle(color: Colors.black, fontSize: 20))
         ],
       ),
       onTap: () {
@@ -279,58 +267,53 @@ class _ActivityScreenBottombarState
           ),
           backgroundColor: Colors.purpleAccent,
           builder: (BuildContext context) {
-            return Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      baslik,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    baslik,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  ListTile(
-                    title: Text(
-                      etkinlik_list[index],
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
+                ),
+                ListTile(
+                  title: Text(
+                    etkinlik_list[index],
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
                     ),
                   ),
-                  const SizedBox(height: 80),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('Kapat'),
-                        onPressed: () {
-                          Navigator.pop(context); // Modal sayfasını kapat
-                        },
+                ),
+                const SizedBox(height: 80),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      child: const Text('Kapat'),
+                      onPressed: () {
+                        Navigator.pop(context); // Modal sayfasını kapat
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.lightGreenAccent),
-                        ),
-                        child: const Text('Etkinliğe Başla',
-                            style: TextStyle(color: Colors.black)),
-                        onPressed: () {
-                          context.push(
-                              "/home/$index/${getActivityType(index)}/$isPregnant");
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+                      child: const Text('Etkinliğe Başla', style: TextStyle(color: Colors.black)),
+                      onPressed: () {
+                        context.push("/home/$index/${getActivityType(index)}/$isPregnant");
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+              ],
             );
           },
         );
@@ -357,8 +340,7 @@ class _ActivityScreenBottombarState
             fit: BoxFit.fitWidth,
             width: 100,
           ),
-          Text(btnYazisi,
-              style: const TextStyle(color: Colors.black, fontSize: 20))
+          Text(btnYazisi, style: const TextStyle(color: Colors.black, fontSize: 20))
         ],
       ),
       onTap: () {

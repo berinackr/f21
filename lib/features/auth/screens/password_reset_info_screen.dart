@@ -24,6 +24,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: CustomStyles.primaryColor),
         //toolbarHeight: 0,
         elevation: 0,
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -66,7 +67,7 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                       "ŞİFRENİZ SIFIRLANDI!",
                       style: TextStyle(
                         fontSize: 24,
-                        color: Color.fromARGB(255, 31, 4, 99),
+                        color: CustomStyles.primaryColor,
                       ),
                     ),
                     const Spacer(
@@ -74,17 +75,17 @@ class _PasswordResetInfoScreenState extends State<PasswordResetInfoScreen> {
                     ),
                     const Icon(
                       Icons.check,
-                      color: Color.fromARGB(255, 249, 191, 178),
+                      color: Colors.green,
                       size: 160,
                     ),
                     const Spacer(flex: 1),
                     //Info Label
-                    const Text(
+                    Text(
                       "Lütfen posta kutunuzu kontrol ediniz. Eğer bu mail adresi sistemimize kayıtlı ise yeni şifrenizi oluşturabileceğiniz linki içeren bir mail alacaksınız.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
-                        color: CustomStyles.primaryColor,
+                        color: CustomStyles.forumTextColor,
                       ),
                     ),
                     const Spacer(
